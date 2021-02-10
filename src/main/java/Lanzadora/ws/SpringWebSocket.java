@@ -1,4 +1,4 @@
-package ws;
+package Lanzadora.ws;
 
 
 import org.json.JSONObject;
@@ -16,6 +16,8 @@ public class SpringWebSocket extends TextWebSocketHandler {
 	private static final String NOMBRE = "nombre";
 	private static final String TYPE = "type";
 	private static final String VISTA = "vista";
+	private static final String URL = "direccion";
+	
 
 	@Override
 	public void afterConnectionEstablished(WebSocketSession session) throws Exception {
@@ -29,12 +31,11 @@ public class SpringWebSocket extends TextWebSocketHandler {
 		case "ready":
 			
 			break;
-/*
-		case "convocarReunion":
-			Manager.get().convocarReunion(jso.getString(NOMBRE), jso.getString(DIA), jso.getString(HI),
-					jso.getString(MI), jso.getString(HF), jso.getString(MF), jso.get("usuarios").toString(), "true");
-			break;
 
+		case "sendProyecto":
+			Manager.get().sendProyecto(jso.getString(URL));
+			break;
+/*
 		case "check":
 			session.sendMessage(
 					new TextMessage(Manager.get().usuariosDisponibles(jso.getString(NOMBRE), jso.getString(DIA),

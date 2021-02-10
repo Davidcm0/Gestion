@@ -1,7 +1,14 @@
 package Lanzadora.Model;
 
 
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
 import java.math.BigInteger;
+import java.net.Socket;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.time.LocalTime;
@@ -250,6 +257,42 @@ public class Manager {
 		} catch (NoSuchAlgorithmException e) {
 			throw new RuntimeException(e);
 		}
+	}
+
+	public void sendProyecto(String direccion) {
+		
+		
+		 DataInputStream input;
+		 BufferedInputStream bis;
+		 BufferedOutputStream bos;
+		 int in;
+		 byte[] byteArray;
+		 //Fichero a transferir
+		 final String filename = direccion;
+		 
+		try{
+		 final File localFile = new File( filename );
+		 Socket client = new Socket("localhost", 5000);
+		 bis = new BufferedInputStream(new FileInputStream(localFile));
+		 bos = new BufferedOutputStream(client.getOutputStream());
+		 //Enviamos el nombre del fichero
+		 DataOutputStream dos=new DataOutputStream(client.getOutputStream());
+		 System.out.println(filename);
+		 dos.writeUTF(localFile.getName());
+		 //Enviamos el fichero
+		 byteArray = new byte[8192];
+		 while ((in = bis.read(byteArray)) != -1){
+		 bos.write(byteArray,0,in);
+		 }
+		 
+		bis.close();
+		 bos.close();
+		 
+		}catch ( Exception e ) {
+		 System.err.println(e);
+		 }
+		
+		
 	}
 
 }

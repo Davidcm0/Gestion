@@ -1,10 +1,49 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
+<title>Mis Proyectos</title>
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<!-- Bootstrap CSS -->
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+	integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
+	crossorigin="anonymous">
+<!-- Bootstrap CSS -->
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+	integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
+	crossorigin="anonymous">
+<!-- CUSTOM CSS -->
+<link rel="stylesheet" href="proyectos.css">
 </head>
 <body>
-<h1>holaaaaaa</h1>
+	<div class="col-md-6 col-sm-8 col-xl-6 col-lg-4 boxHeaderGestion">
+		<button type="button" id="volverGestion"
+			onclick="window.history.back()">Volver</button>
+		<h1>Mis proyectos</h1>
+	</div>
+	<div class="enviarProyecto">
+		<input type="text" name="" placeholder="Dirección proyecto" id="direccion"></br>
+		<button type="button" data-bind="click:$root.enviar" id="boton_enviar">Enviar Proyecto</button>
+	</div>
+	<!-- Optional JavaScript -->
+	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+		integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+		integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+		integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<!-- KNOCKOUT -->
+	<script src="https://knockoutjs.com/downloads/knockout-3.5.0.js"></script>
+
+	<script src="sendproyecto.js"></script>
 </body>
 </html>

@@ -1,4 +1,4 @@
-package ws;
+package Lanzadora.ws;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
