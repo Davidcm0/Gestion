@@ -35,12 +35,11 @@ public class SpringWebSocket extends TextWebSocketHandler {
 		case "sendProyecto":
 			Manager.get().sendProyecto(jso.getString(URL));
 			break;
-/*
-		case "check":
-			session.sendMessage(
-					new TextMessage(Manager.get().usuariosDisponibles(jso.getString(NOMBRE), jso.getString(DIA),
-							jso.getString(HI), jso.getString(MI), jso.getString(HF), jso.getString(MF)).toString()));
+
+		case "explorador":
+			Manager.get().explorador();
 			break;
+			/*
 		case "leer":
 			if (Manager.get().isAdmin(jso.getString(NOMBRE)) || "gestionUsuarios".equals(jso.getString(VISTA))) {
 				session.sendMessage(new TextMessage(Manager.get().leer().toString()));

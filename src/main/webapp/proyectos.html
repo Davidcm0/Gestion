@@ -23,6 +23,7 @@
 		<h1>Mis proyectos</h1>
 	</div>
 	<div class="enviarProyecto">
+	    <button type="button" data-bind="click:$root.explorador" id="explorador">Seleccionar proyecto</button>
 		<input type="text" name="" placeholder="Dirección proyecto" id="direccion"></br>
 		<button type="button" data-bind="click:$root.enviar" id="boton_enviar">Enviar Proyecto</button>
 	</div>
@@ -45,5 +46,6 @@
 	<script src="https://knockoutjs.com/downloads/knockout-3.5.0.js"></script>
 
 	<script src="sendproyecto.js"></script>
+	<script src="explorador.js"></script>
 </body>
 </html>

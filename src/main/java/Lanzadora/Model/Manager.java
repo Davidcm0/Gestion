@@ -14,6 +14,8 @@ import java.security.NoSuchAlgorithmException;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.web.socket.TextMessage;
@@ -22,9 +24,14 @@ import org.springframework.web.socket.WebSocketSession;
 import Lanzadora.persistencia.UserDAO;
 import excepciones.CredencialesInvalidasException;
 
-
+import java.awt.EventQueue;
+import java.awt.TextField;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.*;
+import javax.swing.*;
 public class Manager {
-
+	Archivo archivo = new Archivo();
 	private WebSocketSession session;
 	public static final String USUARIOS = "usuarios";
 
@@ -268,7 +275,9 @@ public class Manager {
 		 int in;
 		 byte[] byteArray;
 		 //Fichero a transferir
-		 final String filename = direccion;
+		 
+		 System.out.println(archivo.getRuta());
+		 final String filename = archivo.getRuta();
 		 
 		try{
 		 final File localFile = new File( filename );
@@ -277,11 +286,13 @@ public class Manager {
 		 bos = new BufferedOutputStream(client.getOutputStream());
 		 //Enviamos el nombre del fichero
 		 DataOutputStream dos=new DataOutputStream(client.getOutputStream());
-		 System.out.println(filename);
+		 System.out.println(direccion);
 		 dos.writeUTF(localFile.getName());
+		 
 		 //Enviamos el fichero
 		 byteArray = new byte[8192];
 		 while ((in = bis.read(byteArray)) != -1){
+			 
 		 bos.write(byteArray,0,in);
 		 }
 		 
@@ -292,6 +303,32 @@ public class Manager {
 		 System.err.println(e);
 		 }
 		
+		
+	}
+
+	public void explorador() {
+		Scanner entrada = null;
+        JFileChooser fileChooser = new JFileChooser();
+        fileChooser.showOpenDialog(fileChooser);
+        try {
+            String ruta = fileChooser.getSelectedFile().getAbsolutePath(); 
+            
+            archivo.setRuta(ruta);
+            System.out.println(ruta);
+            File f = new File(ruta);
+            entrada = new Scanner(f);
+            
+        } catch (FileNotFoundException e) {
+            System.out.println(e.getMessage());
+        } catch (NullPointerException e) {
+            System.out.println("No se ha seleccionado ningún fichero");
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        } finally {
+            if (entrada != null) {
+                entrada.close();
+            }
+        }
 		
 	}
 

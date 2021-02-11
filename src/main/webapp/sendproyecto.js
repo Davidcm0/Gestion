@@ -6,7 +6,7 @@ function ViewModel() {
 
 
 	self.enviar = function() {	
-
+		
 		const info = {
 			type: 'sendProyecto',
 			direccion: $('#direccion').val(),
@@ -18,6 +18,13 @@ function ViewModel() {
 
 				alert('Se ha creado incorrectamente');
 			}
+		};
+		self.sws.send(JSON.stringify(info));
+	};
+	
+	self.explorador = function(){
+		const info ={
+				type: 'explorador',
 		};
 		self.sws.send(JSON.stringify(info));
 	};
