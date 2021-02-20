@@ -17,6 +17,10 @@ public class SpringWebSocket extends TextWebSocketHandler {
 	private static final String TYPE = "type";
 	private static final String VISTA = "vista";
 	private static final String URL = "direccion";
+	private static final String LENGUAJE = "lenguaje";
+	private static final String DUT = "dut";
+	private static final String REPETICIONES = "repeticiones";
+	private static final String DESCRIPCION = "descripcion";
 	
 
 	@Override
@@ -39,15 +43,11 @@ public class SpringWebSocket extends TextWebSocketHandler {
 		case "explorador":
 			Manager.get().explorador();
 			break;
-			/*
-		case "leer":
-			if (Manager.get().isAdmin(jso.getString(NOMBRE)) || "gestionUsuarios".equals(jso.getString(VISTA))) {
-				session.sendMessage(new TextMessage(Manager.get().leer().toString()));
-			} else {
-				session.sendMessage(
-						new TextMessage(Manager.get().leerActividades((String) jso.get(NOMBRE)).toString()));
-			}
+			
+		case "crear":
+			Manager.get().crearProyecto(jso.getString(NOMBRE),jso.getInt(REPETICIONES), jso.getString(LENGUAJE), jso.getString(DESCRIPCION), jso.getInt(DUT));
 			break;
+			/*
 		case "insertar":
 			Manager.get().insertarActividad((String) jso.get(NOMBRE), jso.getString(DIA), jso.getString(HI),
 					jso.getString(MI), jso.getString(HF), jso.getString(MF), jso.getString("usuarios"), "false");

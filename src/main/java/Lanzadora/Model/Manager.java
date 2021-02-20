@@ -13,6 +13,7 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
 
@@ -21,7 +22,9 @@ import org.json.JSONObject;
 import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
 
+
 import Lanzadora.persistencia.UserDAO;
+import Lanzadora.persistencia.proyectoDAO;
 import excepciones.CredencialesInvalidasException;
 
 import java.awt.EventQueue;
@@ -329,6 +332,13 @@ public class Manager {
                 entrada.close();
             }
         }
+		
+	}
+
+	public void crearProyecto(String nombre, int repeticiones, String lenguaje, String descripcion, int dut) {
+		java.util.Date fecha = new Date();
+		System.out.println (fecha);
+		proyectoDAO.insertar(new proyecto(fecha, descripcion,  dut, repeticiones, lenguaje, nombre ));
 		
 	}
 

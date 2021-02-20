@@ -16,19 +16,49 @@
 	<div class="col-md-6 col-sm-8 col-xl-6 col-lg-4 boxHeaderGestion">
 		<button type="button" id="volverGestion"
 			onclick="window.history.back()">Volver</button>
-		<h1>Mis proyectos</h1>
+		<h1>Formulario proyecto</h1>
 	</div>
 	<div class="enviarProyecto">
-		<button type="button" data-bind="click:$root.explorador"
-			id="explorador">Seleccionar proyecto</button>
-		<input type="text" name="" placeholder="Dirección proyecto"
-			id="direccion"></br>
-		<button type="button" data-bind="click:$root.enviar" id="boton_enviar">Enviar
-			Proyecto</button>
-		
+		<form>
+			<div class="form-row">
+				<div class="form-group col-md-6">
+					<label for="inputEmail4">Nombre</label> <input type="email"
+						class="form-control" id="nombre" placeholder="Nombre">
+				</div>
+				<div class="form-group col-md-6">
+					<label for="inputPassword4">Repeticiones</label> <input type="text"
+						class="form-control" id="repeticiones" placeholder="Repeticiones">
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="inputAddress">Descripción</label> <input type="text"
+					class="form-control" id="descripcion" placeholder="Pequeña descripción">
+			</div>
+			
+			<div class="form-row">
+				<div class="form-group col-md-2">
+					
+				</div>
+				<div class="form-group col-md-4">
+					<label for="inputState">Lenguaje</label> <select id="lenguaje"
+						class="form-control">
+						<option selected>Elige...</option>
+						<option>Java</option>
+						<option>Python</option>
+					</select>
+				</div>
+				<div class="form-group col-md-2">
+					<label for="inputZip">DUT</label> <input type="text"
+						class="form-control" id="dut">
+				</div>
+			</div>
+			
+			<button type="submit" class="btn btn-primary" data-bind="click:$root.crear">Crear proyecto</button>
+		</form>
+
 	</div>
-	
-	
+
+
 
 	<!-- Optional JavaScript -->
 	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
@@ -48,7 +78,7 @@
 	<!-- KNOCKOUT -->
 	<script src="https://knockoutjs.com/downloads/knockout-3.5.0.js"></script>
 
-	<script src="sendproyecto.js"></script>
-	<script src="explorador.js"></script>
+	<script src="form.js"></script>
+	
 </body>
 </html>

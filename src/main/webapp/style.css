@@ -6,8 +6,9 @@ body {
 	margin: 0;
 	padding: 0;
 	font-family: sans-serif;
-	background-image: url(fondo-pantalla.jpg);
-	background-size: cover;
+	background-image: url(fondoPantalla.jpg);
+	
+	background-repeat: repeat;
 }
 
 .box {
