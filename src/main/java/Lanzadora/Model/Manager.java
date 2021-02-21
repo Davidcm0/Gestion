@@ -269,7 +269,7 @@ public class Manager {
 		}
 	}
 
-	public void sendProyecto(String direccion) {
+	public void sendProyecto() {
 		
 		
 		 DataInputStream input;
@@ -289,7 +289,7 @@ public class Manager {
 		 bos = new BufferedOutputStream(client.getOutputStream());
 		 //Enviamos el nombre del fichero
 		 DataOutputStream dos=new DataOutputStream(client.getOutputStream());
-		 System.out.println(direccion);
+		 
 		 dos.writeUTF(localFile.getName());
 		 
 		 //Enviamos el fichero
@@ -335,10 +335,25 @@ public class Manager {
 		
 	}
 
-	public void crearProyecto(String nombre, int repeticiones, String lenguaje, String descripcion, int dut) {
+	public void crearProyecto(String nombre, int repeticiones, String lenguaje, String descripcion, int dut, String usuario) {
 		java.util.Date fecha = new Date();
 		System.out.println (fecha);
-		proyectoDAO.insertar(new proyecto(fecha, descripcion,  dut, repeticiones, lenguaje, nombre ));
+		proyectoDAO.insertar(new proyecto(fecha, nombre, descripcion,  dut, repeticiones, lenguaje, usuario ));
+		
+	}
+
+	public JSONObject leer_proyectos(String nombre) {
+		JSONArray jsa = new JSONArray();
+		JSONObject jso = new JSONObject();
+		List<proyecto> proyectos = proyectoDAO.leer_proyectos(nombre);
+
+		for (proyecto proyecto : proyectos) {
+
+			jsa.put(proyecto.toJSON());
+		}
+		jso.put("proyectos", jsa);
+
+		return jso;
 		
 	}
 

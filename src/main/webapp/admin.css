@@ -1,0 +1,371 @@
+*{
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+body{
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+  background-image: url(fondo-pantalla.jpg);
+  background-size: cover;
+}
+
+.boxHeader{
+  width: 100%;
+  height: 80px;
+  padding: 20px;
+  position: absolute;
+  top: 0%;
+  left: 20%;
+  transform: translate(0%,0%);
+  background: rgba(0,0,0,-0.1);
+  box-shadow: 0 0 30px rgba(0,0,0,0.568);
+  color:white;
+  text-align: center;
+  border-radius: 25px;
+  flex-wrap: wrap;
+  margin: 22px;
+  cursor: pointer;
+  margin-bottom: 10px;
+}
+
+.boxHeader h1{
+  color: rgb(248, 248, 248);
+  text-transform: uppercase;
+  font-weight: 100;
+  text-align: center;
+}
+
+.boxHeader button[type="logout"]{
+  width:25%;  
+  background: none;
+  font-size: 15px;
+  margin: 0px;
+  text-align: center;
+  border: 3px;
+  padding: 10px;
+  outline: none;
+  background: #90c7e7;
+  color: white;
+  border-color: #d8d8d8;
+  border-radius: 18px;
+  transition: 0.5s;
+  cursor: pointer;
+  display: inline;
+  float: right;
+}
+
+.boxHeader button[type="logout"]:hover{
+  background: #3397e9;
+  color: black;
+  border-color: #3397e9;
+  transform: scale(1.1);
+}
+
+.boxMenu{
+  width: 100%;
+  padding: 10px;
+  position: absolute;
+  top: 90px;
+  left: 20%;
+  transform: translate(0%,0%);
+  background: rgba(0,0,0,-0.1);
+  box-shadow: 0 0 30px rgba(0,0,0,0.568);
+  color:white;
+  text-align: center;
+  border-radius: 25px;
+  flex-wrap: wrap;
+  margin:22px;
+  margin-bottom: 0px;
+}
+
+.boxMenu button[id="displayNone"],.boxMenu button[id="calendario"],.boxMenu button[id="usuarios"]{ 
+border:0;
+  background:#161616c5;
+  display: block;
+  top: 0%;
+  left: 50%;
+  margin: 20px auto;
+  text-align: center;
+  border: 2px solid #2e2c2c;
+  padding: 14px 10px;
+  width: 200px;
+  outline: none;
+  color: rgb(255, 255, 255);
+  border-radius: 20px;
+  transition: 0.5s;
+  cursor: pointer;
+  display: inline;
+  float: center;
+}
+.boxMenu button[id="displayNone"]:hover,.boxMenu button[id="calendario"]:hover,.boxMenu button[id="usuarios"]:hover{
+  width: 280px;
+  background: #f8f8f8; 
+  color: black;
+}
+
+#nombreActividad{
+  width:60%;
+  border:0;
+  font-size: 16px;
+  margin: 10px;
+  text-align: center;
+  background: #90c7e7;
+  border: 2px;
+  border-color: black;
+  padding: 10px;
+  outline: none;
+  color: white;
+  border-radius: 18px;
+  transition: 0.25s;
+  float: center;
+}
+
+#nombreActividad:hover{
+  background: #90c7e7;
+  color: white;
+  border-color: black;
+  transform: scale(0.9);
+}
+
+.boxMenu select[id="dia"] {
+  background-color: #90c7e7;
+  box-sizing: border-box;
+  border-radius: 20px;
+  padding: 5px;
+  font-family: sans-serif;
+  box-sizing: border-box;
+  z-index: 99;
+
+}
+
+.boxMenu input[id="horaInicio"] {
+	width:200px;
+	float:center;
+	display:inline;
+}
+
+
+.boxMenu input[id="horaFinal"] {
+	width:200px;
+	float:center;
+	display:inline;
+}
+
+#crear{
+  color: white;
+  border-color:#2b7e4d;
+  width:25%;  
+  border:0;
+  font-size: 15px;
+  margin: 0px;
+  text-align: center;
+  border: 2px;
+  padding: 10px;
+  outline: none;
+  background: #5fca8c;
+  border-radius: 18px;
+  transition: 0.25s;
+  cursor: pointer;
+  display: inline;
+}
+
+#crear:hover{
+  background: #398558;
+  color: whitesmoke;
+  transform: scale(0.9);
+}
+#volver{
+  color: white;
+  border: 2px;
+  opacity:0.9;
+  width:25%;  
+  background: none;
+  font-size: 15px;
+  margin: 0px;
+  text-align: center;
+  padding: 10px;
+  outline: none;
+  border-radius: 18px;
+  transition: 0.25s;
+  cursor: pointer;
+  display: inline;
+  float: center;
+	border-color: grey;
+	background-color:grey;
+	opacity:0.8;
+}
+
+#volver:hover{
+  color: whitesmoke;
+  transform: scale(0.9);
+background-color: grey;
+}
+
+.boxMenu select[id="select"] {
+  background-color: #90c7e7;
+  box-sizing: border-box;
+  border-radius: 20px;
+  padding: 5px;
+  font-family: sans-serif;
+  box-sizing: border-box;
+  z-index: 99;
+}
+
+.boxHeaderGestion{
+  max-width: 97%;
+  width: 97%;
+  height: 80px;
+  padding: 20px;
+  position: absolute;
+  top: 0%;
+  left: 0%;
+  transform: translate(0%,0%);
+  background: rgba(0,0,0,-0.1);
+  box-shadow: 0 0 30px rgba(0,0,0,0.568);
+  color:white;
+  text-align: center;
+  border-radius: 25px;
+  flex-wrap: wrap;
+  margin: 22px;
+  cursor: pointer;
+  margin-bottom: 10px;
+
+}
+
+.boxHeaderGestion h1{
+  color: rgb(248, 248, 248);
+  text-transform: uppercase;
+  font-weight: 100;
+  text-align: center;
+}
+
+#volverGestion{
+  color: white;
+  border: 2px;
+  border-color:#ac0606;
+  opacity:0.9;
+  width:25%;  
+  border:0;
+  background: none;
+  font-size: 15px;
+  margin: 0px;
+  text-align: center;
+  padding: 10px;
+  outline: none;
+  background: #e74141a4;
+  color: black;
+  border-radius: 18px;
+  transition: 0.25s;
+  cursor: pointer;
+  display: inline;
+  float: right;
+}
+
+#volverGestion:hover{
+  background: #af4a4a;
+  color: whitesmoke;
+  transform: scale(0.9);
+}
+
+#mas{
+  color: white;
+  border: 2px;
+  border-color:#5fca8c;
+  opacity:0.9;
+  width:10%;  
+  border:0;
+  background: none;
+  font-size: 25px;
+  margin: 0px;
+  margin-right: 10px;
+  text-align: center;
+  padding: 3px;
+  outline: none;
+  background: #5fca8c;
+  color: black;
+  border-radius: 18px;
+  transition: 0.25s;
+  cursor: pointer;
+  display: inline;
+  float: right;
+}
+
+#mas:hover{
+  background: #398558;
+  color: whitesmoke;
+  transform: scale(0.9);
+}
+
+.boxMenuGestion{
+  max-width: 97%;
+  width: 97%;
+  padding: 20px;
+  position: absolute;
+  top: 90px;
+  left: 0%;
+  transform: translate(0%,0%);
+  background: rgba(0,0,0,-0.1);
+  box-shadow: 0 0 30px rgba(0,0,0,0.568);
+  color: black;
+  text-align: center;
+  border-radius: 25px;
+  flex-wrap: wrap;
+  margin:22px;
+  margin-bottom: 0px;
+  float: center;
+}
+
+.card {
+	display: inline-block;
+	margin-right: 30px;
+	opacity:0.9;
+	margin-bottom: 30px;
+}
+
+h2, p{
+	color: black;
+}
+
+.boxMenuGestion{
+  max-width: 97%;
+  width: 97%;
+  padding: 20px;
+  position: absolute;
+  top: 90px;
+  left: 0%;
+  transform: translate(0%,0%);
+  background: rgba(0,0,0,-0.1);
+  box-shadow: 0 0 30px rgba(0,0,0,0.568);
+  color: black;
+  text-align: center;
+  border-radius: 25px;
+  flex-wrap: wrap;
+  margin:22px;
+  margin-bottom: 0px;
+  float: center;
+}
+
+.cards {
+	margin-top:120px;
+	margin-left:70px;
+	max-width: 97%;
+	left:1000px;
+}
+p {
+  padding: 0;
+  margin: 0 0 15px 0;
+  font-size: 12px;
+  width: 1000px;
+}
+#hide-me {
+  width: 100%;
+  height: 350px;
+  visibility: hidden;
+  padding: 10px;
+  margin: 0 15px 0 0;
+  font-size: 14px;
+  font-weight: bold;
+  float: left;
+  text-align: center;
+}

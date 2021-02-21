@@ -11,13 +11,41 @@
 
 <!-- CUSTOM CSS -->
 <link rel="stylesheet" href="proyectos.css">
+<link rel="stylesheet" href="admin.css">
+
 </head>
 <body>
 	<div class="col-md-6 col-sm-8 col-xl-6 col-lg-4 boxHeaderGestion">
 		<button type="button" id="volverGestion"
 			onclick="window.history.back()">Volver</button>
+			<button type="button" id="volverGestion"
+			onclick="window.location.href='form.html'">Crear proyecto</button>
 		<h1>Mis proyectos</h1>
 	</div>
+	<div id="koGestion">
+		<div class="cards">
+			<!-- ko foreach : { data: listaproyectos, as :"proyecto" } -->
+			<div class="card" style="width: 18rem;">
+				<div class="card-body">
+					<h5 class="card-title" data-bind="html : nombre"></h5>
+					Descripción: <label class="card-text"
+						data-bind="html : descripcion"></label></br> Autor: <label
+						class="card-text" data-bind="html : autor"></label></br> DUT: <label
+						class="card-text" data-bind="html : dut"></label></br> Repeticiones: <label
+						class="card-text" data-bind="html : repeticiones"></label></br>
+					Lenguaje: <label class="card-text" data-bind="html : lenguaje"></label></br>
+					Fecha: <label class="card-text" data-bind="html : fecha"></label></br> 
+					<button type="button" data-bind="click:$root.explorador"
+						id="explorador" class="btn btn-primary">Seleccionar proyecto</button>
+					
+					<button type="button" data-bind="click:$root.enviar"
+						id="boton_enviar" class="btn btn-primary">Enviar Proyecto</button>
+				</div>
+			</div>
+			<!-- /ko -->
+		</div>
+	</div>
+	<!--  
 	<div class="enviarProyecto">
 		<button type="button" data-bind="click:$root.explorador"
 			id="explorador">Seleccionar proyecto</button>
@@ -25,10 +53,10 @@
 			id="direccion"></br>
 		<button type="button" data-bind="click:$root.enviar" id="boton_enviar">Enviar
 			Proyecto</button>
-		
+
 	</div>
-	
-	
+-->
+
 
 	<!-- Optional JavaScript -->
 	<!-- jQuery first, then Popper.js, then Bootstrap JS -->

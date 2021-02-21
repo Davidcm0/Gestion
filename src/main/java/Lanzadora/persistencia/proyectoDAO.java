@@ -1,9 +1,14 @@
 package Lanzadora.persistencia;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.bson.Document;
 import org.springframework.stereotype.Repository;
 
+
 import com.mongodb.client.MongoCollection;
+import com.mongodb.client.MongoCursor;
 
 import Lanzadora.Model.User;
 import Lanzadora.Model.proyecto;
@@ -27,8 +32,9 @@ public final class proyectoDAO {
 			coleccion = AgenteDB.get().getBd(PROYECTO);
 			document = new Document("Id", System.currentTimeMillis());
 			
-			document.append(NAME, proyecto.getUser());
+			document.append(NAME, proyecto.getNombre());
 			document.append("descripcion", proyecto.getDescripcion());
+			document.append("Autor", proyecto.getUser());
 			document.append("dut", proyecto.getDUT());
 			document.append("repeticiones", proyecto.getRepeticiones());
 			document.append("lenguaje", proyecto.getLenguaje());
@@ -37,5 +43,27 @@ public final class proyectoDAO {
 			coleccion.insertOne(document);
 			System.out.println("xx");
 		}
+	}
+
+	public static List<proyecto> leer_proyectos(String nombre) {
+
+		ArrayList<proyecto> proyectos = new ArrayList<>();
+		Document document;
+		proyecto p = null;
+		MongoCollection<Document> coleccion = AgenteDB.get().getBd(PROYECTO);
+		MongoCursor<Document> iter = coleccion.find().iterator();
+
+		while ((iter.hasNext())) {
+			document = iter.next();
+			if ((nombre).equals(document.getString("Autor"))) {
+				p = new proyecto(document.getDate("fecha"), document.getString(NAME), document.getString("descripcion"), document.getInteger("dut"), document.getInteger("repeticiones"),document.getString("lenguaje"),document.getString("Autor"));
+			
+			
+			}
+
+			proyectos.add(p);
+		}
+
+		return proyectos;
 	}
 }

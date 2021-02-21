@@ -1,6 +1,9 @@
 package Lanzadora.Model;
 
+import java.util.Collection;
 import java.util.Date;
+
+import org.json.JSONObject;
 
 public class proyecto {
 	
@@ -10,15 +13,22 @@ public class proyecto {
 	private int repeticiones;
 	private String lenguaje;
 	private String user;
-
+	private String nombre;
 	
-	public proyecto(Date fecha, String descripcion, int DUT, int repeticiones, String lenguaje, String user) {
+	public proyecto(Date fecha, String nombre, String descripcion, int DUT, int repeticiones, String lenguaje, String user) {
 		this.fecha = fecha;
+		this.nombre = nombre;
 		this.descripcion = descripcion;
 		this.DUT = DUT;
 		this.repeticiones = repeticiones;
 		this.lenguaje = lenguaje;
 		this.user = user;
+	}
+	public String getNombre() {
+		return nombre;
+	}
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
 	}
 	public Date getFecha() {
 		return fecha;
@@ -55,6 +65,17 @@ public class proyecto {
 	}
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
+	}
+	public JSONObject toJSON() {
+		JSONObject jso = new JSONObject();
+		jso.put("Fecha", this.getFecha());
+		jso.put("Nombre", this.getNombre());
+		jso.put("Descripcion", this.getDescripcion());
+		jso.put("DUT", this.getDUT());
+		jso.put("Repeticiones", this.getRepeticiones());
+		jso.put("Lenguaje",this.getLenguaje());
+		jso.put("Autor",this.getUser());
+		return jso;
 	}
 	
 }

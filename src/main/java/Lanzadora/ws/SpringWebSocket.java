@@ -21,6 +21,7 @@ public class SpringWebSocket extends TextWebSocketHandler {
 	private static final String DUT = "dut";
 	private static final String REPETICIONES = "repeticiones";
 	private static final String DESCRIPCION = "descripcion";
+	private static final String USUARIO = "usuario";
 	
 
 	@Override
@@ -33,11 +34,12 @@ public class SpringWebSocket extends TextWebSocketHandler {
 		JSONObject jso = new JSONObject(message.getPayload().toString());
 		switch (jso.getString(TYPE)) {
 		case "ready":
-			
+			session.sendMessage(new TextMessage(Manager.get().leer_proyectos(jso.getString(NOMBRE)).toString()));
+			//Manager.get().leer_proyectos(jso.getString(NOMBRE));
 			break;
 
 		case "sendProyecto":
-			Manager.get().sendProyecto(jso.getString(URL));
+			Manager.get().sendProyecto();
 			break;
 
 		case "explorador":
@@ -45,7 +47,7 @@ public class SpringWebSocket extends TextWebSocketHandler {
 			break;
 			
 		case "crear":
-			Manager.get().crearProyecto(jso.getString(NOMBRE),jso.getInt(REPETICIONES), jso.getString(LENGUAJE), jso.getString(DESCRIPCION), jso.getInt(DUT));
+			Manager.get().crearProyecto(jso.getString(NOMBRE),jso.getInt(REPETICIONES), jso.getString(LENGUAJE), jso.getString(DESCRIPCION), jso.getInt(DUT),jso.getString(USUARIO) );
 			break;
 			/*
 		case "insertar":
