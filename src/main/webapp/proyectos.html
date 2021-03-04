@@ -35,11 +35,27 @@
 						class="card-text" data-bind="html : repeticiones"></label></br>
 					Lenguaje: <label class="card-text" data-bind="html : lenguaje"></label></br>
 					Fecha: <label class="card-text" data-bind="html : fecha"></label></br> 
-					<button type="button" data-bind="click:$root.explorador"
-						id="explorador" class="btn btn-primary">Seleccionar proyecto</button>
+					Estado: <label class="card-text" data-bind="html : estado"></label>
+					<!-- ko if: proyecto.estado == "En preparación" -->
+					<button type="button" data-bind="click: terminar"
+						id="explorador" class="btn btn-primary">Terminar proyecto</button></br> 
+						<!-- /ko -->
+						</br> 
+					<!-- ko if: proyecto.estado == "medido" -->
 					
+					<button type="button" data-bind="click:$root.resultados"
+						id="explorador" class="btn btn-primary">Pedir resultados</button></br> 
+						</br> 
+						<!-- /ko -->	
+						
+					<!-- ko if: proyecto.estado == "En preparación" -->	
+					<button type="button" data-bind="click:$root.explorador"
+						id="explorador" class="btn btn-primary">Seleccionar proyecto</button></br>
+					</br>
 					<button type="button" data-bind="click:$root.enviar"
-						id="boton_enviar" class="btn btn-primary">Enviar Proyecto</button>
+						id="enviar" class="btn btn-primary">Enviar Proyecto</button>
+						<!-- /ko -->
+						
 				</div>
 			</div>
 			<!-- /ko -->

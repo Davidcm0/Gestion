@@ -49,18 +49,19 @@ public class SpringWebSocket extends TextWebSocketHandler {
 		case "crear":
 			Manager.get().crearProyecto(jso.getString(NOMBRE),jso.getInt(REPETICIONES), jso.getString(LENGUAJE), jso.getString(DESCRIPCION), jso.getInt(DUT),jso.getString(USUARIO) );
 			break;
+			
+		case "terminar":
+			Manager.get().terminar_proyecto(jso.getString("proyecto"));
+			break;
+				
+		case "resultados":
+			Manager.get().resultados(jso.getString("proyecto"));
+			break;
+			
+		case "register":
+			Manager.get().register((String) jso.get(NOMBRE), jso.getString("email"), jso.getString("pwd1"));
+			break;
 			/*
-		case "insertar":
-			Manager.get().insertarActividad((String) jso.get(NOMBRE), jso.getString(DIA), jso.getString(HI),
-					jso.getString(MI), jso.getString(HF), jso.getString(MF), jso.getString("usuarios"), "false");
-			break;
-		case "eliminar":
-			Manager.get().eliminarUsuario((String) jso.get(NOMBRE));
-			break;
-		/*case "register":
-			Manager.get().register((String) jso.get(NOMBRE), jso.getString("email"), jso.getString("pwd1"),
-					jso.getString("rol"));
-			break;
 		case "infoUsuarios":
 			session.sendMessage(new TextMessage(Manager.get().leer().toString()));
 			break;

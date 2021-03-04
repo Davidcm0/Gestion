@@ -6,7 +6,7 @@ import java.util.Date;
 import org.json.JSONObject;
 
 public class proyecto {
-	
+
 	private Date fecha;
 	private String descripcion;
 	private int DUT;
@@ -14,8 +14,10 @@ public class proyecto {
 	private String lenguaje;
 	private String user;
 	private String nombre;
-	
-	public proyecto(Date fecha, String nombre, String descripcion, int DUT, int repeticiones, String lenguaje, String user) {
+	private String estado;
+
+	public proyecto(Date fecha, String nombre, String descripcion, int DUT, int repeticiones, String lenguaje,
+			String user, String estado) {
 		this.fecha = fecha;
 		this.nombre = nombre;
 		this.descripcion = descripcion;
@@ -23,49 +25,73 @@ public class proyecto {
 		this.repeticiones = repeticiones;
 		this.lenguaje = lenguaje;
 		this.user = user;
+		this.estado = estado;
 	}
+
 	public String getNombre() {
 		return nombre;
 	}
+
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
+
 	public Date getFecha() {
 		return fecha;
 	}
+
 	public void setFecha(Date fecha) {
 		this.fecha = fecha;
 	}
+
 	public int getDUT() {
 		return DUT;
 	}
+
 	public void setDUT(int dUT) {
 		DUT = dUT;
 	}
+
 	public int getRepeticiones() {
 		return repeticiones;
 	}
+
 	public void setRepeticiones(int repeticiones) {
 		this.repeticiones = repeticiones;
 	}
+
 	public String getLenguaje() {
 		return lenguaje;
 	}
+
 	public void setLenguaje(String lenguaje) {
 		this.lenguaje = lenguaje;
 	}
+
 	public String getUser() {
 		return user;
 	}
+
 	public void setUser(String user) {
 		this.user = user;
 	}
+
 	public String getDescripcion() {
 		return descripcion;
 	}
+
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
 	}
+
+	public String getEstado() {
+		return estado;
+	}
+
+	public void setEstado(String estado) {
+		this.estado = estado;
+	}
+
 	public JSONObject toJSON() {
 		JSONObject jso = new JSONObject();
 		jso.put("Fecha", this.getFecha());
@@ -73,9 +99,10 @@ public class proyecto {
 		jso.put("Descripcion", this.getDescripcion());
 		jso.put("DUT", this.getDUT());
 		jso.put("Repeticiones", this.getRepeticiones());
-		jso.put("Lenguaje",this.getLenguaje());
-		jso.put("Autor",this.getUser());
+		jso.put("Lenguaje", this.getLenguaje());
+		jso.put("Autor", this.getUser());
+		jso.put("estado", this.getEstado());
 		return jso;
 	}
-	
+
 }

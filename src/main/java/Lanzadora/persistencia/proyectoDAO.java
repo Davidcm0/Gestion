@@ -39,6 +39,7 @@ public final class proyectoDAO {
 			document.append("repeticiones", proyecto.getRepeticiones());
 			document.append("lenguaje", proyecto.getLenguaje());
 			document.append("fecha", proyecto.getFecha());
+			document.append("estado", proyecto.getEstado());
 
 			coleccion.insertOne(document);
 			System.out.println("xx");
@@ -56,7 +57,7 @@ public final class proyectoDAO {
 		while ((iter.hasNext())) {
 			document = iter.next();
 			if ((nombre).equals(document.getString("Autor"))) {
-				p = new proyecto(document.getDate("fecha"), document.getString(NAME), document.getString("descripcion"), document.getInteger("dut"), document.getInteger("repeticiones"),document.getString("lenguaje"),document.getString("Autor"));
+				p = new proyecto(document.getDate("fecha"), document.getString(NAME), document.getString("descripcion"), document.getInteger("dut"), document.getInteger("repeticiones"),document.getString("lenguaje"),document.getString("Autor"), document.getString("estado"));
 			
 			
 			}
@@ -65,5 +66,16 @@ public final class proyectoDAO {
 		}
 
 		return proyectos;
+	}
+
+	public static void actualizar(String proyecto, String estado) {
+		MongoCollection<Document> coleccion = AgenteDB.get().getBd(PROYECTO);
+		 Document findDocument = new Document("nombre", proyecto);
+		 
+		// Create the document to specify the update
+		    Document updateDocument = new Document("$set",
+		        new Document("estado", estado));
+		    coleccion.findOneAndUpdate(findDocument, updateDocument);
+		
 	}
 }

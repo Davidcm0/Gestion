@@ -26,7 +26,7 @@ function ViewModel() {
 
 		for (var i = 0; i < proyectos.length; i++) {
 			var proyecto = proyectos[i];
-				self.listaproyectos.push(new Proyecto(proyecto.Nombre, proyecto.Descripcion, proyecto.Autor, proyecto.Fecha, proyecto.DUT, proyecto.Repeticiones, proyecto.Lenguaje));
+				self.listaproyectos.push(new Proyecto(proyecto.Nombre, proyecto.Descripcion, proyecto.Autor, proyecto.Fecha, proyecto.DUT, proyecto.Repeticiones, proyecto.Lenguaje, proyecto.estado));
 			
 			
 
@@ -58,8 +58,10 @@ function ViewModel() {
 		self.sws.send(JSON.stringify(info));
 	};
 	
+	
+	
 	class Proyecto {
-		constructor(nombre, descripcion, autor, fecha, dut, repeticiones, lenguaje) {
+		constructor(nombre, descripcion, autor, fecha, dut, repeticiones, lenguaje, estado) {
 			this.nombre = nombre;
 			this.descripcion = descripcion;
 			this.autor = autor;
@@ -67,7 +69,27 @@ function ViewModel() {
 			this.dut = dut;
 			this.repeticiones = repeticiones;
 			this.lenguaje = lenguaje;
+			this.estado = estado;
 		}
+		terminar() {
+			var p = {
+				type: "terminar",
+				proyecto: this.nombre
+			};
+			self.nombreUsuario(this.name);
+			self.sws.send(JSON.stringify(p));
+
+		}
+		
+		resultados(){
+			var p = {
+				type: 'resultados',
+				proyecto: this.nombre
+					
+			};
+			self.nombreUsuario(this.name);
+			self.sws.send(JSON.stringify(p));
+		};
 
 	}
 

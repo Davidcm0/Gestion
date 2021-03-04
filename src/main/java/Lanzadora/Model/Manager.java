@@ -57,6 +57,8 @@ public class Manager {
 		ArrayList<User> usuarios = (ArrayList<User>) UserDAO.leerUsers();
 		for (User u : usuarios) {
 			login = checkCredenciales(u, name, password);
+			if(login)
+				break;
 		}
 		if (!login) {
 			throw new CredencialesInvalidasException();
@@ -338,7 +340,8 @@ public class Manager {
 	public void crearProyecto(String nombre, int repeticiones, String lenguaje, String descripcion, int dut, String usuario) {
 		java.util.Date fecha = new Date();
 		System.out.println (fecha);
-		proyectoDAO.insertar(new proyecto(fecha, nombre, descripcion,  dut, repeticiones, lenguaje, usuario ));
+		String estado = "En preparación";
+		proyectoDAO.insertar(new proyecto(fecha, nombre, descripcion,  dut, repeticiones, lenguaje, usuario, estado));
 		
 	}
 
@@ -354,6 +357,22 @@ public class Manager {
 		jso.put("proyectos", jsa);
 
 		return jso;
+		
+	}
+
+	public void register(String nombre, String email, String password) {
+		UserDAO.insertar(new User(nombre, encriptarMD5(password)));
+		
+	}
+
+	public void terminar_proyecto(String proyecto) {
+		String terminar = "terminado";
+		proyectoDAO.actualizar(proyecto, terminar);
+		
+	}
+
+	public void resultados(String proyecto) {
+		// TODO Auto-generated method stub
 		
 	}
 
