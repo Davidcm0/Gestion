@@ -251,7 +251,7 @@ background-color: grey;
   text-align: center;
   padding: 10px;
   outline: none;
-  background: #a57272;
+  background:  #8b8b8b;
   color: black;
   border-radius: 18px;
   transition: 0.25s;
@@ -261,7 +261,7 @@ background-color: grey;
 }
 
 #volverGestion:hover{
-  background: #af4a4a;
+  background: #3d3c3c;
   color: whitesmoke;
   transform: scale(0.9);
 }

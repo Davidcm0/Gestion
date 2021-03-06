@@ -27,7 +27,7 @@ function ViewModel() {
 
 		for (var i = 0; i < proyectos.length; i++) {
 			var proyecto = proyectos[i];
-				self.listaproyectos.push(new Proyecto(proyecto.Nombre, proyecto.Descripcion, proyecto.Autor, proyecto.Fecha, proyecto.DUT, proyecto.Repeticiones, proyecto.Lenguaje, proyecto.estado));
+				self.listaproyectos.push(new Proyecto(proyecto.Nombre, proyecto.Descripcion, proyecto.Autor, proyecto.Fecha, proyecto.DUT, proyecto.Repeticiones, proyecto.Lenguaje, proyecto.estado, proyecto.proyecto_enviado));
 			
 			
 
@@ -102,7 +102,7 @@ function ViewModel() {
 	}
 	
 	class Proyecto {
-		constructor (nombre, descripcion, autor, fecha, dut, repeticiones, lenguaje, estado) {
+		constructor (nombre, descripcion, autor, fecha, dut, repeticiones, lenguaje, estado, proyecto_enviado) {
 			this.nombre = nombre;
 			this.descripcion = descripcion;
 			this.autor = autor;
@@ -111,6 +111,7 @@ function ViewModel() {
 			this.repeticiones = repeticiones;
 			this.lenguaje = lenguaje;
 			this.estado = estado;
+			this.proyecto_enviado = proyecto_enviado;
 		}
 		
 		info() {
@@ -146,7 +147,22 @@ function ViewModel() {
 			self.sws.send(JSON.stringify(p));
 		}
 
-		
+		enviar() {	
+			
+			const info = {
+				type: 'sendProyecto',
+				usuario: sessionStorage.userName,
+				nombre: this.nombre,
+				success: function() {
+					alert('Se ha enviar correctamente');
+				},
+				error: function() {
+
+					alert('Se ha creado incorrectamente');
+				}
+			};
+			self.sws.send(JSON.stringify(info));
+		};
 
 	}
 

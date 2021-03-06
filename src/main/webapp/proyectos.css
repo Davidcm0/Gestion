@@ -243,7 +243,7 @@ background-color: grey;
 #volverGestion{
   color: white;
   border: 2px;
-  border-color:#ac0606;
+  border-color:#4a4e4a;
   opacity:0.9;
   width:24%;  
   border:5px;
@@ -253,7 +253,7 @@ background-color: grey;
   text-align: center;
   padding: 10px;
   outline: none;
-  background: #6b4343;
+  background: #303d30;
   color: black;
   border-radius: 18px;
   transition: 0.25s;
@@ -263,7 +263,35 @@ background-color: grey;
 }
 
 #volverGestion:hover{
-  background: #af4a4a;
+  background: #161d16;
+  color: whitesmoke;
+  transform: scale(0.9);
+}
+
+#crearProyecto{
+  color: white;
+  border: 2px;
+  border-color:#379737;
+  opacity:0.9;
+  width:24%;  
+  border:5px;
+  background: none;
+  font-size: 15px;
+  margin: 5px;
+  text-align: center;
+  padding: 10px;
+  outline: none;
+  background: #1fce36;
+  color: black;
+  border-radius: 18px;
+  transition: 0.25s;
+  cursor: pointer;
+  display: inline;
+  float: right;
+}
+
+#crearProyecto:hover{
+  background: #18a52b;
   color: whitesmoke;
   transform: scale(0.9);
 }

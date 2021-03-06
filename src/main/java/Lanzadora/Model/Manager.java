@@ -271,7 +271,9 @@ public class Manager {
 		}
 	}
 
-	public void sendProyecto() {
+	public void sendProyecto(String nombre) {
+		boolean enviado = false;
+		//boolean proyecto_enviado = true;
 		
 		
 		 DataInputStream input;
@@ -299,6 +301,7 @@ public class Manager {
 		 while ((in = bis.read(byteArray)) != -1){
 			 
 		 bos.write(byteArray,0,in);
+		 enviado = true;
 		 }
 		 
 		bis.close();
@@ -307,8 +310,8 @@ public class Manager {
 		}catch ( Exception e ) {
 		 System.err.println(e);
 		 }
-		
-		
+		if(enviado)
+			proyectoDAO.proyecto_enviado(nombre, true);
 	}
 
 	public void explorador() {
@@ -341,7 +344,7 @@ public class Manager {
 		java.util.Date fecha = new Date();
 		System.out.println (fecha);
 		String estado = "En preparación";
-		proyectoDAO.insertar(new proyecto(fecha, nombre, descripcion,  dut, repeticiones, lenguaje, usuario, estado));
+		proyectoDAO.insertar(new proyecto(fecha, nombre, descripcion,  dut, repeticiones, lenguaje, usuario, estado, false));
 		
 	}
 

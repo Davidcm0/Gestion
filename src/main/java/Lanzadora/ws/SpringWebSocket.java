@@ -39,7 +39,7 @@ public class SpringWebSocket extends TextWebSocketHandler {
 			break;
 
 		case "sendProyecto":
-			Manager.get().sendProyecto();
+			Manager.get().sendProyecto(jso.getString("nombre"));
 			break;
 
 		case "explorador":

@@ -57,7 +57,7 @@ public final class proyectoDAO {
 		while ((iter.hasNext())) {
 			document = iter.next();
 			if ((nombre).equals(document.getString("Autor"))) {
-				p = new proyecto(document.getDate("fecha"), document.getString(NAME), document.getString("descripcion"), document.getInteger("dut"), document.getInteger("repeticiones"),document.getString("lenguaje"),document.getString("Autor"), document.getString("estado"));
+				p = new proyecto(document.getDate("fecha"), document.getString(NAME), document.getString("descripcion"), document.getInteger("dut"), document.getInteger("repeticiones"),document.getString("lenguaje"),document.getString("Autor"), document.getString("estado"),document.getBoolean("proyecto_enviado"));
 			
 			
 			}
@@ -112,6 +112,16 @@ public final class proyectoDAO {
 		  
 		   // coleccion.findOneAndUpdate(findDocument, updateDocument);
 		System.out.println("sdsds");
+		
+	}
+
+	public static void proyecto_enviado(String nombre, boolean b) {
+		System.out.println("xxx");
+		MongoCollection<Document> coleccion = AgenteDB.get().getBd(PROYECTO);
+		 Document findDocument = new Document("nombre", nombre);
+		 
+		 Document updateName = new Document("$set",new Document("proyecto_enviado", b));
+		    coleccion.findOneAndUpdate(findDocument, updateName);
 		
 	}
 }

@@ -15,9 +15,12 @@ public class proyecto {
 	private String user;
 	private String nombre;
 	private String estado;
+	private Boolean proyecto_enviado;
+
+	
 
 	public proyecto(Date fecha, String nombre, String descripcion, int DUT, int repeticiones, String lenguaje,
-			String user, String estado) {
+			String user, String estado, boolean proyecto_enviado) {
 		this.fecha = fecha;
 		this.nombre = nombre;
 		this.descripcion = descripcion;
@@ -26,6 +29,7 @@ public class proyecto {
 		this.lenguaje = lenguaje;
 		this.user = user;
 		this.estado = estado;
+		this.proyecto_enviado = proyecto_enviado;
 	}
 
 	public String getNombre() {
@@ -91,6 +95,14 @@ public class proyecto {
 	public void setEstado(String estado) {
 		this.estado = estado;
 	}
+	
+	public Boolean getProyecto_enviado() {
+		return proyecto_enviado;
+	}
+
+	public void setProyecto_enviado(Boolean proyecto_enviado) {
+		this.proyecto_enviado = proyecto_enviado;
+	}
 
 	public JSONObject toJSON() {
 		JSONObject jso = new JSONObject();
@@ -102,6 +114,7 @@ public class proyecto {
 		jso.put("Lenguaje", this.getLenguaje());
 		jso.put("Autor", this.getUser());
 		jso.put("estado", this.getEstado());
+		jso.put("proyecto_enviado", this.getProyecto_enviado());
 		return jso;
 	}
 
