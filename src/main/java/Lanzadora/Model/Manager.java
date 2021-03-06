@@ -376,4 +376,14 @@ public class Manager {
 		
 	}
 
+	public Object leer() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public void modificarUsuario(String nombre, String new_nombre, String descripcion, int dut, int repeticiones, String lenguaje) {
+		proyectoDAO.modificar(nombre, new_nombre, descripcion, dut, repeticiones, lenguaje);
+		
+	}
+
 }

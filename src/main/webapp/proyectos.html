@@ -18,7 +18,7 @@
 	<div class="col-md-6 col-sm-8 col-xl-6 col-lg-4 boxHeaderGestion">
 		<button type="button" id="volverGestion"
 			onclick="window.history.back()">Volver</button>
-			<button type="button" id="volverGestion"
+		<button type="button" id="volverGestion"
 			onclick="window.location.href='form.html'">Crear proyecto</button>
 		<h1>Mis proyectos</h1>
 	</div>
@@ -34,32 +34,119 @@
 						class="card-text" data-bind="html : dut"></label></br> Repeticiones: <label
 						class="card-text" data-bind="html : repeticiones"></label></br>
 					Lenguaje: <label class="card-text" data-bind="html : lenguaje"></label></br>
-					Fecha: <label class="card-text" data-bind="html : fecha"></label></br> 
+					Fecha: <label class="card-text" data-bind="html : fecha"></label></br>
 					Estado: <label class="card-text" data-bind="html : estado"></label>
 					<!-- ko if: proyecto.estado == "En preparación" -->
-					<button type="button" data-bind="click: terminar"
-						id="explorador" class="btn btn-primary">Terminar proyecto</button></br> 
-						<!-- /ko -->
-						</br> 
-					<!-- ko if: proyecto.estado == "medido" -->
-					
-					<button type="button" data-bind="click:$root.resultados"
-						id="explorador" class="btn btn-primary">Pedir resultados</button></br> 
-						</br> 
-						<!-- /ko -->	
-						
-					<!-- ko if: proyecto.estado == "En preparación" -->	
-					<button type="button" data-bind="click:$root.explorador"
-						id="explorador" class="btn btn-primary">Seleccionar proyecto</button></br>
+					<div class="row">
+						<div class="col">
+							<button type="button" data-bind="click:$root.explorador"
+								id="explorador" class="btn btn-primary">Seleccionar
+								proyecto</button>
+							</br> </br>
+						</div>
+						<div class="col">
+							<button type="button" data-bind="click:$root.enviar" id="enviar"
+								class="btn btn-primary">Enviar Proyecto</button>
+							</br>
+						</div>
+					</div>
+					<!-- /ko -->
+
+
+					<!-- ko if: proyecto.estado == "En preparación" -->
+					<!-- 
+					<input type="button" class="btn btn-primary" value="Editar proyecto" onclick="javascript:window.open('http://localhost:8080/editar.html','','width=600,height=400,left=50,top=50,toolbar=yes');" />
+					 
+					<button type="button" class="btn btn-primary"
+						data-bs-toggle="modal" data-bs-target="#exampleModal">Editar
+						proyecto</button>
+						-->
+					<!-- Button trigger modal -->
+					<button type="button" data-bind="click: info" class="btn btn-primary" data-toggle="modal"
+						data-target="#exampleModal">Editar proyecto</button>
+
 					</br>
-					<button type="button" data-bind="click:$root.enviar"
-						id="enviar" class="btn btn-primary">Enviar Proyecto</button>
-						<!-- /ko -->
-						
+
+
+
+					<!-- /ko -->
+					</br>
+					<!-- ko if: proyecto.estado == "En preparación" -->
+					<button type="button" data-bind="click: terminar" id="explorador"
+						class="btn btn-primary">Terminar proyecto</button>
+					</br>
+					<!-- /ko -->
+
+					<!-- ko if: proyecto.estado == "medido" -->
+
+					<button type="button" data-bind="click:$root.resultados"
+						id="explorador" class="btn btn-primary">Pedir resultados</button>
+
+					<!-- /ko -->
+
+
+
 				</div>
 			</div>
 			<!-- /ko -->
 		</div>
+
+		<!-- Modal -->
+		<div class="modal fade" id="exampleModal" tabindex="-1"
+			aria-labelledby="exampleModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="exampleModalLabel">Modificacion
+							proyecto</h5>
+						<button type="button" class="close" data-dismiss="modal"
+							aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						<!-- AQUI METO EL CODIGO -->
+						<h1>Modificar proyecto</h1>
+						<p>
+						<form>
+							<div id="container" class="form">
+								<div>
+									<input id="nombreProyecto" name="nombre" required="required"
+										type="text" placeholder="Nombre proyecto" />
+								</div>
+								<div>
+									<textarea id="descripcion" required="required"
+										placeholder="descripción"></textarea>
+								</div>
+								<div>
+									<input id="dut" required="required" type="number"
+										placeholder="DUT" />
+								</div>
+								<div>
+									<input id="repeticiones" required="required" type="number"
+										placeholder="repeticiones" />
+								</div>
+								<div>
+									<label for="inputState">Lenguaje</label> <select id="lenguaje"
+										class="form-control">
+										<option selected>Elige...</option>
+										<option>Java</option>
+										<option>Python</option>
+									</select>
+								</div>
+							</div>
+							<p>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary"
+							data-dismiss="modal">Cerrar</button>
+						<button type="button" class="btn btn-primary" data-dismiss="modal"
+							data-bind="click: $root.modificar">Guardar cambios</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
 	</div>
 	<!--  
 	<div class="enviarProyecto">

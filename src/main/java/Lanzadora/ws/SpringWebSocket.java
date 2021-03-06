@@ -61,14 +61,16 @@ public class SpringWebSocket extends TextWebSocketHandler {
 		case "register":
 			Manager.get().register((String) jso.get(NOMBRE), jso.getString("email"), jso.getString("pwd1"));
 			break;
-			/*
-		case "infoUsuarios":
-			session.sendMessage(new TextMessage(Manager.get().leer().toString()));
+			
+		case "info":
+			session.sendMessage(new TextMessage(Manager.get().leer_proyectos(jso.getString("user")).toString()));
 			break;
+			
 		case "modificar":
-			// Misma condicion para modificar usuario tanto para Asistente como para Admin
-			Manager.get().modificarUsuario(jso.getString(NOMBRE), jso.getString("email"), jso.getString("pwd"));
+			
+			Manager.get().modificarUsuario(jso.getString(NOMBRE), jso.getString("new_nombre"), jso.getString("descripcion"), jso.getInt("dut"), jso.getInt("repeticiones"), jso.getString("lenguaje"));
 			break;
+			/*
 		case "ascender":
 			Manager.get().ascenderUsuario(jso.getString(NOMBRE));
 			break;

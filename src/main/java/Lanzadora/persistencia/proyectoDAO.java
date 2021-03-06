@@ -78,4 +78,40 @@ public final class proyectoDAO {
 		    coleccion.findOneAndUpdate(findDocument, updateDocument);
 		
 	}
+
+	public static void modificar(String nombre, String new_nombre, String descripcion, int dut, int repeticiones, String lenguaje) {
+		
+		
+		MongoCollection<Document> coleccion = AgenteDB.get().getBd(PROYECTO);
+		 Document findDocument = new Document("nombre", nombre);
+		//actualizamos descripcion
+		 if (!descripcion.equals("")) {
+		    Document updateDescripcion = new Document("$set",new Document("descripcion", descripcion));
+		    coleccion.findOneAndUpdate(findDocument, updateDescripcion);
+		 }
+		 if (dut != 000) {
+		    //dut
+		    Document updateDut = new Document("$set",new Document("dut", dut));
+		    coleccion.findOneAndUpdate(findDocument, updateDut);
+		 }
+		 if (repeticiones != 000) {
+		  //repeticiones
+		    Document updaterep = new Document("$set",new Document("repeticiones", repeticiones));
+		    coleccion.findOneAndUpdate(findDocument, updaterep);
+		 }
+		 if (!lenguaje.equals("Elige...")) {
+		  //lenguaje
+		    Document updateLen = new Document("$set",new Document("lenguaje", lenguaje));
+		    coleccion.findOneAndUpdate(findDocument, updateLen);
+		 }
+		 if (!new_nombre.equals("")) {
+		  //nombre
+		    Document updateName = new Document("$set",new Document("nombre", new_nombre));
+		    coleccion.findOneAndUpdate(findDocument, updateName);
+		 }
+		  
+		   // coleccion.findOneAndUpdate(findDocument, updateDocument);
+		System.out.println("sdsds");
+		
+	}
 }

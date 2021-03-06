@@ -2,16 +2,17 @@ var self;
 function ViewModel() {
 	self = this;
 	self.listaproyectos = ko.observableArray([]);
-	self.nombreUsuario = ko.observable('');
+	self.nombreProyecto = ko.observable('');
 	var url = "ws://" + window.location.host + "/Gestion";
 	self.sws = new WebSocket(url);
 	
 	self.sws.onopen = function(event) {
-
+		
 		var msg = {
 			type: "ready",
 			nombre: sessionStorage.userName,
-			vista: "gestionUsuarios"
+			vista: "gestionUsuarios",
+			
 		};
 		self.sws.send(JSON.stringify(msg));
 	};
@@ -30,6 +31,15 @@ function ViewModel() {
 			
 			
 
+		}
+		
+		for (var j = 0; j < proyectos.length; j++) {
+			var proyecto = proyectos[j];
+			if (proyecto.Nombre === self.nombreProyecto()) {
+
+				document.getElementById('nombreProyecto').placeholder = proyecto.Nombre;
+
+			}
 		}
 
 	}
@@ -58,10 +68,41 @@ function ViewModel() {
 		self.sws.send(JSON.stringify(info));
 	};
 	
-	
+	self.modificar = function() {
+		var dut;
+		var repeticiones;
+		
+		if(document.getElementById("dut").value === ""){
+			dut = 000;
+		} else{
+			dut =  document.getElementById("dut").value;
+		}
+		
+		if(document.getElementById("repeticiones").value === ""){
+			repeticiones = 000;
+		} else{
+			repeticiones =  document.getElementById("repeticiones").value;
+		}
+
+		var p = {
+			type: "modificar",
+			nombre: self.nombreProyecto(),
+			new_nombre: document.getElementById("nombreProyecto").value,
+			descripcion: document.getElementById("descripcion").value,
+			dut: dut,
+			repeticiones: repeticiones,
+			lenguaje: document.getElementById("lenguaje").options[document.getElementById("lenguaje").selectedIndex].text,
+			success: function() {
+				location.reload();
+			}
+		};
+		
+		self.sws.send(JSON.stringify(p));
+		location.reload();
+	}
 	
 	class Proyecto {
-		constructor(nombre, descripcion, autor, fecha, dut, repeticiones, lenguaje, estado) {
+		constructor (nombre, descripcion, autor, fecha, dut, repeticiones, lenguaje, estado) {
 			this.nombre = nombre;
 			this.descripcion = descripcion;
 			this.autor = autor;
@@ -71,25 +112,41 @@ function ViewModel() {
 			this.lenguaje = lenguaje;
 			this.estado = estado;
 		}
+		
+		info() {
+			self.nombreProyecto(this.nombre);
+			var p = {
+				type: "info",
+				nombre: this.nombre,
+				user:sessionStorage.userName
+				
+			};
+			
+			self.sws.send(JSON.stringify(p));
+
+		}
+		
 		terminar() {
 			var p = {
 				type: "terminar",
 				proyecto: this.nombre
 			};
-			self.nombreUsuario(this.name);
+			
 			self.sws.send(JSON.stringify(p));
 
 		}
-		
+
 		resultados(){
 			var p = {
 				type: 'resultados',
 				proyecto: this.nombre
-					
+
 			};
 			self.nombreUsuario(this.name);
 			self.sws.send(JSON.stringify(p));
-		};
+		}
+
+		
 
 	}
 
