@@ -20,7 +20,7 @@
 			onclick="window.history.back()">Volver</button>
 		<button type="button" id="crearProyecto"
 			onclick="window.location.href='form.html'">Crear proyecto</button>
-		<h1>Mis proyectos</h1>
+		<h1></h1>
 	</div>
 	<div id="koGestion">
 		<div class="cards">
@@ -37,12 +37,12 @@
 					Fecha: <label class="card-text" data-bind="html : fecha"></label></br>
 					Estado: <label class="card-text" data-bind="html : estado"></label></br>
 					<!-- ko if: proyecto.proyecto_enviado == true -->
-						Proyecto enviado
+					Proyecto enviado
 					<!-- /ko -->
 					<!-- ko if: proyecto.proyecto_enviado == false -->
-						Proyecto no enviado
+					Proyecto no enviado
 					<!-- /ko -->
-					<!-- ko if: proyecto.estado == "En preparación" && proyecto.proyecto_enviado == false -->
+					<!-- ko if: proyecto.estado == "En preparación" && proyecto.proyecto_enviado == false && $root.usuario !="admin"-->
 					<div class="row">
 						<div class="col">
 							<button type="button" data-bind="click:$root.explorador"
@@ -59,7 +59,7 @@
 					<!-- /ko -->
 
 
-					<!-- ko if: proyecto.estado == "En preparación" -->
+					<!-- ko if: proyecto.estado == "En preparación" && $root.usuario !="admin" -->
 					<!-- 
 					<input type="button" class="btn btn-primary" value="Editar proyecto" onclick="javascript:window.open('http://localhost:8080/editar.html','','width=600,height=400,left=50,top=50,toolbar=yes');" />
 					 
@@ -68,25 +68,40 @@
 						proyecto</button>
 						-->
 					<!-- Button trigger modal -->
-					<button type="button" data-bind="click: info" class="btn btn-primary" data-toggle="modal"
+					<button type="button" data-bind="click: info"
+						class="btn btn-primary" data-toggle="modal"
 						data-target="#exampleModal">Editar proyecto</button>
-
-					
 
 
 
 					<!-- /ko -->
+					
+					<!-- ko {if: $root.usuario === "admin"} -->
+					<div>
+						<label for="inputState">Cambiar estado:</label> <select id="Estado"
+							class="form-control">
+							<option selected>Elige...</option>
+							<option>Validado</option>
+							<option>Medido</option>
+						</select>
+					</div>
 					</br>
-					<!-- ko if: proyecto.estado == "En preparación" && proyecto.proyecto_enviado == true -->
+					<button type="button" data-bind="click: estado"
+						class="btn btn-primary" data-toggle="modal"
+						data-target="#exampleModal">Guardar cambios</button>
+					<!-- /ko -->
+					
+					</br>
+					<!-- ko if: proyecto.estado == "En preparación" && proyecto.proyecto_enviado == true && $root.usuario !="admin" -->
 					<button type="button" data-bind="click: terminar" id="explorador"
 						class="btn btn-primary">Terminar proyecto</button>
 					</br>
 					<!-- /ko -->
 
-					<!-- ko if: proyecto.estado == "medido" -->
+					<!-- ko if: proyecto.estado == "medido" && $root.usuario !="admin" -->
 
 					<button type="button" data-bind="click:$root.resultados"
-						id="explorador" class="btn btn-primary">Pedir resultados</button>
+						id="explorador" class="btn btn-primary">Ver resultados</button>
 
 					<!-- /ko -->
 
@@ -140,6 +155,7 @@
 										<option>Python</option>
 									</select>
 								</div>
+
 							</div>
 							<p>
 					</div>

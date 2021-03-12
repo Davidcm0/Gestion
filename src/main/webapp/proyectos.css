@@ -164,7 +164,7 @@ border:0;
   padding: 10px;
   outline: none;
   background: #5fca8c;
-  border-radius: 18px;
+  border-radius: 12px;
   transition: 0.25s;
   cursor: pointer;
   display: inline;
@@ -283,7 +283,7 @@ background-color: grey;
   outline: none;
   background: #1fce36;
   color: black;
-  border-radius: 18px;
+  border-radius: 14px;
   transition: 0.25s;
   cursor: pointer;
   display: inline;
@@ -372,6 +372,7 @@ background-color: grey;
 	margin-right: 30px;
 	opacity:0.9;
 	margin-bottom: 30px;
+	border-radius:15px;
 }
 
 h2, p{

@@ -3,11 +3,13 @@ function ViewModel() {
 	self = this;
 	self.listaproyectos = ko.observableArray([]);
 	self.nombreProyecto = ko.observable('');
+	self.user = ko.observable('');
+	this.usuario = sessionStorage.userName;
 	var url = "ws://" + window.location.host + "/Gestion";
 	self.sws = new WebSocket(url);
 	
 	self.sws.onopen = function(event) {
-		
+		self.user(sessionStorage.userName);
 		var msg = {
 			type: "ready",
 			nombre: sessionStorage.userName,
@@ -41,6 +43,7 @@ function ViewModel() {
 
 			}
 		}
+		document.getElementsByTagName('h1')[0].innerText = sessionStorage.userName;
 
 	}
 
