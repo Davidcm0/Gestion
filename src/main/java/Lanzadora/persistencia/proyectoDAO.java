@@ -131,4 +131,28 @@ public final class proyectoDAO {
 		    coleccion.findOneAndUpdate(findDocument, updateName);
 		
 	}
+
+	public static List<User> leer_usuarios() {
+		ArrayList<User> usuarios = new ArrayList<>();
+		Document document;
+		User u= null;
+		MongoCollection<Document> coleccion = AgenteDB.get().getBd(USUARIO);
+		MongoCursor<Document> iter = coleccion.find().iterator();
+		
+		while ((iter.hasNext())) {
+			document = iter.next();
+			
+			if (!"admin".equals(document.getString("name"))) {
+				if(!document.getBoolean("validado")) {
+					u = new User(document.getString("name"), document.getString("password"), document.getBoolean("validado"));
+					usuarios.add(u);
+				}
+				
+			
+			}
+					
+		}
+
+		return usuarios;
+	}
 }

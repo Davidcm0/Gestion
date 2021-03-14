@@ -34,7 +34,12 @@ public class SpringWebSocket extends TextWebSocketHandler {
 		JSONObject jso = new JSONObject(message.getPayload().toString());
 		switch (jso.getString(TYPE)) {
 		case "ready":
-			session.sendMessage(new TextMessage(Manager.get().leer_proyectos(jso.getString(NOMBRE)).toString()));
+			if(jso.getString("vista").equals("validar")) {
+				session.sendMessage(new TextMessage(Manager.get().leer_usuarios().toString()));
+			}else {
+				session.sendMessage(new TextMessage(Manager.get().leer_proyectos(jso.getString(NOMBRE)).toString()));
+			}
+			
 			//Manager.get().leer_proyectos(jso.getString(NOMBRE));
 			break;
 

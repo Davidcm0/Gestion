@@ -372,7 +372,8 @@ public class Manager {
 	}
 
 	public void register(String nombre, String email, String password) {
-		UserDAO.insertar(new User(nombre, encriptarMD5(password)));
+		Boolean validado = false;
+		UserDAO.insertar(new User(nombre, encriptarMD5(password), validado ));
 		
 	}
 
@@ -395,6 +396,20 @@ public class Manager {
 	public void modificarUsuario(String nombre, String new_nombre, String descripcion, int dut, int repeticiones, String lenguaje) {
 		proyectoDAO.modificar(nombre, new_nombre, descripcion, dut, repeticiones, lenguaje);
 		
+	}
+
+	public JSONObject leer_usuarios() {
+		JSONArray jsa = new JSONArray();
+		JSONObject jso = new JSONObject();
+		List<User> usuarios = proyectoDAO.leer_usuarios();
+
+		for (User usuario : usuarios) {
+
+			jsa.put(usuario.toJSON());
+		}
+		jso.put("usuarios", jsa);
+
+		return jso;
 	}
 
 }

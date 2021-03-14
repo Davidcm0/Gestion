@@ -15,6 +15,7 @@ public final class UserDAO {
 	public static final String USUARIO = "users";
 	public static final String PASSWORD = "password";
 	public static final String NAME = "name";
+	public static final String VALIDADO = "validado";
 
 
 	private UserDAO() {
@@ -40,7 +41,7 @@ public final class UserDAO {
 		while ((iter.hasNext())) {
 			document = iter.next();
 			
-				u = new User(document.getString(NAME), document.getString(PASSWORD));
+				u = new User(document.getString(NAME), document.getString(PASSWORD), document.getBoolean("valiado"));
 		
 				//u = new Asistente(document.getString(NAME), document.getString(EMAIL), document.getString(PASSWORD));
 				
@@ -63,6 +64,7 @@ public final class UserDAO {
 			document = new Document(NAME, user.getName());
 	
 			document.append(PASSWORD, user.getPassword());
+			document.append(VALIDADO, user.getValidado());
 			
 			coleccion.insertOne(document);
 		}

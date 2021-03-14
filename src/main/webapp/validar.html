@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<title>Mis Proyectos</title>
+<title>Validar</title>
 <meta charset="ISO-8859-1">
 <!-- Bootstrap CSS -->
 <link rel="stylesheet"
@@ -18,14 +18,9 @@
 	<div class="col-md-6 col-sm-8 col-xl-6 col-lg-4 boxHeaderGestion">
 		<button type="button" id="volverGestion"
 			onclick="window.history.back()">Volver</button>
-			<!-- ko {if: $root.usuario != "admin"} -->
-		<button type="button" id="crearProyecto"
-			onclick="window.location.href='form.html'">Crear proyecto</button>
-			<!-- /ko -->
-			<!-- ko {if: $root.usuario === "admin"} -->
-		<button type="button" id="crearProyecto"
-			onclick="window.location.href='validar.html'">Validar usuario</button>
-			<!-- /ko -->
+			<button type="button" id="volverGestion"
+			data-bind="click: $root.eliminar">Borrar no validados</button>
+
 		<h1></h1>
 		
 	</div>
@@ -34,74 +29,17 @@
 	
 	<div id="koGestion">
 		<div class="cards">
-			<!-- ko foreach : { data: listaproyectos, as :"proyecto" } -->
+			<!-- ko foreach : { data: listausuarios, as :"usuario" } -->
 			<div class="card" style="width: 18rem;">
 				<div class="card-body">
 					<h4 class="card-title" data-bind="html : nombre"></h4>
-					<h6 class="card-subtitle mb-2 text-muted" data-bind="html : autor"></h6>
-					Descripción: <label class="card-text"
-						data-bind="html : descripcion"></label></br><!--   Autor: <label
-						class="card-text" data-bind="html : autor"></label></br>--> DUT: <label
-						class="card-text" data-bind="html : dut"></label></br> Repeticiones: <label
-						class="card-text" data-bind="html : repeticiones"></label></br>
-					Lenguaje: <label class="card-text" data-bind="html : lenguaje"></label></br>
-					Fecha: <label class="card-text" data-bind="html : fecha"></label></br>
-					Estado: <label class="card-text" data-bind="html : estado"></label></br>
-					<!-- ko if: proyecto.proyecto_enviado == true -->
-					<b>Proyecto enviado</b>
-					<!-- /ko -->
-					<!-- ko if: proyecto.proyecto_enviado == false -->
-					<b>Proyecto no enviado</b>
-					<!-- /ko -->
-					<!-- ko if: proyecto.estado == "En preparación" && proyecto.proyecto_enviado == false && $root.usuario !="admin"-->
-					<div class="row">
-						<div class="col">
-							<button type="button" data-bind="click:$root.explorador"
-								id="explorador" class="btn btn-outline-success">Seleccionar
-								proyecto</button>
-							</br> </br>
-						</div>
-						<div class="col">
-							<button type="button" data-bind="click: enviar" id="enviar"
-								class="btn btn-outline-success">Enviar Proyecto</button>
-							</br>
-						</div>
-					</div>
-					<!-- /ko -->
+					<h6 class="card-subtitle mb-2 text-muted" data-bind="html : nombre"></h6>
 
-
-					<!-- ko if: (proyecto.estado == "En preparación") || $root.usuario =="admin"  -->
-					<!-- 
-					<input type="button" class="btn btn-primary" value="Editar proyecto" onclick="javascript:window.open('http://localhost:8080/editar.html','','width=600,height=400,left=50,top=50,toolbar=yes');" />
-					 
-					<button type="button" class="btn btn-primary"
-						data-bs-toggle="modal" data-bs-target="#exampleModal">Editar
-						proyecto</button>
-						-->
-					<!-- Button trigger modal -->
-					<button type="button" data-bind="click: info"
-						class="btn btn-outline-success" data-toggle="modal"
-						data-target="#exampleModal">Editar proyecto</button>
-
-
-
-					<!-- /ko -->
 					
+					<button type="button" data-bind="click: validacion"
+						class="btn btn-outline-success">Validar</button>
+
 					
-					
-					</br>
-					<!-- ko if: proyecto.estado == "En preparación" && proyecto.proyecto_enviado == true && $root.usuario !="admin" -->
-					<button type="button" data-bind="click: terminar" id="explorador"
-						class="btn btn-outline-success">Terminar proyecto</button>
-					</br>
-					<!-- /ko -->
-
-					<!-- ko if: proyecto.estado == "medido" && $root.usuario !="admin" -->
-
-					<button type="button" data-bind="click:$root.resultados"
-						id="explorador" class="btn btn-outline-success">Ver resultados</button>
-
-					<!-- /ko -->
 
 
 
@@ -213,7 +151,7 @@
 	<!-- KNOCKOUT -->
 	<script src="https://knockoutjs.com/downloads/knockout-3.5.0.js"></script>
 
-	<script src="sendproyecto.js"></script>
-	<script src="explorador.js"></script>
+	<script src="validar.js"></script>
+	
 </body>
 </html>
