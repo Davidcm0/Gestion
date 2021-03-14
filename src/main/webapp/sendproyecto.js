@@ -193,6 +193,7 @@ function ViewModel() {
 				}
 			};
 			self.sws.send(JSON.stringify(info));
+			location.reload();
 		};
 
 	}
