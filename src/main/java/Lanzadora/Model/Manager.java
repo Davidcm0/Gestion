@@ -11,8 +11,11 @@ import java.math.BigInteger;
 import java.net.Socket;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
@@ -342,9 +345,14 @@ public class Manager {
 
 	public void crearProyecto(String nombre, int repeticiones, String lenguaje, String descripcion, int dut, String usuario) {
 		java.util.Date fecha = new Date();
+		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
+		System.out.println(dtf);
+        System.out.println("yyyy/MM/dd HH:mm:ss-> "+dtf.format(LocalDateTime.now()));
+        //fecha = dtf.format(LocalDateTime.now());
 		System.out.println (fecha);
 		String estado = "En preparación";
-		proyectoDAO.insertar(new proyecto(fecha, nombre, descripcion,  dut, repeticiones, lenguaje, usuario, estado, false));
+		Boolean enviado = false;
+		proyectoDAO.insertar(new proyecto(fecha, nombre, descripcion,  dut, repeticiones, lenguaje, usuario, estado, enviado));
 		
 	}
 
@@ -368,9 +376,9 @@ public class Manager {
 		
 	}
 
-	public void terminar_proyecto(String proyecto) {
-		String terminar = "terminado";
-		proyectoDAO.actualizar(proyecto, terminar);
+	public void actualizar_estado(String proyecto, String estado) {
+		
+		proyectoDAO.actualizar(proyecto, estado);
 		
 	}
 

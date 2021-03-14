@@ -22,44 +22,48 @@
 			onclick="window.location.href='form.html'">Crear proyecto</button>
 		<h1></h1>
 	</div>
+	
+	
+	
 	<div id="koGestion">
 		<div class="cards">
 			<!-- ko foreach : { data: listaproyectos, as :"proyecto" } -->
 			<div class="card" style="width: 18rem;">
 				<div class="card-body">
-					<h5 class="card-title" data-bind="html : nombre"></h5>
+					<h4 class="card-title" data-bind="html : nombre"></h4>
+					<h6 class="card-subtitle mb-2 text-muted" data-bind="html : autor"></h6>
 					Descripción: <label class="card-text"
-						data-bind="html : descripcion"></label></br> Autor: <label
-						class="card-text" data-bind="html : autor"></label></br> DUT: <label
+						data-bind="html : descripcion"></label></br><!--   Autor: <label
+						class="card-text" data-bind="html : autor"></label></br>--> DUT: <label
 						class="card-text" data-bind="html : dut"></label></br> Repeticiones: <label
 						class="card-text" data-bind="html : repeticiones"></label></br>
 					Lenguaje: <label class="card-text" data-bind="html : lenguaje"></label></br>
 					Fecha: <label class="card-text" data-bind="html : fecha"></label></br>
 					Estado: <label class="card-text" data-bind="html : estado"></label></br>
 					<!-- ko if: proyecto.proyecto_enviado == true -->
-					Proyecto enviado
+					<b>Proyecto enviado</b>
 					<!-- /ko -->
 					<!-- ko if: proyecto.proyecto_enviado == false -->
-					Proyecto no enviado
+					<b>Proyecto no enviado</b>
 					<!-- /ko -->
 					<!-- ko if: proyecto.estado == "En preparación" && proyecto.proyecto_enviado == false && $root.usuario !="admin"-->
 					<div class="row">
 						<div class="col">
 							<button type="button" data-bind="click:$root.explorador"
-								id="explorador" class="btn btn-primary">Seleccionar
+								id="explorador" class="btn btn-outline-success">Seleccionar
 								proyecto</button>
 							</br> </br>
 						</div>
 						<div class="col">
 							<button type="button" data-bind="click: enviar" id="enviar"
-								class="btn btn-primary">Enviar Proyecto</button>
+								class="btn btn-outline-success">Enviar Proyecto</button>
 							</br>
 						</div>
 					</div>
 					<!-- /ko -->
 
 
-					<!-- ko if: proyecto.estado == "En preparación" && $root.usuario !="admin" -->
+					<!-- ko if: (proyecto.estado == "En preparación") || $root.usuario =="admin"  -->
 					<!-- 
 					<input type="button" class="btn btn-primary" value="Editar proyecto" onclick="javascript:window.open('http://localhost:8080/editar.html','','width=600,height=400,left=50,top=50,toolbar=yes');" />
 					 
@@ -69,39 +73,26 @@
 						-->
 					<!-- Button trigger modal -->
 					<button type="button" data-bind="click: info"
-						class="btn btn-primary" data-toggle="modal"
+						class="btn btn-outline-success" data-toggle="modal"
 						data-target="#exampleModal">Editar proyecto</button>
 
 
 
 					<!-- /ko -->
 					
-					<!-- ko {if: $root.usuario === "admin"} -->
-					<div>
-						<label for="inputState">Cambiar estado:</label> <select id="Estado"
-							class="form-control">
-							<option selected>Elige...</option>
-							<option>Validado</option>
-							<option>Medido</option>
-						</select>
-					</div>
-					</br>
-					<button type="button" data-bind="click: estado"
-						class="btn btn-primary" data-toggle="modal"
-						data-target="#exampleModal">Guardar cambios</button>
-					<!-- /ko -->
+					
 					
 					</br>
 					<!-- ko if: proyecto.estado == "En preparación" && proyecto.proyecto_enviado == true && $root.usuario !="admin" -->
 					<button type="button" data-bind="click: terminar" id="explorador"
-						class="btn btn-primary">Terminar proyecto</button>
+						class="btn btn-outline-success">Terminar proyecto</button>
 					</br>
 					<!-- /ko -->
 
 					<!-- ko if: proyecto.estado == "medido" && $root.usuario !="admin" -->
 
 					<button type="button" data-bind="click:$root.resultados"
-						id="explorador" class="btn btn-primary">Ver resultados</button>
+						id="explorador" class="btn btn-outline-success">Ver resultados</button>
 
 					<!-- /ko -->
 
@@ -121,7 +112,7 @@
 						<h5 class="modal-title" id="exampleModalLabel">Modificacion
 							proyecto</h5>
 						<button type="button" class="close" data-dismiss="modal"
-							aria-label="Close">
+							aria-label="Close" onclick="window.location.href='proyectos.html'">
 							<span aria-hidden="true">&times;</span>
 						</button>
 					</div>
@@ -131,10 +122,12 @@
 						<p>
 						<form>
 							<div id="container" class="form">
+							
 								<div>
 									<input id="nombreProyecto" name="nombre" required="required"
 										type="text" placeholder="Nombre proyecto" />
 								</div>
+								
 								<div>
 									<textarea id="descripcion" required="required"
 										placeholder="descripción"></textarea>
@@ -155,14 +148,26 @@
 										<option>Python</option>
 									</select>
 								</div>
+								
+								<!-- ko {if: $root.usuario === "admin"} -->
+					<div>
+						<label for="inputState">Cambiar estado:</label> <select id="Estado"
+							class="form-control">
+							<option selected>Elige...</option>
+							<option>Validado</option>
+							<option>Medido</option>
+						</select>
+					</div>
+					
+					<!-- /ko -->
 
 							</div>
 							<p>
 					</div>
 					<div class="modal-footer">
-						<button type="button" class="btn btn-secondary"
-							data-dismiss="modal">Cerrar</button>
-						<button type="button" class="btn btn-primary" data-dismiss="modal"
+						<button type="button" class="btn btn-outline-secondary"
+							data-dismiss="modal" onclick="window.location.href='proyectos.html'">Cerrar</button>
+						<button type="button" class="btn btn-outline-success" data-dismiss="modal"
 							data-bind="click: $root.modificar">Guardar cambios</button>
 					</div>
 				</div>

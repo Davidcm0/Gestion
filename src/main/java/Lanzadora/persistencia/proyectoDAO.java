@@ -40,6 +40,7 @@ public final class proyectoDAO {
 			document.append("lenguaje", proyecto.getLenguaje());
 			document.append("fecha", proyecto.getFecha());
 			document.append("estado", proyecto.getEstado());
+			document.append("proyecto_enviado", proyecto.getProyecto_enviado());
 
 			coleccion.insertOne(document);
 			System.out.println("xx");

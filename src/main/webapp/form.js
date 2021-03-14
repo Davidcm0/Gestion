@@ -16,14 +16,17 @@ function ViewModel() {
 			dut: $('#dut').val(),
 			lenguaje: document.getElementById("lenguaje").options[document.getElementById("lenguaje").selectedIndex].text,
 			success: function() {
+				window.location.href = 'proyectos.html';
 				alert('Se ha creado correctamente');
+				
 			},
 			error: function() {
-
+				
 				alert('Se ha creado incorrectamente');
 			}
 		};
 		self.sws.send(JSON.stringify(info));
+		window.location.href = 'proyectos.html';
 	};
 
 }

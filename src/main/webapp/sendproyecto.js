@@ -86,6 +86,9 @@ function ViewModel() {
 		} else{
 			repeticiones =  document.getElementById("repeticiones").value;
 		}
+		
+		
+		if(sessionStorage.userName != "admin"){
 
 		var p = {
 			type: "modificar",
@@ -99,10 +102,23 @@ function ViewModel() {
 				location.reload();
 			}
 		};
+		} else{
+			var p = {
+					type: "estado",
+					proyecto: self.nombreProyecto(),
+					estado: document.getElementById("Estado").options[document.getElementById("Estado").selectedIndex].text,
+					success: function() {
+						location.reload();
+					}
+				};
+		}
 		
 		self.sws.send(JSON.stringify(p));
 		location.reload();
 	}
+	
+	
+
 	
 	class Proyecto {
 		constructor (nombre, descripcion, autor, fecha, dut, repeticiones, lenguaje, estado, proyecto_enviado) {
@@ -148,6 +164,18 @@ function ViewModel() {
 			};
 			self.nombreUsuario(this.name);
 			self.sws.send(JSON.stringify(p));
+		}
+		
+		estado_proyecto() {
+			var matches = document.querySelectorAll('select');
+			var p = {
+				type: "estado",
+				estado: document.getElementById("Estado").options[document.getElementById("Estado").selectedIndex].text,
+				proyecto: this.nombre
+			};
+			
+			self.sws.send(JSON.stringify(p));
+
 		}
 
 		enviar() {	

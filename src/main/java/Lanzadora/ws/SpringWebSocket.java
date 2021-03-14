@@ -51,7 +51,8 @@ public class SpringWebSocket extends TextWebSocketHandler {
 			break;
 			
 		case "terminar":
-			Manager.get().terminar_proyecto(jso.getString("proyecto"));
+			String terminar = "terminar";
+			Manager.get().actualizar_estado(jso.getString("proyecto"), terminar);
 			break;
 				
 		case "resultados":
@@ -70,10 +71,11 @@ public class SpringWebSocket extends TextWebSocketHandler {
 			
 			Manager.get().modificarUsuario(jso.getString(NOMBRE), jso.getString("new_nombre"), jso.getString("descripcion"), jso.getInt("dut"), jso.getInt("repeticiones"), jso.getString("lenguaje"));
 			break;
-			/*
-		case "ascender":
-			Manager.get().ascenderUsuario(jso.getString(NOMBRE));
+			
+		case "estado":
+			Manager.get().actualizar_estado(jso.getString("proyecto"), jso.getString("estado"));
 			break;
+			/*
 		case "aceptarReunion":
 			Manager.get().aceptarReunion(jso.getString(NOMBRE), jso.getInt("id"));
 			session.sendMessage(
