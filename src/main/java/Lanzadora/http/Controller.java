@@ -20,6 +20,7 @@ public class Controller {
 		JSONObject jso = new JSONObject(credenciales);
 		String name = jso.getString(USERNAME);
 		String password = jso.getString(PASS);
+		
 		Manager.get().login(name, password);
 	}
 
@@ -28,6 +29,7 @@ public class Controller {
 		JSONObject jso = new JSONObject(credenciales);
 		String password = jso.getString(PASS);
 		String passwordConfirmacion = jso.getString("pwd2");
+		
 
 		if (!password.equals(passwordConfirmacion)) {
 			throw new excepciones.DiferentesContrasenasException();

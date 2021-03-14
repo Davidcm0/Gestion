@@ -5,13 +5,15 @@ import org.json.JSONObject;
 public class User {
 	protected String name;
 	protected String password;
+	private String email;
 	private Boolean validado;
 	
-	public User(String name, String password, Boolean validado) {
+	public User(String name, String password, String email, Boolean validado) {
 
 		this.name = name;
 		this.password = password;
 		this.validado = validado;
+		this.email = email;
 
 	}
 
@@ -38,11 +40,20 @@ public class User {
 	public void setValidado(Boolean validado) {
 		this.validado = validado;
 	}
+	
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
 
 	protected JSONObject toJSON() {
 		JSONObject jso = new JSONObject();
 		jso.put("name", this.getName());
 		jso.put("password", this.getPassword());
+		jso.put("email", this.getEmail());
 		jso.put("validado", this.getValidado());
 		return jso;
 	}

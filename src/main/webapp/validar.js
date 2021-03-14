@@ -29,7 +29,7 @@ function ViewModel() {
 
 		for (var i = 0; i < usuarios.length; i++) {
 			var usuario = usuarios[i];
-				self.listausuarios.push(new Usuario(usuario.name, usuario.password, usuario.validado));
+				self.listausuarios.push(new Usuario(usuario.name, usuario.password, usuario.email, usuario.validado));
 			
 			
 
@@ -39,16 +39,31 @@ function ViewModel() {
 
 	}
 	
+	self.eliminar = function(){
+		const info ={
+				type: 'eliminar',
+		};
+		self.sws.send(JSON.stringify(info));
+		location.reload();
+	};
+	
 	
 	class Usuario {
-		constructor (nombre, password, validado) {
+		constructor (nombre, password, email, validado) {
 			this.nombre = nombre;
 			this.password = password;
+			this.email = email;
 			this.validado = validado;
 		}
 		
 		validacion(){
-			
+			var p = {
+					type: "validacion",
+					nombre: this.nombre
+				};
+				
+				self.sws.send(JSON.stringify(p));
+				location.reload();
 		}
 	}
 	

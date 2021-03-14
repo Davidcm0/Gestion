@@ -144,7 +144,7 @@ public final class proyectoDAO {
 			
 			if (!"admin".equals(document.getString("name"))) {
 				if(!document.getBoolean("validado")) {
-					u = new User(document.getString("name"), document.getString("password"), document.getBoolean("validado"));
+					u = new User(document.getString("name"), document.getString("password"), document.getString("email"), document.getBoolean("validado"));
 					usuarios.add(u);
 				}
 				

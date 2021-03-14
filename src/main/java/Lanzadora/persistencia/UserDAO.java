@@ -41,7 +41,7 @@ public final class UserDAO {
 		while ((iter.hasNext())) {
 			document = iter.next();
 			
-				u = new User(document.getString(NAME), document.getString(PASSWORD), document.getBoolean("valiado"));
+				u = new User(document.getString(NAME), document.getString(PASSWORD),document.getString("email"), document.getBoolean("validado"));
 		
 				//u = new Asistente(document.getString(NAME), document.getString(EMAIL), document.getString(PASSWORD));
 				
@@ -64,6 +64,7 @@ public final class UserDAO {
 			document = new Document(NAME, user.getName());
 	
 			document.append(PASSWORD, user.getPassword());
+			document.append("email", user.getEmail());
 			document.append(VALIDADO, user.getValidado());
 			
 			coleccion.insertOne(document);
@@ -85,6 +86,32 @@ public final class UserDAO {
 		//Mismo metodo para modificar usuario tanto para Asistente como para Admin
 			UserDAO.eliminar(u);
 			UserDAO.insertar(u);
+	}
+
+	public static void validar(String usuario) {
+		MongoCollection<Document> coleccion = AgenteDB.get().getBd(USUARIO);
+		 Document findDocument = new Document("name", usuario);
+		 
+		// Create the document to specify the update
+		    Document updateDocument = new Document("$set",
+		        new Document("validado", true));
+		    coleccion.findOneAndUpdate(findDocument, updateDocument);
+		
+	}
+
+	public static void eliminarAll() {
+		ArrayList<User> usuarios = (ArrayList<User>) leerUsers();
+		Document document;
+		MongoCollection<Document> coleccion;
+		coleccion = AgenteDB.get().getBd(USUARIO);
+		
+		for(User usuario: usuarios) {
+			if(!usuario.getValidado()) {
+				document = new Document("name", usuario.getName());
+				coleccion.findOneAndDelete(document);
+			}
+		}
+		
 	}
 
 }

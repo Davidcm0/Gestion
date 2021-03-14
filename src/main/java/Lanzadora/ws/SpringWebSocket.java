@@ -80,17 +80,17 @@ public class SpringWebSocket extends TextWebSocketHandler {
 		case "estado":
 			Manager.get().actualizar_estado(jso.getString("proyecto"), jso.getString("estado"));
 			break;
+			
+		case "validacion":
+			Manager.get().validar_user(jso.getString(NOMBRE));
+			
+			break;
+			
+		case "eliminar":
+			Manager.get().eliminar_users();
+			
+			break;
 			/*
-		case "aceptarReunion":
-			Manager.get().aceptarReunion(jso.getString(NOMBRE), jso.getInt("id"));
-			session.sendMessage(
-					new TextMessage(Manager.get().cargarReunionesPendientes(jso.getString(NOMBRE)).toString()));
-			break;
-		case "rechazarReunion":
-			Manager.get().rechazarReunion(jso.getString(NOMBRE), jso.getInt("id"));
-			session.sendMessage(
-					new TextMessage(Manager.get().cargarReunionesPendientes(jso.getString(NOMBRE)).toString()));
-			break;
 		case "reunionesPendientes":
 			session.sendMessage(
 					new TextMessage(Manager.get().cargarReunionesPendientes(jso.getString(NOMBRE)).toString()));
