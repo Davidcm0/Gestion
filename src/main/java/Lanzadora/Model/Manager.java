@@ -10,6 +10,11 @@ import java.math.BigInteger;
 import java.net.Socket;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
@@ -332,8 +337,22 @@ public class Manager {
 
 	}
 
-	public void resultados(String proyecto) {
-		// TODO Auto-generated method stub
+	public void resultados(String proyecto, String usuario) {
+		try {
+			Connection connection = DriverManager.getConnection("jdbc:mariadb://172.20.48.59:3306/elliotdb?user=david&password=greenTFG#");
+
+			Statement s = connection.createStatement();
+			//ResultSet rs = s.executeQuery("Select * from testcasereport");
+			ResultSet rs = s.executeQuery ("select d.* from testcase t, testcasereport r, testcasereport_data d where t.name = \"Fasta2\" and t._id = r.TestCase_id and r._id = d.TestCaseReport_id");
+		//System.out.println(rs);
+			while (rs.next())
+			{
+			    System.out.println (rs.getInt (1) + " " + rs.getString (2));
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 	}
 

@@ -159,10 +159,11 @@ function ViewModel() {
 		resultados(){
 			var p = {
 				type: 'resultados',
-				proyecto: this.nombre
+				proyecto: this.nombre,
+				usuario:sessionStorage.userName
 
 			};
-			self.nombreUsuario(this.name);
+			//self.nombreUsuario(this.name);
 			self.sws.send(JSON.stringify(p));
 		}
 		

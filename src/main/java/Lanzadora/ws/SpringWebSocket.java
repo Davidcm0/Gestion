@@ -61,7 +61,7 @@ public class SpringWebSocket extends TextWebSocketHandler {
 			break;
 				
 		case "resultados":
-			Manager.get().resultados(jso.getString("proyecto"));
+			Manager.get().resultados(jso.getString("proyecto"), jso.getString("usuario"));
 			break;
 			
 		case "register":

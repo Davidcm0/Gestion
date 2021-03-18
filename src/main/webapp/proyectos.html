@@ -96,9 +96,9 @@
 					</br>
 					<!-- /ko -->
 
-					<!-- ko if: proyecto.estado == "medido" && $root.usuario !="admin" -->
+					<!-- ko if: proyecto.estado === "Medido" && $root.usuario !="admin" -->
 
-					<button type="button" data-bind="click:$root.resultados"
+					<button type="button" data-bind="click: resultados"
 						id="explorador" class="btn btn-outline-success">Ver resultados</button>
 
 					<!-- /ko -->
