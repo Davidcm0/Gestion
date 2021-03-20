@@ -22,8 +22,18 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
+import java.util.Set;
+import java.util.TreeMap;
+import java.io.FileOutputStream;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Row;
 
+
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.web.socket.TextMessage;
@@ -338,6 +348,7 @@ public class Manager {
 	}
 
 	public JSONObject resultados(String proyecto, String usuario) {
+		
 		Resultados resultados = new Resultados();
 		Double Time[] = new Double[10];
 		Double HDD[] = new Double[10];
@@ -423,13 +434,13 @@ public class Manager {
 				// rs.getDouble (5)+ " " + rs.getDouble (6)+ " " + rs.getDouble (7)+ " " +
 				// rs.getDouble (8)+ " " + rs.getDouble (9));
 			}
-			System.out.println("hh");
+			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
-		
+		hacer_excel(resultados);
 		JSONArray jsa = new JSONArray();
 		JSONObject jso = new JSONObject();
 
@@ -475,6 +486,46 @@ public class Manager {
 	public void eliminar_users() {
 		UserDAO.eliminarAll();
 
+	}
+	
+	public void hacer_excel(Resultados resultados) {
+		Double w = resultados.getTime()[0];
+		Workbook workbook = new HSSFWorkbook();
+        //Crea hoja nueva
+        Sheet sheet = workbook.createSheet("Resultados");
+        //Por cada línea se crea un arreglo de objetos (Object[])
+        Map<String, Object[]> datos = new TreeMap<String, Object[]>();
+        datos.put("1", new Object[]{"", "Min", "Max", "Media","Q1", "Q3"});
+        datos.put("2", new Object[]{"Tiempo", resultados.getTime()[0], resultados.getTime()[1], resultados.getTime()[2], resultados.getTime()[3], resultados.getTime()[4]});
+        datos.put("3", new Object[]{"HDD", resultados.getHDD()[0], "Allos"});
+        datos.put("4", new Object[]{"Procesador", "Carlos", "Caritas"});
+        datos.put("5", new Object[]{"Monitor", "Luisa", "Vitz"});
+        datos.put("6", new Object[]{"DUT", "Luisa", "Vitz"});
+        //Iterar sobre datos para escribir en la hoja
+        Set<String> keyset = datos.keySet();
+        int numeroRenglon = 0;
+        for (String key : keyset) {
+            Row row = sheet.createRow(numeroRenglon++);
+            Object[] arregloObjetos = datos.get(key);
+            int numeroCelda = 0;
+            for (Object obj : arregloObjetos) {
+                Cell cell = row.createCell(numeroCelda++);
+                if (obj instanceof String) {
+                    cell.setCellValue((String) obj);
+                } else if (obj instanceof Double) {
+                    cell.setCellValue((Double) obj);
+                }
+            }
+        }
+        try {
+            //Se genera el documento
+            FileOutputStream out = new FileOutputStream(new File("ejemplo.csv"));
+            workbook.write(out);
+            out.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+		
 	}
 
 }

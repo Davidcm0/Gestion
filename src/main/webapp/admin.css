@@ -368,3 +368,10 @@ p {
   float: left;
   text-align: center;
 }
+
+table {
+   border-collapse: separate;
+   border-spacing: 1px;
+   border-radius: 2px;
+   
+}
