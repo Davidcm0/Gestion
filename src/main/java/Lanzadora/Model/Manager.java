@@ -76,7 +76,7 @@ public class Manager {
 	public boolean checkCredenciales(User u, String name, String password) throws Exception {
 		boolean aux = false;
 		String pwdEncrypted, pwdUser;
-		if(u.getValidado()) {
+		if (u.getValidado()) {
 			if (u.getName().equals(name)) {
 				pwdEncrypted = u.getPassword();
 				pwdUser = encriptarMD5(password);
@@ -90,7 +90,7 @@ public class Manager {
 				}
 			}
 		}
-		
+
 		return aux;
 
 	}
@@ -327,7 +327,7 @@ public class Manager {
 
 	public void register(String nombre, String email, String password) {
 		Boolean validado = false;
-		UserDAO.insertar(new User(nombre, encriptarMD5(password),email,  validado));
+		UserDAO.insertar(new User(nombre, encriptarMD5(password), email, validado));
 
 	}
 
@@ -337,22 +337,108 @@ public class Manager {
 
 	}
 
-	public void resultados(String proyecto, String usuario) {
+	public JSONObject resultados(String proyecto, String usuario) {
+		Resultados resultados = new Resultados();
+		Double Time[] = new Double[10];
+		Double HDD[] = new Double[10];
+		Double Graphs[] = new Double[10];
+		Double Procesador[] = new Double[10];
+		Double Monitor[] = new Double[10];
+		Double DUT[] = new Double[10];
+		int j = 4;
 		try {
-			Connection connection = DriverManager.getConnection("jdbc:mariadb://172.20.48.59:3306/elliotdb?user=david&password=greenTFG#");
+			Connection connection = DriverManager
+					.getConnection("jdbc:mariadb://172.20.48.59:3306/elliotdb?user=david&password=greenTFG#");
 
 			Statement s = connection.createStatement();
-			//ResultSet rs = s.executeQuery("Select * from testcasereport");
-			ResultSet rs = s.executeQuery ("select d.* from testcase t, testcasereport r, testcasereport_data d where t.name = \"Fasta2\" and t._id = r.TestCase_id and r._id = d.TestCaseReport_id");
-		//System.out.println(rs);
-			while (rs.next())
-			{
-			    System.out.println (rs.getInt (1) + " " + rs.getString (2));
+
+			ResultSet rs = s.executeQuery(
+					"select d.* from testcase t, testcasereport r, testcasereport_data d where t.name = \"Fasta2\" and t._id = r.TestCase_id and r._id = d.TestCaseReport_id");
+
+			while (rs.next()) {
+				switch (rs.getString(3)) {
+				case "time":
+					j = 4;
+					for (int i = 0; i < Time.length; i++) {
+						Time[i] = rs.getDouble(j);
+						j++;
+					}
+					resultados.setTime(Time);
+
+					break;
+
+				case "hdd":
+					j = 4;
+					for (int i = 0; i < Time.length; i++) {
+						HDD[i] = rs.getDouble(j);
+						j++;
+					}
+					
+					resultados.setHDD(HDD);
+					break;
+
+				case "graphicscard":
+					j = 4;
+					for (int i = 0; i < Time.length; i++) {
+						Graphs[i] = rs.getDouble(j);
+						j++;
+					}
+					resultados.setGraphs(Graphs);
+
+					break;
+
+				case "processor":
+					j = 4;
+					for (int i = 0; i < Time.length; i++) {
+						Procesador[i] = rs.getDouble(j);
+						j++;
+					}
+					resultados.setProcesador(Procesador);
+
+					break;
+
+				case "monitor":
+					j = 4;
+					for (int i = 0; i < Time.length; i++) {
+						Monitor[i] = rs.getDouble(j);
+						j++;
+					}
+					resultados.setMonitror(Monitor);
+
+					break;
+
+				case "dut":
+					j = 4;
+					for (int i = 0; i < Time.length; i++) {
+						DUT[i] = rs.getDouble(j);
+						j++;
+					}
+					resultados.setDUT(DUT);
+
+					break;
+
+				}
+				
+				// System.out.println (rs.getString(3) + " " + rs.getDouble (4)+ " " +
+				// rs.getDouble (5)+ " " + rs.getDouble (6)+ " " + rs.getDouble (7)+ " " +
+				// rs.getDouble (8)+ " " + rs.getDouble (9));
 			}
+			System.out.println("hh");
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+		
+		JSONArray jsa = new JSONArray();
+		JSONObject jso = new JSONObject();
+
+			jsa.put(resultados.toJSON());
+		
+		jso.put("resultados", jsa);
+
+		return jso;
+		
 
 	}
 

@@ -4,6 +4,8 @@ function ViewModel() {
 	self.listaproyectos = ko.observableArray([]);
 	self.nombreProyecto = ko.observable('');
 	self.user = ko.observable('');
+	self.time = ko.observable('');
+	
 	this.usuario = sessionStorage.userName;
 	var url = "ws://" + window.location.host + "/Gestion";
 	self.sws = new WebSocket(url);
@@ -25,8 +27,48 @@ function ViewModel() {
 		var data = event.data;
 		data = JSON.parse(data);
 		var proyectos = data.proyectos;
+		var resultados = data.resultados;
+		if(resultados != null){
+			document.getElementById('timeMin').innerText = resultados[0].Time[0];
+			document.getElementById('timeMax').innerText = resultados[0].Time[1];
+			document.getElementById('timeMedia').innerText = resultados[0].Time[2];
+			document.getElementById('timeQ1').innerText = resultados[0].Time[3];
+			document.getElementById('timeQ3').innerText = resultados[0].Time[4];
+			
+			document.getElementById('HDDMin').innerText = resultados[0].HDD[0];
+			document.getElementById('HDDMax').innerText = resultados[0].HDD[1];
+			document.getElementById('HDDMedia').innerText = resultados[0].HDD[2];
+			document.getElementById('HDDQ1').innerText = resultados[0].HDD[3];
+			document.getElementById('HDDQ3').innerText = resultados[0].HDD[4];
+			
+			document.getElementById('GraphsMin').innerText = resultados[0].Grafica[0];
+			document.getElementById('GraphsMax').innerText = resultados[0].Grafica[1];
+			document.getElementById('GraphsMedia').innerText = resultados[0].Grafica[2];
+			document.getElementById('GraphsQ1').innerText = resultados[0].Grafica[3];
+			document.getElementById('GraphsQ3').innerText = resultados[0].Grafica[4];
+			
+			document.getElementById('ProcesadorMin').innerText = resultados[0].Procesador[0];
+			document.getElementById('ProcesadorMax').innerText = resultados[0].Procesador[1];
+			document.getElementById('ProcesadorMedia').innerText = resultados[0].Procesador[2];
+			document.getElementById('ProcesadorQ1').innerText = resultados[0].Procesador[3];
+			document.getElementById('ProcesadorQ3').innerText = resultados[0].Procesador[4];
 
+			document.getElementById('MonitorMin').innerText = resultados[0].Monitor[0];
+			document.getElementById('MonitorMax').innerText = resultados[0].Monitor[1];
+			document.getElementById('MonitorMedia').innerText = resultados[0].Monitor[2];
+			document.getElementById('MonitorQ1').innerText = resultados[0].Monitor[3];
+			document.getElementById('MonitorQ3').innerText = resultados[0].Monitor[4];
 
+			document.getElementById('DUTMin').innerText = resultados[0].DUT[0];
+			document.getElementById('DUTMax').innerText = resultados[0].DUT[1];
+			document.getElementById('DUTMedia').innerText = resultados[0].DUT[2];
+			document.getElementById('DUTQ1').innerText = resultados[0].DUT[3];
+			document.getElementById('DUTQ3').innerText = resultados[0].DUT[4];
+			
+			document.getElementById('Pro').innerText = self.nombreProyecto();
+			//self.time(resultados[0].DUT[0]) ;
+		}
+		
 		for (var i = 0; i < proyectos.length; i++) {
 			var proyecto = proyectos[i];
 				self.listaproyectos.push(new Proyecto(proyecto.Nombre, proyecto.Descripcion, proyecto.Autor, proyecto.Fecha, proyecto.DUT, proyecto.Repeticiones, proyecto.Lenguaje, proyecto.estado, proyecto.proyecto_enviado));
@@ -157,6 +199,8 @@ function ViewModel() {
 		}
 
 		resultados(){
+			
+			self.nombreProyecto(this.nombre);
 			var p = {
 				type: 'resultados',
 				proyecto: this.nombre,

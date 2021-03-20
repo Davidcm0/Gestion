@@ -18,20 +18,21 @@
 	<div class="col-md-6 col-sm-8 col-xl-6 col-lg-4 boxHeaderGestion">
 		<button type="button" id="volverGestion"
 			onclick="window.history.back()">Volver</button>
-			<!-- ko {if: $root.usuario != "admin"} -->
+		<!-- ko {if: $root.usuario != "admin"} -->
 		<button type="button" id="crearProyecto"
 			onclick="window.location.href='form.html'">Crear proyecto</button>
-			<!-- /ko -->
-			<!-- ko {if: $root.usuario === "admin"} -->
+		<!-- /ko -->
+		<!-- ko {if: $root.usuario === "admin"} -->
 		<button type="button" id="crearProyecto"
-			onclick="window.location.href='validar.html'">Validar usuarios</button>
-			<!-- /ko -->
+			onclick="window.location.href='validar.html'">Validar
+			usuarios</button>
+		<!-- /ko -->
 		<h1></h1>
-		
+
 	</div>
-	
-	
-	
+
+
+
 	<div id="koGestion">
 		<div class="cards">
 			<!-- ko foreach : { data: listaproyectos, as :"proyecto" } -->
@@ -40,13 +41,17 @@
 					<h4 class="card-title" data-bind="html : nombre"></h4>
 					<h6 class="card-subtitle mb-2 text-muted" data-bind="html : autor"></h6>
 					Descripción: <label class="card-text"
-						data-bind="html : descripcion"></label></br><!--   Autor: <label
-						class="card-text" data-bind="html : autor"></label></br>--> DUT: <label
-						class="card-text" data-bind="html : dut"></label></br> Repeticiones: <label
-						class="card-text" data-bind="html : repeticiones"></label></br>
-					Lenguaje: <label class="card-text" data-bind="html : lenguaje"></label></br>
-					Fecha: <label class="card-text" data-bind="html : fecha"></label></br>
-					Estado: <label class="card-text" data-bind="html : estado"></label></br>
+						data-bind="html : descripcion"></label></br>
+					<!--   Autor: <label
+						class="card-text" data-bind="html : autor"></label></br>-->
+					DUT: <label class="card-text" data-bind="html : dut"></label></br>
+					Repeticiones: <label class="card-text"
+						data-bind="html : repeticiones"></label></br> Lenguaje: <label
+						class="card-text" data-bind="html : lenguaje"></label></br> Fecha: <label
+						class="card-text" data-bind="html : fecha"></label></br> Estado: <label
+						class="card-text" data-bind="html : estado"></label></br>
+
+
 					<!-- ko if: proyecto.proyecto_enviado == true -->
 					<b>Proyecto enviado</b>
 					<!-- /ko -->
@@ -86,9 +91,9 @@
 
 
 					<!-- /ko -->
-					
-					
-					
+
+
+
 					</br>
 					<!-- ko if: proyecto.estado == "En preparación" && proyecto.proyecto_enviado == true && $root.usuario !="admin" -->
 					<button type="button" data-bind="click: terminar" id="explorador"
@@ -98,8 +103,9 @@
 
 					<!-- ko if: proyecto.estado === "Medido" && $root.usuario !="admin" -->
 
-					<button type="button" data-bind="click: resultados"
-						id="explorador" class="btn btn-outline-success">Ver resultados</button>
+					<button type="button" data-bind="click: resultados" id="explorador"
+						class="btn btn-outline-success" data-toggle="modal"
+						data-target="#exampleModal2">Ver resultados</button>
 
 					<!-- /ko -->
 
@@ -110,7 +116,7 @@
 			<!-- /ko -->
 		</div>
 
-		<!-- Modal -->
+		<!-- Modal Editar-->
 		<div class="modal fade" id="exampleModal" tabindex="-1"
 			aria-labelledby="exampleModalLabel" aria-hidden="true">
 			<div class="modal-dialog">
@@ -119,7 +125,8 @@
 						<h5 class="modal-title" id="exampleModalLabel">Modificacion
 							proyecto</h5>
 						<button type="button" class="close" data-dismiss="modal"
-							aria-label="Close" onclick="window.location.href='proyectos.html'">
+							aria-label="Close"
+							onclick="window.location.href='proyectos.html'">
 							<span aria-hidden="true">&times;</span>
 						</button>
 					</div>
@@ -129,12 +136,12 @@
 						<p>
 						<form>
 							<div id="container" class="form">
-							
+
 								<div>
 									<input id="nombreProyecto" name="nombre" required="required"
 										type="text" placeholder="Nombre proyecto" />
 								</div>
-								
+
 								<div>
 									<textarea id="descripcion" required="required"
 										placeholder="descripción"></textarea>
@@ -155,27 +162,123 @@
 										<option>Python</option>
 									</select>
 								</div>
-								
+
 								<!-- ko {if: $root.usuario === "admin"} -->
-					<div>
-						<label for="inputState">Cambiar estado:</label> <select id="Estado"
-							class="form-control">
-							<option selected>Elige...</option>
-							<option>Validado</option>
-							<option>Medido</option>
-						</select>
-					</div>
-					
-					<!-- /ko -->
+								<div>
+									<label for="inputState">Cambiar estado:</label> <select
+										id="Estado" class="form-control">
+										<option selected>Elige...</option>
+										<option>Validado</option>
+										<option>Medido</option>
+									</select>
+								</div>
+
+								<!-- /ko -->
 
 							</div>
 							<p>
 					</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-outline-secondary"
-							data-dismiss="modal" onclick="window.location.href='proyectos.html'">Cerrar</button>
-						<button type="button" class="btn btn-outline-success" data-dismiss="modal"
-							data-bind="click: $root.modificar">Guardar cambios</button>
+							data-dismiss="modal"
+							onclick="window.location.href='proyectos.html'">Cerrar</button>
+						<button type="button" class="btn btn-outline-success"
+							data-dismiss="modal" data-bind="click: $root.modificar">Guardar
+							cambios</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- Modal Resultados-->
+		<div class="modal fade" id="exampleModal2" tabindex="-1"
+			aria-labelledby="exampleModalLabel" aria-hidden="true">
+			<div class="modal-dialog" style="max-width: 65%;">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="exampleModalLabel">Resultados</h5>
+						<button type="button" class="close" data-dismiss="modal"
+							aria-label="Close"
+							onclick="window.location.href='proyectos.html'">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body" >
+						<!-- AQUI METO EL CODIGO -->
+						<h1 id="Pro"></h1>
+						<p>
+						<div id="container" class="form">
+							<table class="default" border="1" bordercolor="#63DE02" cellspacing="10" cellpadding="10">
+								<tr>
+									<th></th>
+									<th>Min</th>
+									<th>Max</th>
+									<th>Media</th>
+									<th>Q1</th>
+									<th>Q3</th>
+								</tr>
+								<tr>
+									<th >Tiempo</th>
+									<td id="timeMin"></td>
+									<td id="timeMax"></td>
+									<td id="timeMedia"></td>
+									<td id="timeQ1"></td>
+									<td id="timeQ3"></td>
+								</tr>
+								<tr>
+									<th>HDD</th>
+									<td id="HDDMin"></td>
+									<td id="HDDMax"></td>
+									<td id="HDDMedia"></td>
+									<td id="HDDQ1"></td>
+									<td id="HDDQ3"></td>
+								</tr>
+								<tr>
+									<th>Gráfica</th>
+									<td id="GraphsMin"></td>
+									<td id="GraphsMax"></td>
+									<td id="GraphsMedia"></td>
+									<td id="GraphsQ1"></td>
+									<td id="GraphsQ3"></td>
+								</tr>
+								<tr>
+									<th>Procesador</th>
+									<td id="ProcesadorMin"></td>
+									<td id="ProcesadorMax"></td>
+									<td id="ProcesadorMedia"></td>
+									<td id="ProcesadorQ1"></td>
+									<td id="ProcesadorQ3"></td>
+								</tr>
+								<tr>
+									<th>Monitor</th>
+									<td id="MonitorMin"></td>
+									<td id="MonitorMax"></td>
+									<td id="MonitorMedia"></td>
+									<td id="MonitorQ1"></td>
+									<td id="MonitorQ3"></td>
+								</tr>
+								<tr>
+									<th>DUT</th>
+									<td id="DUTMin"></td>
+									<td id="DUTMax"></td>
+									<td id="DUTMedia"></td>
+									<td id="DUTQ1"></td>
+									<td id="DUTQ3"></td>
+								</tr>
+							</table>
+							
+
+
+						</div>
+						<p>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-outline-secondary"
+							data-dismiss="modal"
+							onclick="window.location.href='proyectos.html'">Cerrar</button>
+						<button type="button" class="btn btn-outline-success"
+							data-dismiss="modal" data-bind="click: $root.modificar">Guardar
+							como pdf</button>
 					</div>
 				</div>
 			</div>
