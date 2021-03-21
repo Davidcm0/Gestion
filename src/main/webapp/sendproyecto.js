@@ -69,22 +69,25 @@ function ViewModel() {
 			//self.time(resultados[0].DUT[0]) ;
 		}
 		
-		for (var i = 0; i < proyectos.length; i++) {
-			var proyecto = proyectos[i];
-				self.listaproyectos.push(new Proyecto(proyecto.Nombre, proyecto.Descripcion, proyecto.Autor, proyecto.Fecha, proyecto.DUT, proyecto.Repeticiones, proyecto.Lenguaje, proyecto.estado, proyecto.proyecto_enviado));
-			
-			
-
-		}
-		
-		for (var j = 0; j < proyectos.length; j++) {
-			var proyecto = proyectos[j];
-			if (proyecto.Nombre === self.nombreProyecto()) {
-
-				document.getElementById('nombreProyecto').placeholder = proyecto.Nombre;
+		if(proyectos != null){
+			for (var i = 0; i < proyectos.length; i++) {
+				var proyecto = proyectos[i];
+					self.listaproyectos.push(new Proyecto(proyecto.Nombre, proyecto.Descripcion, proyecto.Autor, proyecto.Fecha, proyecto.DUT, proyecto.Repeticiones, proyecto.Lenguaje, proyecto.estado, proyecto.proyecto_enviado));
+				
+				
 
 			}
+			
+			for (var j = 0; j < proyectos.length; j++) {
+				var proyecto = proyectos[j];
+				if (proyecto.Nombre === self.nombreProyecto()) {
+
+					document.getElementById('nombreProyecto').placeholder = proyecto.Nombre;
+
+				}
+			}
 		}
+		
 		document.getElementsByTagName('h1')[0].innerText = sessionStorage.userName;
 
 	}
@@ -112,6 +115,15 @@ function ViewModel() {
 		};
 		self.sws.send(JSON.stringify(info));
 	};
+	
+	self.excel = function() {
+		const info ={
+				type: 'excel',
+				proyecto: self.nombreProyecto,
+				usuario: sessionStorage.userName
+		};
+		self.sws.send(JSON.stringify(info));
+	}
 	
 	self.modificar = function() {
 		var dut;
@@ -197,6 +209,7 @@ function ViewModel() {
 			self.sws.send(JSON.stringify(p));
 
 		}
+		
 
 		resultados(){
 			

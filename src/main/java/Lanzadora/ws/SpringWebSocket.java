@@ -91,11 +91,12 @@ public class SpringWebSocket extends TextWebSocketHandler {
 			Manager.get().eliminar_users();
 			
 			break;
-			/*
-		case "reunionesPendientes":
-			session.sendMessage(
-					new TextMessage(Manager.get().cargarReunionesPendientes(jso.getString(NOMBRE)).toString()));
+			
+		case "excel":
+			
+			Manager.get().hacer_excel();
 			break;
+			/*
 		default:
 			break;*/
 		}

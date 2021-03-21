@@ -28,10 +28,11 @@ import java.util.Set;
 import java.util.TreeMap;
 import java.io.FileOutputStream;
 import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.CellStyle;
 import org.apache.poi.ss.usermodel.Row;
-
-
+import org.apache.poi.hssf.usermodel.HSSFCellStyle;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.hssf.util.HSSFColor;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.json.JSONArray;
@@ -39,8 +40,7 @@ import org.json.JSONObject;
 import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
 
-import Lanzadora.persistencia.UserDAO;
-import Lanzadora.persistencia.proyectoDAO;
+import Lanzadora.persistencia.*;
 import excepciones.CredencialesInvalidasException;
 
 import java.awt.EventQueue;
@@ -52,6 +52,7 @@ import javax.swing.*;
 
 public class Manager {
 	Archivo archivo = new Archivo();
+	Resultados resultados = new Resultados();
 	private WebSocketSession session;
 	public static final String USUARIOS = "usuarios";
 
@@ -349,7 +350,7 @@ public class Manager {
 
 	public JSONObject resultados(String proyecto, String usuario) {
 		
-		Resultados resultados = new Resultados();
+		resultados.setNombre(proyecto + "_" + usuario);
 		Double Time[] = new Double[10];
 		Double HDD[] = new Double[10];
 		Double Graphs[] = new Double[10];
@@ -358,13 +359,11 @@ public class Manager {
 		Double DUT[] = new Double[10];
 		int j = 4;
 		try {
-			Connection connection = DriverManager
-					.getConnection("jdbc:mariadb://172.20.48.59:3306/elliotdb?user=david&password=greenTFG#");
-
-			Statement s = connection.createStatement();
-
-			ResultSet rs = s.executeQuery(
-					"select d.* from testcase t, testcasereport r, testcasereport_data d where t.name = \"Fasta2\" and t._id = r.TestCase_id and r._id = d.TestCaseReport_id");
+			
+			AgenteMariaDB maria = AgenteMariaDB.getMariaDB();
+			
+			ResultSet rs = AgenteMariaDB.hacer_consulta(resultados.getNombre());
+			
 
 			while (rs.next()) {
 				switch (rs.getString(3)) {
@@ -430,9 +429,7 @@ public class Manager {
 
 				}
 				
-				// System.out.println (rs.getString(3) + " " + rs.getDouble (4)+ " " +
-				// rs.getDouble (5)+ " " + rs.getDouble (6)+ " " + rs.getDouble (7)+ " " +
-				// rs.getDouble (8)+ " " + rs.getDouble (9));
+				
 			}
 			
 		} catch (SQLException e) {
@@ -440,7 +437,7 @@ public class Manager {
 			e.printStackTrace();
 		}
 		
-		hacer_excel(resultados);
+		
 		JSONArray jsa = new JSONArray();
 		JSONObject jso = new JSONObject();
 
@@ -488,19 +485,52 @@ public class Manager {
 
 	}
 	
-	public void hacer_excel(Resultados resultados) {
-		Double w = resultados.getTime()[0];
+	
+	public void hacer_excel() {
+		
+		Scanner entrada = null;
+		JFileChooser fileChooser = new JFileChooser();
+		fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+		fileChooser.showOpenDialog(fileChooser);
+		try {
+			String ruta = fileChooser.getSelectedFile().getAbsolutePath();
+
+			archivo.setRuta(ruta);
+			//System.out.println(ruta);
+			
+
+		}  catch (NullPointerException e) {
+			System.out.println("No se ha seleccionado ningún fichero");
+		} catch (Exception e) {
+			
+			System.out.println(e.getMessage());
+		} finally {
+			if (entrada != null) {
+				entrada.close();
+			}
+		}
+		
+		
 		Workbook workbook = new HSSFWorkbook();
+		CellStyle backgroundStyle = workbook.createCellStyle();
+		
+	     // backgroundStyle.setFillBackgroundColor(HSSFColor.GREY_25_PERCENT.index);
+        // backgroundStyle.setFillPattern(HSSFCellStyle.SOLID_FOREGROUND);
         //Crea hoja nueva
         Sheet sheet = workbook.createSheet("Resultados");
+        
+        for(int i = 0; i<6; i++)
+        	sheet.setColumnWidth(i, 4000);
+        
         //Por cada línea se crea un arreglo de objetos (Object[])
         Map<String, Object[]> datos = new TreeMap<String, Object[]>();
         datos.put("1", new Object[]{"", "Min", "Max", "Media","Q1", "Q3"});
         datos.put("2", new Object[]{"Tiempo", resultados.getTime()[0], resultados.getTime()[1], resultados.getTime()[2], resultados.getTime()[3], resultados.getTime()[4]});
-        datos.put("3", new Object[]{"HDD", resultados.getHDD()[0], "Allos"});
-        datos.put("4", new Object[]{"Procesador", "Carlos", "Caritas"});
-        datos.put("5", new Object[]{"Monitor", "Luisa", "Vitz"});
-        datos.put("6", new Object[]{"DUT", "Luisa", "Vitz"});
+        datos.put("3", new Object[]{"HDD", resultados.getHDD()[0], resultados.getHDD()[1], resultados.getHDD()[2], resultados.getHDD()[3], resultados.getHDD()[4]});
+        datos.put("4", new Object[]{"Gráfica", resultados.getGraphs()[0], resultados.getGraphs()[1], resultados.getGraphs()[2], resultados.getGraphs()[3], resultados.getGraphs()[4]});
+        datos.put("5", new Object[]{"Procesador",resultados.getProcesador()[0], resultados.getProcesador()[1], resultados.getProcesador()[2], resultados.getProcesador()[3], resultados.getProcesador()[4]});
+        datos.put("6", new Object[]{"Monitor", resultados.getMonitror()[0], resultados.getMonitror()[1], resultados.getMonitror()[2], resultados.getMonitror()[3],resultados.getMonitror()[4]});
+        datos.put("7", new Object[]{"DUT", resultados.getDUT()[0], resultados.getDUT()[1], resultados.getDUT()[2], resultados.getDUT()[3], resultados.getDUT()[4]});
         //Iterar sobre datos para escribir en la hoja
         Set<String> keyset = datos.keySet();
         int numeroRenglon = 0;
@@ -512,6 +542,8 @@ public class Manager {
                 Cell cell = row.createCell(numeroCelda++);
                 if (obj instanceof String) {
                     cell.setCellValue((String) obj);
+                    cell.setCellStyle(backgroundStyle);
+                    
                 } else if (obj instanceof Double) {
                     cell.setCellValue((Double) obj);
                 }
@@ -519,7 +551,7 @@ public class Manager {
         }
         try {
             //Se genera el documento
-            FileOutputStream out = new FileOutputStream(new File("ejemplo.csv"));
+            FileOutputStream out = new FileOutputStream(new File(archivo.getRuta() + "\\" + resultados.getNombre() + "_resultados.xls"));
             workbook.write(out);
             out.close();
         } catch (Exception e) {

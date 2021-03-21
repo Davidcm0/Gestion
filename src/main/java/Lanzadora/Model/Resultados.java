@@ -10,8 +10,15 @@ public class Resultados {
 	private Double Procesador[] = new Double [10];
 	private Double Monitror[] = new Double [10];
 	private Double DUT[] = new Double [10];
+	private String nombre;
 	
 	
+	public String getNombre() {
+		return nombre;
+	}
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
 	public Resultados() {
 		
 	}
@@ -60,6 +67,7 @@ public class Resultados {
 		jso.put("Procesador", this.getProcesador());
 		jso.put("Monitor", this.getMonitror());
 		jso.put("DUT", this.getDUT());
+		jso.put("nombre", this.getNombre());
 		return jso;
 	}
 	
