@@ -83,6 +83,7 @@ function ViewModel() {
 				if (proyecto.Nombre === self.nombreProyecto()) {
 
 					document.getElementById('nombreProyecto').placeholder = proyecto.Nombre;
+					document.getElementById('nombrepro').innerText = proyecto.Nombre;
 
 				}
 			}
@@ -129,21 +130,21 @@ function ViewModel() {
 		var dut;
 		var repeticiones;
 		
-		if(document.getElementById("dut").value === ""){
-			dut = 000;
-		} else{
-			dut =  document.getElementById("dut").value;
-		}
 		
-		if(document.getElementById("repeticiones").value === ""){
-			repeticiones = 000;
-		} else{
-			repeticiones =  document.getElementById("repeticiones").value;
-		}
 		
 		
 		if(sessionStorage.userName != "admin"){
-
+			if(document.getElementById("dut").value === ""){
+				dut = 000;
+			} else{
+				dut =  document.getElementById("dut").value;
+			}
+			
+			if(document.getElementById("repeticiones").value === ""){
+				repeticiones = 000;
+			} else{
+				repeticiones =  document.getElementById("repeticiones").value;
+			}
 		var p = {
 			type: "modificar",
 			nombre: self.nombreProyecto(),

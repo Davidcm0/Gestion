@@ -36,7 +36,7 @@
 	<div id="koGestion">
 		<div class="cards">
 			<!-- ko foreach : { data: listaproyectos, as :"proyecto" } -->
-			<div class="card" style="width: 18rem;">
+			<div class="card" style="width: 18rem; max-width: 18rem;">
 				<div class="card-body">
 					<h4 class="card-title" data-bind="html : nombre"></h4>
 					<h6 class="card-subtitle mb-2 text-muted" data-bind="html : autor"></h6>
@@ -132,11 +132,15 @@
 					</div>
 					<div class="modal-body">
 						<!-- AQUI METO EL CODIGO -->
-						<h1>Modificar proyecto</h1>
+						<h1 id = "nombrepro">Modificar proyecto</h1>
 						<p>
 						<form>
 							<div id="container" class="form">
-
+								<div>
+									<input id="nombreProyecto" name="nombre" required="required"
+										type="text" placeholder="Nombre proyecto" hidden/>
+								</div>
+								<!-- ko {if: $root.usuario != "admin"} -->
 								<div>
 									<input id="nombreProyecto" name="nombre" required="required"
 										type="text" placeholder="Nombre proyecto" />
@@ -162,7 +166,7 @@
 										<option>Python</option>
 									</select>
 								</div>
-
+								<!-- /ko -->
 								<!-- ko {if: $root.usuario === "admin"} -->
 								<div>
 									<label for="inputState">Cambiar estado:</label> <select

@@ -319,7 +319,7 @@ background-color: grey;
 	margin-right: 30px;
 	opacity:0.9;
 	margin-bottom: 30px;
-	border-radius:15px;
+	border-radius:30px;
 }
 
 h2, p{
@@ -374,4 +374,8 @@ table {
    border-spacing: 1px;
    border-radius: 2px;
    
+}
+
+.btn {
+	border-radius: 12px;
 }
