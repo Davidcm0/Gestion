@@ -1,6 +1,5 @@
 package Lanzadora.ws;
 
-
 import org.json.JSONObject;
 import org.springframework.stereotype.Component;
 import org.springframework.web.socket.TextMessage;
@@ -22,7 +21,6 @@ public class SpringWebSocket extends TextWebSocketHandler {
 	private static final String REPETICIONES = "repeticiones";
 	private static final String DESCRIPCION = "descripcion";
 	private static final String USUARIO = "usuario";
-	
 
 	@Override
 	public void afterConnectionEstablished(WebSocketSession session) throws Exception {
@@ -34,13 +32,13 @@ public class SpringWebSocket extends TextWebSocketHandler {
 		JSONObject jso = new JSONObject(message.getPayload().toString());
 		switch (jso.getString(TYPE)) {
 		case "ready":
-			if(jso.getString("vista").equals("validar")) {
+			if (jso.getString("vista").equals("validar")) {
 				session.sendMessage(new TextMessage(Manager.get().leer_usuarios().toString()));
-			}else {
+			} else {
 				session.sendMessage(new TextMessage(Manager.get().leer_proyectos(jso.getString(NOMBRE)).toString()));
 			}
-			
-			//Manager.get().leer_proyectos(jso.getString(NOMBRE));
+
+			// Manager.get().leer_proyectos(jso.getString(NOMBRE));
 			break;
 
 		case "sendProyecto":
@@ -50,55 +48,64 @@ public class SpringWebSocket extends TextWebSocketHandler {
 		case "explorador":
 			Manager.get().explorador();
 			break;
-			
+
 		case "crear":
-			Manager.get().crearProyecto(jso.getString(NOMBRE),jso.getInt(REPETICIONES), jso.getString(LENGUAJE), jso.getString(DESCRIPCION), jso.getInt(DUT),jso.getString(USUARIO) );
+			Manager.get().crearProyecto(jso.getString(NOMBRE), jso.getInt(REPETICIONES), jso.getString(LENGUAJE),
+					jso.getString(DESCRIPCION), jso.getInt(DUT), jso.getString(USUARIO));
 			break;
-			
+
 		case "terminar":
 			String terminar = "terminar";
 			Manager.get().actualizar_estado(jso.getString("proyecto"), terminar);
 			break;
-				
+
 		case "resultados":
-			session.sendMessage(new TextMessage(Manager.get().resultados(jso.getString("proyecto"), jso.getString("usuario")).toString()));
-			
+			session.sendMessage(new TextMessage(
+					Manager.get().resultados(jso.getString("proyecto"), jso.getString("usuario")).toString()));
+
 			break;
-			
+
 		case "register":
 			Manager.get().register((String) jso.get(NOMBRE), jso.getString("email"), jso.getString("pwd1"));
 			break;
-			
+
 		case "info":
 			session.sendMessage(new TextMessage(Manager.get().leer_proyectos(jso.getString("user")).toString()));
 			break;
-			
+
 		case "modificar":
-			
-			Manager.get().modificarUsuario(jso.getString(NOMBRE), jso.getString("new_nombre"), jso.getString("descripcion"), jso.getInt("dut"), jso.getInt("repeticiones"), jso.getString("lenguaje"));
+
+			Manager.get().modificarUsuario(jso.getString(NOMBRE), jso.getString("new_nombre"),
+					jso.getString("descripcion"), jso.getInt("dut"), jso.getInt("repeticiones"),
+					jso.getString("lenguaje"));
 			break;
-			
+
 		case "estado":
 			Manager.get().actualizar_estado(jso.getString("proyecto"), jso.getString("estado"));
 			break;
-			
+
 		case "validacion":
 			Manager.get().validar_user(jso.getString(NOMBRE));
-			
+
 			break;
-			
+
 		case "eliminar":
 			Manager.get().eliminar_users();
-			
+
 			break;
-			
+
 		case "excel":
-			
+
 			Manager.get().hacer_excel();
 			break;
-			/*
-		default:
-			break;*/
+
+		case "comparar":
+
+			 Manager.get().comparar(jso.get("proyectos").toString());
+			break;
+		/*
+		 * default: break;
+		 */
 		}
 	}
 }

@@ -2,6 +2,7 @@ var self;
 function ViewModel() {
 	self = this;
 	self.listaproyectos = ko.observableArray([]);
+	self.proyectosSeleccionados = ko.observableArray([]);
 	self.nombreProyecto = ko.observable('');
 	self.user = ko.observable('');
 	self.time = ko.observable('');
@@ -81,8 +82,10 @@ function ViewModel() {
 			for (var j = 0; j < proyectos.length; j++) {
 				var proyecto = proyectos[j];
 				if (proyecto.Nombre === self.nombreProyecto()) {
-
-					document.getElementById('nombreProyecto').placeholder = proyecto.Nombre;
+					if(sessionStorage.userName != "admin"){
+						document.getElementById('nombreProyecto').placeholder = proyecto.Nombre;
+					}
+					
 					document.getElementById('nombrepro').innerText = proyecto.Nombre;
 
 				}
@@ -122,6 +125,20 @@ function ViewModel() {
 				type: 'excel',
 				proyecto: self.nombreProyecto,
 				usuario: sessionStorage.userName
+		};
+		self.sws.send(JSON.stringify(info));
+	}
+	
+	self.compararPro = function() {
+		for (var i = 0; i < self.listaproyectos().length; i++) {
+			if (document.getElementsByClassName("form-check-input")[i].checked === true) {
+				self.proyectosSeleccionados.push(document.getElementsByClassName("form-check-label")[i].innerHTML);
+			}
+		}
+		
+		const info ={
+				type: 'comparar',
+				proyectos: self.proyectosSeleccionados()
 		};
 		self.sws.send(JSON.stringify(info));
 	}

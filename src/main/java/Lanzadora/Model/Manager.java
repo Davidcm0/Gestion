@@ -560,4 +560,9 @@ public class Manager {
 		
 	}
 
+	public void comparar(String proyectos) {
+		System.out.println(proyectos);
+		
+	}
+
 }
