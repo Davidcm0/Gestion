@@ -138,6 +138,7 @@ function ViewModel() {
 		
 		const info ={
 				type: 'comparar',
+				usuario: sessionStorage.userName,
 				proyectos: self.proyectosSeleccionados()
 		};
 		self.sws.send(JSON.stringify(info));

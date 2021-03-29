@@ -18,7 +18,7 @@ public class AgenteMariaDB {
 
 	private AgenteMariaDB() {
 		getInstance = true;
-		System.out.println("xdxdxd");
+		
 		try {
 			connection = DriverManager
 					.getConnection("jdbc:mariadb://172.20.48.59:3306/elliotdb?user=david&password=greenTFG#");
@@ -45,10 +45,16 @@ public class AgenteMariaDB {
 	
 	public static ResultSet hacer_consulta(String nombre_caso) {
 		//aqui se haría el cambio
+		String[] parts = nombre_caso.split("_");
+		String consulta = "select d.* from testcase t, testcasereport r, testcasereport_data d where t.name = \"" + parts[0]  +"\" and t._id = r.TestCase_id and r._id = d.TestCaseReport_id";
+		//String consulta = "select d.* from testcase t, testcasereport r, testcasereport_data d where t.name = \"Fasta2\" and t._id = r.TestCase_id and r._id = d.TestCaseReport_id";
 		ResultSet rs = null;
 		try {
 			rs = s.executeQuery(
-					"select d.* from testcase t, testcasereport r, testcasereport_data d where t.name = \"Fasta2\" and t._id = r.TestCase_id and r._id = d.TestCaseReport_id");
+					consulta);
+			System.out.println("xdxdxd");
+			//rs = s.executeQuery(
+			//		"select d.* from testcase t, testcasereport r, testcasereport_data d where t.name = \" "+ nombre_caso +"\" and t._id = r.TestCase_id and r._id = d.TestCaseReport_id");
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
