@@ -7,6 +7,8 @@ function ViewModel() {
 	self.user = ko.observable('');
 	self.time = ko.observable('');
 	self.datos = [];
+	self.datos2 = [];
+	self.datos3 = [];
 	this.usuario = sessionStorage.userName;
 	var url = "ws://" + window.location.host + "/Gestion";
 	self.sws = new WebSocket(url);
@@ -96,20 +98,140 @@ function ViewModel() {
 		if(graficas != null){
 			
 			
-			//var datos = [];
+			//Para la variable datos
 			for(var i = 0; i < graficas.length; i++){
 				var parts = graficas[i][0].nombre.split("_");
 				var nombre_proyecto = parts[0];
-				
-				const tuplaHDD = {country: nombre_proyecto+"HDD", visits: graficas[i][0].DUT[3] }
+				const tuplaHDD = {country: nombre_proyecto+"_HDD", visits: graficas[i][0].DUT[3] }
 				self.datos.push(tuplaHDD);
-				//const tuplaGrafica = {country: nombre_proyecto+"Grafica", visits: graficas[i][0].Grafica[3] }
-				//const tuplaMonitor = {country: nombre_proyecto+"Monitor", visits: graficas[i][0].Monitor[3] }
-				//const tuplaProcesador = {country: nombre_proyecto+"Procesador", visits: graficas[i][0].Procesador[3] }
-				//const tuplaDUT = {country: nombre_proyecto+"DUT", visits: graficas[i][0].DUT[3] }
-				
 			}
+			for(var i = 0; i < graficas.length; i++){
+				var parts = graficas[i][0].nombre.split("_");
+				var nombre_proyecto = parts[0];
+				const tuplaGrafica = {country: nombre_proyecto+"_Grafica", visits: graficas[i][0].Grafica[3] }
+				self.datos.push(tuplaGrafica);
+			}
+			for(var i = 0; i < graficas.length; i++){
+				var parts = graficas[i][0].nombre.split("_");
+				var nombre_proyecto = parts[0];
+				const tuplaMonitor = {country: nombre_proyecto+"_Monitor", visits: graficas[i][0].Monitor[3] }
+				self.datos.push(tuplaMonitor);
+			}
+			for(var i = 0; i < graficas.length; i++){
+				var parts = graficas[i][0].nombre.split("_");
+				var nombre_proyecto = parts[0];
+				const tuplaProcesador = {country: nombre_proyecto+"_Procesador", visits: graficas[i][0].Procesador[3] }
+				self.datos.push(tuplaProcesador);
+			}
+			for(var i = 0; i < graficas.length; i++){
+				var parts = graficas[i][0].nombre.split("_");
+				var nombre_proyecto = parts[0];
+				const tuplaDUT = {country: nombre_proyecto+"_DUT", visits: graficas[i][0].DUT[3] }
+				self.datos.push(tuplaDUT);
+			}
+			//para datos3
+			//Para la variable datos
+			for(var i = 0; i < graficas.length; i++){
+				var parts = graficas[i][0].nombre.split("_");
+				var nombre_proyecto = parts[0];
+				const tuplaHDD = {country: nombre_proyecto+"_HDD", visits: graficas[i][0].DUT[3], error:10 }
+				self.datos3.push(tuplaHDD);
+			}
+			for(var i = 0; i < graficas.length; i++){
+				var parts = graficas[i][0].nombre.split("_");
+				var nombre_proyecto = parts[0];
+				const tuplaGrafica = {country: nombre_proyecto+"_Grafica", visits: graficas[i][0].Grafica[3], error:10}
+				self.datos3.push(tuplaGrafica);
+			}
+			for(var i = 0; i < graficas.length; i++){
+				var parts = graficas[i][0].nombre.split("_");
+				var nombre_proyecto = parts[0];
+				const tuplaMonitor = {country: nombre_proyecto+"_Monitor", visits: graficas[i][0].Monitor[3], error:10 }
+				self.datos3.push(tuplaMonitor);
+			}
+			for(var i = 0; i < graficas.length; i++){
+				var parts = graficas[i][0].nombre.split("_");
+				var nombre_proyecto = parts[0];
+				const tuplaProcesador = {country: nombre_proyecto+"_Procesador", visits: graficas[i][0].Procesador[3], error:10 }
+				self.datos3.push(tuplaProcesador);
+			}
+			for(var i = 0; i < graficas.length; i++){
+				var parts = graficas[i][0].nombre.split("_");
+				var nombre_proyecto = parts[0];
+				const tuplaDUT = {country: nombre_proyecto+"_DUT", visits: graficas[i][0].DUT[3], error:10 }
+				self.datos3.push(tuplaDUT);
+			}
+			//// para la variable datos2
+			
+			for(var i = 0; i < graficas.length; i++){
+				var parts = graficas[i][0].nombre.split("_");
+				var nombre_proyecto = parts[0];
+				var lista = [];
+				//self.datos2.push(nombre_proyecto);
+				var tuplaHDD = {name:"HDD", value: graficas[i][0].HDD[3]}
+				lista.push(tuplaHDD);
+				var final = {name: nombre_proyecto, children: lista}
+				self.datos2.push(final);
+			}
+			
+			for(var i = 0; i < graficas.length; i++){
+				var parts = graficas[i][0].nombre.split("_");
+				var nombre_proyecto = parts[0];
+				var lista = [];
+				//self.datos2.push(nombre_proyecto);
+				var tuplaHDD = {name: "Grafica", value: graficas[i][0].Grafica[3]}
+				lista.push(tuplaHDD);
+				var final = {name: nombre_proyecto, children: lista}
+				self.datos2.push(final);
+			}
+			
+			for(var i = 0; i < graficas.length; i++){
+				var parts = graficas[i][0].nombre.split("_");
+				var nombre_proyecto = parts[0];
+				var lista = [];
+				//self.datos2.push(nombre_proyecto);
+				var tuplaHDD = {name:"Procesador", value: graficas[i][0].Procesador[3]}
+				lista.push(tuplaHDD);
+				var final = {name: nombre_proyecto, children: lista}
+				self.datos2.push(final);
+			}
+			
+			for(var i = 0; i < graficas.length; i++){
+				var parts = graficas[i][0].nombre.split("_");
+				var nombre_proyecto = parts[0];
+				var lista = [];
+				//self.datos2.push(nombre_proyecto);
+				var tuplaHDD = {name: "Monitor", value: graficas[i][0].Monitor[3]}
+				lista.push(tuplaHDD);
+				var final = {name: nombre_proyecto, children: lista}
+				self.datos2.push(final);
+			}
+			
+			for(var i = 0; i < graficas.length; i++){
+				var parts = graficas[i][0].nombre.split("_");
+				var nombre_proyecto = parts[0];
+				var lista = [];
+				//self.datos2.push(nombre_proyecto);
+				var tuplaHDD = {name: "DUT", value: graficas[i][0].DUT[3]}
+				lista.push(tuplaHDD);
+				var final = {name: nombre_proyecto, children: lista}
+				self.datos2.push(final);
+			}
+			
+			
 			var nombre_proyecto = graficas;
+			var chart = document.getElementById("chartdiv");
+			var chart2 = document.getElementById("chartdiv2");
+			var chart3 = document.getElementById("chartdiv3");
+			var chart4 = document.getElementById("chartdiv4");
+			var boxes = document.getElementById("boxes");
+			boxes.style.display = "none";
+			chart.style.display = "flex";
+			chart2.style.display = "flex";
+			chart3.style.display = "flex";
+			chart4.style.display = "flex";
+			//var boton = document.getElementsByClassName("elegirProyecto");
+			//boton[0].style.display = "flex";
 			
 			am4core.ready;
 		}
@@ -129,45 +251,7 @@ function ViewModel() {
 
 			// Add data
 			chart.data = self.datos;
-				/*
-				[{
-			  "country": "USA",
-			  "visits": 3025
-			}, {
-			  "country": "China",
-			  "visits": 1882
-			}, {
-			  "country": "Japan",
-			  "visits": 1809
-			}, {
-			  "country": "Germany",
-			  "visits": 1322
-			}, {
-			  "country": "UK",
-			  "visits": 1122
-			}, {
-			  "country": "France",
-			  "visits": 1114
-			}, {
-			  "country": "India",
-			  "visits": 984
-			}, {
-			  "country": "Spain",
-			  "visits": 711
-			}, {
-			  "country": "Netherlands",
-			  "visits": 665
-			}, {
-			  "country": "Russia",
-			  "visits": 580
-			}, {
-			  "country": "South Korea",
-			  "visits": 443
-			}, {
-			  "country": "Canada",
-			  "visits": 441
-			}];
-			*/
+
 			// Create axes
 			var categoryAxis = chart.xAxes.push(new am4charts.CategoryAxis());
 			categoryAxis.dataFields.category = "country";
@@ -207,6 +291,138 @@ function ViewModel() {
 			});
 
 			// Cursor
+			chart.cursor = new am4charts.XYCursor();
+			
+			//////////////////////////////grafica 2
+			
+			// Themes begin
+			//am4core.useTheme(am4themes_dataviz);
+			am4core.useTheme(am4themes_animated);
+			// Themes end
+
+			// Create chart
+			var chart = am4core.create("chartdiv2", am4charts.PieChart);
+			chart.hiddenState.properties.opacity = 0; // this creates initial fade-in
+
+			chart.data = self.datos;
+
+			var series = chart.series.push(new am4charts.PieSeries());
+			series.dataFields.value = "visits";
+			series.dataFields.radiusValue = "visits";
+			series.dataFields.category = "country";
+			series.slices.template.cornerRadius = 6;
+			series.colors.step = 3;
+
+			series.hiddenState.properties.endAngle = -90;
+
+			chart.legend = new am4charts.Legend();
+			
+			/////////grafica 3
+			
+			// Themes begin
+			//am4core.useTheme(am4themes_dataviz);
+			am4core.useTheme(am4themes_animated);
+			// Themes end
+
+			// create chart
+			var chart = am4core.create("chartdiv3", am4charts.TreeMap);
+			chart.hiddenState.properties.opacity = 0; // this makes initial fade in effect
+
+			chart.data = self.datos2;
+				
+			chart.colors.step = 2;
+
+			// define data fields
+			chart.dataFields.value = "value";
+			chart.dataFields.name = "name";
+			chart.dataFields.children = "children";
+
+			chart.zoomable = false;
+			var bgColor = new am4core.InterfaceColorSet().getFor("background");
+
+			// level 0 series template
+			var level0SeriesTemplate = chart.seriesTemplates.create("0");
+			var level0ColumnTemplate = level0SeriesTemplate.columns.template;
+
+			level0ColumnTemplate.column.cornerRadius(10, 10, 10, 10);
+			level0ColumnTemplate.fillOpacity = 0;
+			level0ColumnTemplate.strokeWidth = 4;
+			level0ColumnTemplate.strokeOpacity = 0;
+
+			// level 1 series template
+			var level1SeriesTemplate = chart.seriesTemplates.create("1");
+			var level1ColumnTemplate = level1SeriesTemplate.columns.template;
+
+			level1SeriesTemplate.tooltip.animationDuration = 0;
+			level1SeriesTemplate.strokeOpacity = 1;
+
+			level1ColumnTemplate.column.cornerRadius(10, 10, 10, 10)
+			level1ColumnTemplate.fillOpacity = 1;
+			level1ColumnTemplate.strokeWidth = 4;
+			level1ColumnTemplate.stroke = bgColor;
+
+			var bullet1 = level1SeriesTemplate.bullets.push(new am4charts.LabelBullet());
+			bullet1.locationY = 0.5;
+			bullet1.locationX = 0.5;
+			bullet1.label.text = "{name}";
+			bullet1.label.fill = am4core.color("#ffffff");
+
+			chart.maxLevels = 2;
+			
+			//////grafica 4
+			
+			// Themes begin
+			am4core.useTheme(am4themes_animated);
+			// Themes end
+
+			var chart = am4core.create("chartdiv4", am4charts.XYChart);
+
+			chart.data = self.datos3;
+				
+
+			chart.padding(40, 40, 40, 40);
+
+			var categoryAxis = chart.xAxes.push(new am4charts.CategoryAxis());
+			categoryAxis.renderer.grid.template.location = 0;
+			categoryAxis.dataFields.category = "country";
+			categoryAxis.renderer.minGridDistance = 60;
+			categoryAxis.renderer.labels.template.horizontalCenter = "right";
+			categoryAxis.renderer.labels.template.verticalCenter = "middle";
+			categoryAxis.renderer.labels.template.rotation = 270;
+
+			var valueAxis = chart.yAxes.push(new am4charts.ValueAxis());
+
+			var series = chart.series.push(new am4charts.LineSeries());
+			series.dataFields.categoryX = "country";
+			series.dataFields.valueY = "visits";
+			series.tooltipText = "{valueY.value} error:{error}"
+				
+
+			var errorBullet = series.bullets.create(am4charts.ErrorBullet);
+			errorBullet.isDynamic = true;
+			errorBullet.strokeWidth = 2;
+
+			var circle = errorBullet.createChild(am4core.Circle);
+			circle.radius = 3;
+			circle.fill = am4core.color("#ffffff");
+
+			// adapter adjusts height of a bullet
+			errorBullet.adapter.add("pixelHeight", function (pixelHeight, target) {
+			  var dataItem = target.dataItem;
+
+			  if(dataItem){
+			    var value = dataItem.valueY;
+			    var errorTopValue = value + dataItem.dataContext.error / 2;
+			    var errorTopY = valueAxis.valueToPoint(errorTopValue).y;
+
+			    var errorBottomValue = value - dataItem.dataContext.error / 2;
+			    var errorBottomY = valueAxis.valueToPoint(errorBottomValue).y;
+
+			    return Math.abs(errorTopY - errorBottomY);
+			   }
+			   return pixelHeight;
+			})
+
 			chart.cursor = new am4charts.XYCursor();
 
 			}); // end am4core.ready()
