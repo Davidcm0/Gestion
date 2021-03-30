@@ -100,8 +100,8 @@ public class SpringWebSocket extends TextWebSocketHandler {
 			break;
 
 		case "comparar":
-				
-			 Manager.get().comparar(jso.get("proyectos"), jso.getString("usuario"));
+			session.sendMessage(new TextMessage( Manager.get().comparar(jso.get("proyectos"), jso.getString("usuario")).toString()));
+			
 			break;
 		/*
 		 * default: break;

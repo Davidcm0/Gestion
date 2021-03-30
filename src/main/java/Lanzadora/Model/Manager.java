@@ -563,7 +563,7 @@ public class Manager {
 
 	}
 
-	public void comparar(Object proyectos, String usuario) {
+	public JSONObject comparar(Object proyectos, String usuario) {
 
 		ArrayList<String> listdata = new ArrayList<String>();
 		JSONArray jArray = (JSONArray) proyectos;
@@ -589,8 +589,8 @@ public class Manager {
 			//jsa.put(jso2);
 		}
 		
-		jso.put("resultados", jsa);
-		System.out.println(listdata.get(0));
+		jso.put("graficas", jsa);
+		return jso;
 	}
 
 }

@@ -355,7 +355,7 @@
 <!-- Chart code -->
 <script>
 
-var x = this.vm.usuario;
+//var x = this.vm.usuario;
 am4core.ready(function() {
 
 // Themes begin
@@ -367,7 +367,9 @@ var chart = am4core.create("chartdiv", am4charts.XYChart);
 chart.scrollbarX = new am4core.Scrollbar();
 
 // Add data
-chart.data = [{
+chart.data = self.datos;
+	/*
+	[{
   "country": "USA",
   "visits": 3025
 }, {
@@ -404,7 +406,7 @@ chart.data = [{
   "country": "Canada",
   "visits": 441
 }];
-
+*/
 // Create axes
 var categoryAxis = chart.xAxes.push(new am4charts.CategoryAxis());
 categoryAxis.dataFields.category = "country";

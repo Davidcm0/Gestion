@@ -6,7 +6,7 @@ function ViewModel() {
 	self.nombreProyecto = ko.observable('');
 	self.user = ko.observable('');
 	self.time = ko.observable('');
-	
+	self.datos = [];
 	this.usuario = sessionStorage.userName;
 	var url = "ws://" + window.location.host + "/Gestion";
 	self.sws = new WebSocket(url);
@@ -29,6 +29,7 @@ function ViewModel() {
 		data = JSON.parse(data);
 		var proyectos = data.proyectos;
 		var resultados = data.resultados;
+		var graficas = data.graficas;
 		if(resultados != null){
 			document.getElementById('timeMin').innerText = resultados[0].Time[0];
 			document.getElementById('timeMax').innerText = resultados[0].Time[1];
@@ -92,9 +93,126 @@ function ViewModel() {
 			}
 		}
 		
+		if(graficas != null){
+			
+			
+			//var datos = [];
+			for(var i = 0; i < graficas.length; i++){
+				var parts = graficas[i][0].nombre.split("_");
+				var nombre_proyecto = parts[0];
+				
+				const tuplaHDD = {country: nombre_proyecto+"HDD", visits: graficas[i][0].DUT[3] }
+				self.datos.push(tuplaHDD);
+				//const tuplaGrafica = {country: nombre_proyecto+"Grafica", visits: graficas[i][0].Grafica[3] }
+				//const tuplaMonitor = {country: nombre_proyecto+"Monitor", visits: graficas[i][0].Monitor[3] }
+				//const tuplaProcesador = {country: nombre_proyecto+"Procesador", visits: graficas[i][0].Procesador[3] }
+				//const tuplaDUT = {country: nombre_proyecto+"DUT", visits: graficas[i][0].DUT[3] }
+				
+			}
+			var nombre_proyecto = graficas;
+			
+			am4core.ready;
+		}
+		
+		
 		document.getElementsByTagName('h1')[0].innerText = sessionStorage.userName;
 
+		am4core.ready(function() {
+
+			// Themes begin
+			am4core.useTheme(am4themes_animated);
+			// Themes end
+
+			// Create chart instance
+			var chart = am4core.create("chartdiv", am4charts.XYChart);
+			chart.scrollbarX = new am4core.Scrollbar();
+
+			// Add data
+			chart.data = self.datos;
+				/*
+				[{
+			  "country": "USA",
+			  "visits": 3025
+			}, {
+			  "country": "China",
+			  "visits": 1882
+			}, {
+			  "country": "Japan",
+			  "visits": 1809
+			}, {
+			  "country": "Germany",
+			  "visits": 1322
+			}, {
+			  "country": "UK",
+			  "visits": 1122
+			}, {
+			  "country": "France",
+			  "visits": 1114
+			}, {
+			  "country": "India",
+			  "visits": 984
+			}, {
+			  "country": "Spain",
+			  "visits": 711
+			}, {
+			  "country": "Netherlands",
+			  "visits": 665
+			}, {
+			  "country": "Russia",
+			  "visits": 580
+			}, {
+			  "country": "South Korea",
+			  "visits": 443
+			}, {
+			  "country": "Canada",
+			  "visits": 441
+			}];
+			*/
+			// Create axes
+			var categoryAxis = chart.xAxes.push(new am4charts.CategoryAxis());
+			categoryAxis.dataFields.category = "country";
+			categoryAxis.renderer.grid.template.location = 0;
+			categoryAxis.renderer.minGridDistance = 30;
+			categoryAxis.renderer.labels.template.horizontalCenter = "right";
+			categoryAxis.renderer.labels.template.verticalCenter = "middle";
+			categoryAxis.renderer.labels.template.rotation = 270;
+			categoryAxis.tooltip.disabled = true;
+			categoryAxis.renderer.minHeight = 110;
+
+			var valueAxis = chart.yAxes.push(new am4charts.ValueAxis());
+			valueAxis.renderer.minWidth = 50;
+
+			// Create series
+			var series = chart.series.push(new am4charts.ColumnSeries());
+			series.sequencedInterpolation = true;
+			series.dataFields.valueY = "visits";
+			series.dataFields.categoryX = "country";
+			series.tooltipText = "[{categoryX}: bold]{valueY}[/]";
+			series.columns.template.strokeWidth = 0;
+
+			series.tooltip.pointerOrientation = "vertical";
+
+			series.columns.template.column.cornerRadiusTopLeft = 10;
+			series.columns.template.column.cornerRadiusTopRight = 10;
+			series.columns.template.column.fillOpacity = 0.8;
+
+			// on hover, make corner radiuses bigger
+			var hoverState = series.columns.template.column.states.create("hover");
+			hoverState.properties.cornerRadiusTopLeft = 0;
+			hoverState.properties.cornerRadiusTopRight = 0;
+			hoverState.properties.fillOpacity = 1;
+
+			series.columns.template.adapter.add("fill", function(fill, target) {
+			  return chart.colors.getIndex(target.dataItem.index);
+			});
+
+			// Cursor
+			chart.cursor = new am4charts.XYCursor();
+
+			}); // end am4core.ready()
+		
 	}
+	
 
 
 	self.enviar = function() {	
