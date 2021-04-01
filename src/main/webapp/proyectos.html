@@ -27,7 +27,7 @@
 				<button type="button" id="volverGestion"
 					onclick="window.history.back()">Volver</button>
 				<button type="button" id="crearProyecto"
-					onclick="mostrarProyectos()" class="btn btn-success">Mostrar
+					onclick="mostrarProyectos()" class="btn btn-success">Ocultar
 					proyectos</button>
 
 				<!-- ko {if: $root.usuario != "admin"} -->
@@ -226,7 +226,7 @@
 		<!-- Modal Resultados-->
 		<div class="modal fade" id="exampleModal2" tabindex="-1"
 			aria-labelledby="exampleModalLabel" aria-hidden="true">
-			<div class="modal-dialog" style="max-width: 70%;">
+			<div class="modal-dialog" style="max-width: 50%;">
 				<div class="modal-content">
 					<div class="modal-header">
 						<h5 class="modal-title" id="exampleModalLabel">Resultados</h5>
@@ -252,7 +252,7 @@
 									<th>Q3</th>
 								</tr>
 								<tr>
-									<th>Tiempo</th>
+									<th>Tiempo<img src="https://img.icons8.com/material-outlined/24/000000/time.png"/></th>
 									<td id="timeMin"></td>
 									<td id="timeMax"></td>
 									<td id="timeMedia"></td>
@@ -260,7 +260,7 @@
 									<td id="timeQ3"></td>
 								</tr>
 								<tr>
-									<th>HDD</th>
+									<th>HDD <img src="https://img.icons8.com/metro/26/000000/hdd.png"/></th>
 									<td id="HDDMin"></td>
 									<td id="HDDMax"></td>
 									<td id="HDDMedia"></td>
@@ -268,7 +268,7 @@
 									<td id="HDDQ3"></td>
 								</tr>
 								<tr>
-									<th>Gráfica</th>
+									<th>Gráfica <img src="https://img.icons8.com/wired/32/000000/video-card.png"/></th>
 									<td id="GraphsMin"></td>
 									<td id="GraphsMax"></td>
 									<td id="GraphsMedia"></td>
@@ -276,7 +276,7 @@
 									<td id="GraphsQ3"></td>
 								</tr>
 								<tr>
-									<th>Procesador</th>
+									<th>Procesador <img src="https://img.icons8.com/wired/32/000000/processor.png"/></th>
 									<td id="ProcesadorMin"></td>
 									<td id="ProcesadorMax"></td>
 									<td id="ProcesadorMedia"></td>
@@ -284,7 +284,7 @@
 									<td id="ProcesadorQ3"></td>
 								</tr>
 								<tr>
-									<th>Monitor</th>
+									<th>Monitor <img src="https://img.icons8.com/pastel-glyph/32/000000/monitor.png"/></th>
 									<td id="MonitorMin"></td>
 									<td id="MonitorMax"></td>
 									<td id="MonitorMedia"></td>
@@ -363,10 +363,13 @@
 	<script type="text/javascript">
 		function mostrarProyectos() {
 			var proyectos = document.getElementsByClassName("cards");
+			var grafica = document.getElementById("chartdiv");
 			if (proyectos[0].style.display == "none") {
 				proyectos[0].style.display = "flex";
+				grafica.style.marginTop = "1%";
 			} else {
 				proyectos[0].style.display = "none";
+				grafica.style.marginTop = "15%";
 			}
 		}
 
@@ -391,6 +394,14 @@
 #chartdiv {
   width: 100%;
   height: 500px;
+}
+th{
+background: darkseagreen;
+border: outset;
+}
+
+td{
+border: outset;
 }
 
 #chartdiv2 {

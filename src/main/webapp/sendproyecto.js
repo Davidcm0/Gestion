@@ -9,6 +9,7 @@ function ViewModel() {
 	self.datos = [];
 	self.datos2 = [];
 	self.datos3 = [];
+	self.datos4 = [];
 	this.usuario = sessionStorage.userName;
 	var url = "ws://" + window.location.host + "/Gestion";
 	self.sws = new WebSocket(url);
@@ -94,71 +95,72 @@ function ViewModel() {
 				}
 			}
 		}
-		
+
 		if(graficas != null){
-			
-			
+
+
 			//Para la variable datos
+
 			for(var i = 0; i < graficas.length; i++){
 				var parts = graficas[i][0].nombre.split("_");
 				var nombre_proyecto = parts[0];
-				const tuplaHDD = {country: nombre_proyecto+"_HDD", visits: graficas[i][0].DUT[3] }
+				const tuplaHDD = {name: nombre_proyecto+"_HDD", value: graficas[i][0].HDD[2] }
 				self.datos.push(tuplaHDD);
 			}
 			for(var i = 0; i < graficas.length; i++){
 				var parts = graficas[i][0].nombre.split("_");
 				var nombre_proyecto = parts[0];
-				const tuplaGrafica = {country: nombre_proyecto+"_Grafica", visits: graficas[i][0].Grafica[3] }
+				const tuplaGrafica = {name: nombre_proyecto+"_Grafica", value: graficas[i][0].Grafica[2] }
 				self.datos.push(tuplaGrafica);
 			}
 			for(var i = 0; i < graficas.length; i++){
 				var parts = graficas[i][0].nombre.split("_");
 				var nombre_proyecto = parts[0];
-				const tuplaMonitor = {country: nombre_proyecto+"_Monitor", visits: graficas[i][0].Monitor[3] }
+				const tuplaMonitor = {name: nombre_proyecto+"_Monitor", value: graficas[i][0].Monitor[2] }
 				self.datos.push(tuplaMonitor);
 			}
 			for(var i = 0; i < graficas.length; i++){
 				var parts = graficas[i][0].nombre.split("_");
 				var nombre_proyecto = parts[0];
-				const tuplaProcesador = {country: nombre_proyecto+"_Procesador", visits: graficas[i][0].Procesador[3] }
+				const tuplaProcesador = {name: nombre_proyecto+"_Procesador", value: graficas[i][0].Procesador[2] }
 				self.datos.push(tuplaProcesador);
 			}
 			for(var i = 0; i < graficas.length; i++){
 				var parts = graficas[i][0].nombre.split("_");
 				var nombre_proyecto = parts[0];
-				const tuplaDUT = {country: nombre_proyecto+"_DUT", visits: graficas[i][0].DUT[3] }
+				const tuplaDUT = {name: nombre_proyecto+"_DUT", value: graficas[i][0].DUT[2] }
 				self.datos.push(tuplaDUT);
 			}
 			//para datos3
-			//Para la variable datos
+			
 			for(var i = 0; i < graficas.length; i++){
 				var parts = graficas[i][0].nombre.split("_");
 				var nombre_proyecto = parts[0];
-				const tuplaHDD = {country: nombre_proyecto+"_HDD", visits: graficas[i][0].DUT[3], error:10 }
+				const tuplaHDD = {country: nombre_proyecto+"_HDD", visits: graficas[i][0].HDD[2], error:10 }
 				self.datos3.push(tuplaHDD);
 			}
 			for(var i = 0; i < graficas.length; i++){
 				var parts = graficas[i][0].nombre.split("_");
 				var nombre_proyecto = parts[0];
-				const tuplaGrafica = {country: nombre_proyecto+"_Grafica", visits: graficas[i][0].Grafica[3], error:10}
+				const tuplaGrafica = {country: nombre_proyecto+"_Grafica", visits: graficas[i][0].Grafica[2], error:10}
 				self.datos3.push(tuplaGrafica);
 			}
 			for(var i = 0; i < graficas.length; i++){
 				var parts = graficas[i][0].nombre.split("_");
 				var nombre_proyecto = parts[0];
-				const tuplaMonitor = {country: nombre_proyecto+"_Monitor", visits: graficas[i][0].Monitor[3], error:10 }
+				const tuplaMonitor = {country: nombre_proyecto+"_Monitor", visits: graficas[i][0].Monitor[2], error:10 }
 				self.datos3.push(tuplaMonitor);
 			}
 			for(var i = 0; i < graficas.length; i++){
 				var parts = graficas[i][0].nombre.split("_");
 				var nombre_proyecto = parts[0];
-				const tuplaProcesador = {country: nombre_proyecto+"_Procesador", visits: graficas[i][0].Procesador[3], error:10 }
+				const tuplaProcesador = {country: nombre_proyecto+"_Procesador", visits: graficas[i][0].Procesador[2], error:10 }
 				self.datos3.push(tuplaProcesador);
 			}
 			for(var i = 0; i < graficas.length; i++){
 				var parts = graficas[i][0].nombre.split("_");
 				var nombre_proyecto = parts[0];
-				const tuplaDUT = {country: nombre_proyecto+"_DUT", visits: graficas[i][0].DUT[3], error:10 }
+				const tuplaDUT = {country: nombre_proyecto+"_DUT", visits: graficas[i][0].DUT[2], error:10 }
 				self.datos3.push(tuplaDUT);
 			}
 			//// para la variable datos2
@@ -168,7 +170,7 @@ function ViewModel() {
 				var nombre_proyecto = parts[0];
 				var lista = [];
 				//self.datos2.push(nombre_proyecto);
-				var tuplaHDD = {name:"HDD", value: graficas[i][0].HDD[3]}
+				var tuplaHDD = {name:"HDD", value: graficas[i][0].HDD[2]}
 				lista.push(tuplaHDD);
 				var final = {name: nombre_proyecto, children: lista}
 				self.datos2.push(final);
@@ -179,7 +181,7 @@ function ViewModel() {
 				var nombre_proyecto = parts[0];
 				var lista = [];
 				//self.datos2.push(nombre_proyecto);
-				var tuplaHDD = {name: "Grafica", value: graficas[i][0].Grafica[3]}
+				var tuplaHDD = {name: "Grafica", value: graficas[i][0].Grafica[2]}
 				lista.push(tuplaHDD);
 				var final = {name: nombre_proyecto, children: lista}
 				self.datos2.push(final);
@@ -190,7 +192,7 @@ function ViewModel() {
 				var nombre_proyecto = parts[0];
 				var lista = [];
 				//self.datos2.push(nombre_proyecto);
-				var tuplaHDD = {name:"Procesador", value: graficas[i][0].Procesador[3]}
+				var tuplaHDD = {name:"Procesador", value: graficas[i][0].Procesador[2]}
 				lista.push(tuplaHDD);
 				var final = {name: nombre_proyecto, children: lista}
 				self.datos2.push(final);
@@ -201,7 +203,7 @@ function ViewModel() {
 				var nombre_proyecto = parts[0];
 				var lista = [];
 				//self.datos2.push(nombre_proyecto);
-				var tuplaHDD = {name: "Monitor", value: graficas[i][0].Monitor[3]}
+				var tuplaHDD = {name: "Monitor", value: graficas[i][0].Monitor[2]}
 				lista.push(tuplaHDD);
 				var final = {name: nombre_proyecto, children: lista}
 				self.datos2.push(final);
@@ -212,10 +214,26 @@ function ViewModel() {
 				var nombre_proyecto = parts[0];
 				var lista = [];
 				//self.datos2.push(nombre_proyecto);
-				var tuplaHDD = {name: "DUT", value: graficas[i][0].DUT[3]}
+				var tuplaHDD = {name: "DUT", value: graficas[i][0].DUT[2]}
 				lista.push(tuplaHDD);
 				var final = {name: nombre_proyecto, children: lista}
 				self.datos2.push(final);
+			}
+			
+			
+			
+		//// para la variable datos4
+			var e = {
+				    "name": "Dummy",
+				    "disabled": true,
+				    "value": 1000,
+				    "color": am4core.color("#dadada"),
+				    "opacity": 0.3,
+				    "strokeDasharray": "4,4"
+				};
+			self.datos4.push(e);
+			for(var i = 0; i < self.datos.length; i++){
+				self.datos4.push(self.datos[i]);
 			}
 			
 			
@@ -240,7 +258,8 @@ function ViewModel() {
 		document.getElementsByTagName('h1')[0].innerText = sessionStorage.userName;
 
 		am4core.ready(function() {
-
+			////grafica 1
+			
 			// Themes begin
 			am4core.useTheme(am4themes_animated);
 			// Themes end
@@ -254,7 +273,7 @@ function ViewModel() {
 
 			// Create axes
 			var categoryAxis = chart.xAxes.push(new am4charts.CategoryAxis());
-			categoryAxis.dataFields.category = "country";
+			categoryAxis.dataFields.category = "name";
 			categoryAxis.renderer.grid.template.location = 0;
 			categoryAxis.renderer.minGridDistance = 30;
 			categoryAxis.renderer.labels.template.horizontalCenter = "right";
@@ -269,8 +288,8 @@ function ViewModel() {
 			// Create series
 			var series = chart.series.push(new am4charts.ColumnSeries());
 			series.sequencedInterpolation = true;
-			series.dataFields.valueY = "visits";
-			series.dataFields.categoryX = "country";
+			series.dataFields.valueY = "value";
+			series.dataFields.categoryX = "name";
 			series.tooltipText = "[{categoryX}: bold]{valueY}[/]";
 			series.columns.template.strokeWidth = 0;
 
@@ -293,29 +312,230 @@ function ViewModel() {
 			// Cursor
 			chart.cursor = new am4charts.XYCursor();
 			
+			
 			//////////////////////////////grafica 2
 			
+			
 			// Themes begin
-			//am4core.useTheme(am4themes_dataviz);
 			am4core.useTheme(am4themes_animated);
 			// Themes end
+			
+			var data = self.datos4;
 
-			// Create chart
-			var chart = am4core.create("chartdiv2", am4charts.PieChart);
-			chart.hiddenState.properties.opacity = 0; // this creates initial fade-in
 
-			chart.data = self.datos;
+			// cointainer to hold both charts
+			var container = am4core.create("chartdiv2", am4core.Container);
+			container.width = am4core.percent(100);
+			container.height = am4core.percent(100);
+			container.layout = "horizontal";
 
-			var series = chart.series.push(new am4charts.PieSeries());
-			series.dataFields.value = "visits";
-			series.dataFields.radiusValue = "visits";
-			series.dataFields.category = "country";
-			series.slices.template.cornerRadius = 6;
-			series.colors.step = 3;
+			container.events.on("maxsizechanged", function () {
+			    chart1.zIndex = 0;
+			    separatorLine.zIndex = 1;
+			    dragText.zIndex = 2;
+			    chart2.zIndex = 3;
+			})
 
-			series.hiddenState.properties.endAngle = -90;
+			var chart1 = container.createChild(am4charts.PieChart);
+			chart1 .fontSize = 11;
+			chart1.hiddenState.properties.opacity = 0; // this makes initial fade in effect
+			chart1.data = data;
+			chart1.radius = am4core.percent(70);
+			chart1.innerRadius = am4core.percent(40);
+			chart1.zIndex = 1;
 
-			chart.legend = new am4charts.Legend();
+			var series1 = chart1.series.push(new am4charts.PieSeries());
+			series1.dataFields.value = "value";
+			series1.dataFields.category = "name";
+			series1.colors.step = 2;
+			series1.alignLabels = false;
+			series1.labels.template.bent = true;
+			series1.labels.template.radius = 3;
+			series1.labels.template.padding(0,0,0,0);
+
+			var sliceTemplate1 = series1.slices.template;
+			sliceTemplate1.cornerRadius = 5;
+			sliceTemplate1.draggable = true;
+			sliceTemplate1.inert = true;
+			sliceTemplate1.propertyFields.fill = "color";
+			sliceTemplate1.propertyFields.fillOpacity = "opacity";
+			sliceTemplate1.propertyFields.stroke = "color";
+			sliceTemplate1.propertyFields.strokeDasharray = "strokeDasharray";
+			sliceTemplate1.strokeWidth = 1;
+			sliceTemplate1.strokeOpacity = 1;
+
+			var zIndex = 5;
+
+			sliceTemplate1.events.on("down", function (event) {
+			    event.target.toFront();
+			    // also put chart to front
+			    var series = event.target.dataItem.component;
+			    series.chart.zIndex = zIndex++;
+			})
+
+			series1.ticks.template.disabled = true;
+
+			sliceTemplate1.states.getKey("active").properties.shiftRadius = 0;
+
+			sliceTemplate1.events.on("dragstop", function (event) {
+			    handleDragStop(event);
+			})
+
+			// separator line and text
+			var separatorLine = container.createChild(am4core.Line);
+			separatorLine.x1 = 0;
+			separatorLine.y2 = 300;
+			separatorLine.strokeWidth = 3;
+			separatorLine.stroke = am4core.color("#dadada");
+			separatorLine.valign = "middle";
+			separatorLine.strokeDasharray = "5,5";
+
+
+			var dragText = container.createChild(am4core.Label);
+			dragText.text = "Drag slices over the line";
+			dragText.rotation = 90;
+			dragText.valign = "middle";
+			dragText.align = "center";
+			dragText.paddingBottom = 5;
+
+			// second chart
+			var chart2 = container.createChild(am4charts.PieChart);
+			chart2.hiddenState.properties.opacity = 0; // this makes initial fade in effect
+			chart2 .fontSize = 11;
+			chart2.radius = am4core.percent(70);
+			chart2.data = data;
+			chart2.innerRadius = am4core.percent(40);
+			chart2.zIndex = 1;
+
+			var series2 = chart2.series.push(new am4charts.PieSeries());
+			series2.dataFields.value = "value";
+			series2.dataFields.category = "name";
+			series2.colors.step = 2;
+
+			series2.alignLabels = false;
+			series2.labels.template.bent = true;
+			series2.labels.template.radius = 3;
+			series2.labels.template.padding(0,0,0,0);
+			series2.labels.template.propertyFields.disabled = "disabled";
+
+			var sliceTemplate2 = series2.slices.template;
+			sliceTemplate2.copyFrom(sliceTemplate1);
+
+			series2.ticks.template.disabled = true;
+
+			function handleDragStop(event) {
+			    var targetSlice = event.target;
+			    var dataItem1;
+			    var dataItem2;
+			    var slice1;
+			    var slice2;
+
+			    if (series1.slices.indexOf(targetSlice) != -1) {
+			        slice1 = targetSlice;
+			        slice2 = series2.dataItems.getIndex(targetSlice.dataItem.index).slice;
+			    }
+			    else if (series2.slices.indexOf(targetSlice) != -1) {
+			        slice1 = series1.dataItems.getIndex(targetSlice.dataItem.index).slice;
+			        slice2 = targetSlice;
+			    }
+
+
+			    dataItem1 = slice1.dataItem;
+			    dataItem2 = slice2.dataItem;
+
+			    var series1Center = am4core.utils.spritePointToSvg({ x: 0, y: 0 }, series1.slicesContainer);
+			    var series2Center = am4core.utils.spritePointToSvg({ x: 0, y: 0 }, series2.slicesContainer);
+
+			    var series1CenterConverted = am4core.utils.svgPointToSprite(series1Center, series2.slicesContainer);
+			    var series2CenterConverted = am4core.utils.svgPointToSprite(series2Center, series1.slicesContainer);
+
+			    // tooltipY and tooltipY are in the middle of the slice, so we use them to avoid extra calculations
+			    var targetSlicePoint = am4core.utils.spritePointToSvg({ x: targetSlice.tooltipX, y: targetSlice.tooltipY }, targetSlice);
+
+			    if (targetSlice == slice1) {
+			        if (targetSlicePoint.x > container.pixelWidth / 2) {
+			            var value = dataItem1.value;
+
+			            dataItem1.hide();
+
+			            var animation = slice1.animate([{ property: "x", to: series2CenterConverted.x }, { property: "y", to: series2CenterConverted.y }], 400);
+			            animation.events.on("animationprogress", function (event) {
+			                slice1.hideTooltip();
+			            })
+
+			            slice2.x = 0;
+			            slice2.y = 0;
+
+			            dataItem2.show();
+			        }
+			        else {
+			            slice1.animate([{ property: "x", to: 0 }, { property: "y", to: 0 }], 400);
+			        }
+			    }
+			    if (targetSlice == slice2) {
+			        if (targetSlicePoint.x < container.pixelWidth / 2) {
+
+			            var value = dataItem2.value;
+
+			            dataItem2.hide();
+
+			            var animation = slice2.animate([{ property: "x", to: series1CenterConverted.x }, { property: "y", to: series1CenterConverted.y }], 400);
+			            animation.events.on("animationprogress", function (event) {
+			                slice2.hideTooltip();
+			            })
+
+			            slice1.x = 0;
+			            slice1.y = 0;
+			            dataItem1.show();
+			        }
+			        else {
+			            slice2.animate([{ property: "x", to: 0 }, { property: "y", to: 0 }], 400);
+			        }
+			    }
+
+			    toggleDummySlice(series1);
+			    toggleDummySlice(series2);
+
+			    series1.hideTooltip();
+			    series2.hideTooltip();
+			}
+
+			function toggleDummySlice(series) {
+			    var show = true;
+			    for (var i = 1; i < series.dataItems.length; i++) {
+			        var dataItem = series.dataItems.getIndex(i);
+			        if (dataItem.slice.visible && !dataItem.slice.isHiding) {
+			            show = false;
+			        }
+			    }
+
+			    var dummySlice = series.dataItems.getIndex(0);
+			    if (show) {
+			        dummySlice.show();
+			    }
+			    else {
+			        dummySlice.hide();
+			    }
+			}
+
+			series2.events.on("datavalidated", function () {
+
+			    var dummyDataItem = series2.dataItems.getIndex(0);
+			    //dummyDataItem.show(0);
+			    dummyDataItem.slice.draggable = false;
+			    dummyDataItem.slice.tooltipText = undefined;
+
+			    for (var i = 1; i < series2.dataItems.length; i++) {
+			        series2.dataItems.getIndex(i).hide(0);
+			    }
+			})
+
+			series1.events.on("datavalidated", function () {
+			    var dummyDataItem = series1.dataItems.getIndex(0);
+			    //dummyDataItem.hide(0);
+			    dummyDataItem.slice.draggable = false;
+			    dummyDataItem.slice.tooltipText = undefined;
+			})
 			
 			/////////grafica 3
 			

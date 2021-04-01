@@ -4,12 +4,12 @@ import org.json.JSONObject;
 
 public class Resultados {
 
-	private Double Time[] = new Double [10];
-	private Double HDD[] = new Double [10];
-	private Double Graphs[] = new Double [10];
-	private Double Procesador[] = new Double [10];
-	private Double Monitror[] = new Double [10];
-	private Double DUT[] = new Double [10];
+	private Double Time[] = new Double [14];
+	private Double HDD[] = new Double [14];
+	private Double Graphs[] = new Double [14];
+	private Double Procesador[] = new Double [14];
+	private Double Monitror[] = new Double [14];
+	private Double DUT[] = new Double [14];
 	private String nombre;
 	
 	
