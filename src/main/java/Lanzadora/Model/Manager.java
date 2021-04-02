@@ -34,8 +34,11 @@ import java.util.TreeMap;
 import java.io.FileOutputStream;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellStyle;
+import org.apache.poi.ss.usermodel.Font;
+import org.apache.poi.ss.usermodel.IndexedColors;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.hssf.usermodel.HSSFCellStyle;
+import org.apache.poi.hssf.usermodel.HSSFFont;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.hssf.util.HSSFColor;
 import org.apache.poi.ss.usermodel.Sheet;
@@ -494,6 +497,7 @@ public class Manager {
 
 	}
 
+	@SuppressWarnings("deprecation")
 	public void hacer_excel() {
 
 		Scanner entrada = null;
@@ -518,8 +522,34 @@ public class Manager {
 		}
 
 		Workbook workbook = new HSSFWorkbook();
-		CellStyle backgroundStyle = workbook.createCellStyle();
-
+		//CellStyle backgroundStyle = workbook.createCellStyle();
+		CellStyle styleString = workbook.createCellStyle();
+		CellStyle styleInt = workbook.createCellStyle();
+		styleString.setBorderBottom(CellStyle.BORDER_THIN);
+		styleString.setBottomBorderColor(IndexedColors.BLACK.getIndex());
+		styleString.setBorderLeft(CellStyle.BORDER_THIN);
+		styleString.setTopBorderColor(IndexedColors.BLACK.getIndex());
+		styleString.setBorderRight(CellStyle.BORDER_THIN);
+		styleString.setLeftBorderColor(IndexedColors.BLACK.getIndex());
+		styleString.setAlignment(CellStyle.ALIGN_CENTER);
+		
+		styleInt.setBorderBottom(CellStyle.BORDER_THIN);
+		styleInt.setBottomBorderColor(IndexedColors.BLACK.getIndex());
+		styleInt.setBorderLeft(CellStyle.BORDER_THIN);
+		styleInt.setTopBorderColor(IndexedColors.BLACK.getIndex());
+		styleInt.setBorderRight(CellStyle.BORDER_THIN);
+		styleInt.setLeftBorderColor(IndexedColors.BLACK.getIndex());
+		styleInt.setBorderTop(CellStyle.BORDER_THIN);
+		styleInt.setTopBorderColor(IndexedColors.BLACK.getIndex());
+		
+		styleString.setFillBackgroundColor(IndexedColors.GREEN.getIndex());
+		styleString.setFillPattern(CellStyle.SOLID_FOREGROUND);
+		styleString.setFillForegroundColor(HSSFColor.LIGHT_GREEN.index);
+        Font font = workbook.createFont();
+        font.setBold(true);
+        font.setFontHeightInPoints((short)12);
+        font.setColor(HSSFColor.BLACK.index);
+        styleString.setFont(font);
 		// backgroundStyle.setFillBackgroundColor(HSSFColor.GREY_25_PERCENT.index);
 		// backgroundStyle.setFillPattern(HSSFCellStyle.SOLID_FOREGROUND);
 		// Crea hoja nueva
@@ -545,19 +575,20 @@ public class Manager {
 				resultados.getDUT()[3], resultados.getDUT()[4], resultados.getDUT()[5], resultados.getDUT()[6], resultados.getDUT()[7], resultados.getDUT()[8], resultados.getDUT()[9], resultados.getDUT()[10], resultados.getDUT()[11], resultados.getDUT()[12], resultados.getDUT()[13] });
 		// Iterar sobre datos para escribir en la hoja
 		Set<String> keyset = datos.keySet();
-		int numeroRenglon = 0;
+		int numeroRenglon = 2;
 		for (String key : keyset) {
 			Row row = sheet.createRow(numeroRenglon++);
 			Object[] arregloObjetos = datos.get(key);
 			int numeroCelda = 0;
 			for (Object obj : arregloObjetos) {
 				Cell cell = row.createCell(numeroCelda++);
-				if (obj instanceof String) {
+				if (obj instanceof String && obj != "") {
 					cell.setCellValue((String) obj);
-					cell.setCellStyle(backgroundStyle);
+					cell.setCellStyle(styleString);
 
 				} else if (obj instanceof Double) {
 					cell.setCellValue((Double) obj);
+					cell.setCellStyle(styleInt);
 				}
 			}
 		}
