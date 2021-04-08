@@ -316,6 +316,16 @@ public class Manager {
 
 	public void crearProyecto(String nombre, int repeticiones, String lenguaje, String descripcion, int dut,
 			String usuario) {
+		User usuarioDef = new User();
+		List<User> usuarios = proyectoDAO.leer_usuarios();
+		for(User user : usuarios) {
+			if(user.getName().equals(usuario)) {
+				
+				usuarioDef.setEmail(user.getEmail());
+						
+			}
+			
+		}
 		java.util.Date fecha = new Date();
 		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
 		System.out.println(dtf);
@@ -325,7 +335,7 @@ public class Manager {
 		String estado = "En preparación";
 		Boolean enviado = false;
 		proyectoDAO.insertar(
-				new proyecto(fecha, nombre, descripcion, dut, repeticiones, lenguaje, usuario, estado, enviado));
+				new proyecto(fecha, nombre, descripcion, dut, repeticiones, lenguaje, usuario, usuarioDef.getEmail(), estado, enviado));
 
 	}
 
@@ -561,17 +571,17 @@ public class Manager {
 		// Por cada línea se crea un arreglo de objetos (Object[])
 		Map<String, Object[]> datos = new TreeMap<String, Object[]>();
 		datos.put("1", new Object[] { "", "Min", "Max", "Media", "Q1", "Q3", "desviación estándar", "Varianza", "Mediana", "media_t", "media_w", "media_g", "mad", "media consumo", "mediana consumo" });
-		datos.put("2", new Object[] { "Tiempo", resultados.getTime()[0], resultados.getTime()[1],
+		datos.put("2", new Object[] { "Tiempo (s)", resultados.getTime()[0], resultados.getTime()[1],
 				resultados.getTime()[2], resultados.getTime()[3], resultados.getTime()[4], resultados.getTime()[5], resultados.getTime()[6], resultados.getTime()[7], resultados.getTime()[8], resultados.getTime()[9], resultados.getTime()[10], resultados.getTime()[11], resultados.getTime()[12],resultados.getTime()[13] });
-		datos.put("3", new Object[] { "HDD", resultados.getHDD()[0], resultados.getHDD()[1], resultados.getHDD()[2],
+		datos.put("3", new Object[] { "HDD (w)", resultados.getHDD()[0], resultados.getHDD()[1], resultados.getHDD()[2],
 				resultados.getHDD()[3], resultados.getHDD()[4], resultados.getHDD()[5], resultados.getHDD()[6], resultados.getHDD()[7], resultados.getHDD()[8], resultados.getHDD()[9], resultados.getHDD()[10], resultados.getHDD()[11], resultados.getHDD()[12], resultados.getHDD()[13] });
-		datos.put("4", new Object[] { "Gráfica", resultados.getGraphs()[0], resultados.getGraphs()[1],
+		datos.put("4", new Object[] { "Gráfica (w)", resultados.getGraphs()[0], resultados.getGraphs()[1],
 				resultados.getGraphs()[2], resultados.getGraphs()[3], resultados.getGraphs()[4], resultados.getGraphs()[5], resultados.getGraphs()[6], resultados.getGraphs()[7], resultados.getGraphs()[8], resultados.getGraphs()[9], resultados.getGraphs()[10], resultados.getGraphs()[11], resultados.getGraphs()[12], resultados.getGraphs()[13] });
-		datos.put("5", new Object[] { "Procesador", resultados.getProcesador()[0], resultados.getProcesador()[1],
+		datos.put("5", new Object[] { "Procesador (w)", resultados.getProcesador()[0], resultados.getProcesador()[1],
 				resultados.getProcesador()[2], resultados.getProcesador()[3], resultados.getProcesador()[4], resultados.getProcesador()[5], resultados.getProcesador()[6], resultados.getProcesador()[7], resultados.getProcesador()[8], resultados.getProcesador()[9], resultados.getProcesador()[10], resultados.getProcesador()[11], resultados.getProcesador()[12], resultados.getProcesador()[13] });
-		datos.put("6", new Object[] { "Monitor", resultados.getMonitror()[0], resultados.getMonitror()[1],
+		datos.put("6", new Object[] { "Monitor (w)", resultados.getMonitror()[0], resultados.getMonitror()[1],
 				resultados.getMonitror()[2], resultados.getMonitror()[3], resultados.getMonitror()[4], resultados.getMonitror()[5], resultados.getMonitror()[6], resultados.getMonitror()[7], resultados.getMonitror()[8], resultados.getMonitror()[9], resultados.getMonitror()[10], resultados.getMonitror()[11], resultados.getMonitror()[12], resultados.getMonitror()[13] });
-		datos.put("7", new Object[] { "DUT", resultados.getDUT()[0], resultados.getDUT()[1], resultados.getDUT()[2],
+		datos.put("7", new Object[] { "DUT (w)", resultados.getDUT()[0], resultados.getDUT()[1], resultados.getDUT()[2],
 				resultados.getDUT()[3], resultados.getDUT()[4], resultados.getDUT()[5], resultados.getDUT()[6], resultados.getDUT()[7], resultados.getDUT()[8], resultados.getDUT()[9], resultados.getDUT()[10], resultados.getDUT()[11], resultados.getDUT()[12], resultados.getDUT()[13] });
 		// Iterar sobre datos para escribir en la hoja
 		Set<String> keyset = datos.keySet();

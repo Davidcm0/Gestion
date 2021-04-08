@@ -4,6 +4,8 @@ function ViewModel() {
 	self.listaproyectos = ko.observableArray([]);
 	self.proyectosSeleccionados = ko.observableArray([]);
 	self.nombreProyecto = ko.observable('');
+	self.AutorProyecto = ko.observable('');
+	self.email_userProyecto = ko.observable('');
 	self.user = ko.observable('');
 	self.time = ko.observable('');
 	self.datos = [];
@@ -77,7 +79,7 @@ function ViewModel() {
 		if(proyectos != null){
 			for (var i = 0; i < proyectos.length; i++) {
 				var proyecto = proyectos[i];
-					self.listaproyectos.push(new Proyecto(proyecto.Nombre, proyecto.Descripcion, proyecto.Autor, proyecto.Fecha, proyecto.DUT, proyecto.Repeticiones, proyecto.Lenguaje, proyecto.estado, proyecto.proyecto_enviado));
+					self.listaproyectos.push(new Proyecto(proyecto.Nombre, proyecto.Descripcion, proyecto.Autor, proyecto.email_user, proyecto.Fecha, proyecto.DUT, proyecto.Repeticiones, proyecto.Lenguaje, proyecto.estado, proyecto.proyecto_enviado));
 				
 				
 
@@ -131,38 +133,7 @@ function ViewModel() {
 				const tuplaDUT = {name: nombre_proyecto+"_DUT", value: graficas[i][0].DUT[2] }
 				self.datos.push(tuplaDUT);
 			}
-			//para datos3
 			
-			for(var i = 0; i < graficas.length; i++){
-				var parts = graficas[i][0].nombre.split("_");
-				var nombre_proyecto = parts[0];
-				const tuplaHDD = {country: nombre_proyecto+"_HDD", visits: graficas[i][0].HDD[2], error:10 }
-				self.datos3.push(tuplaHDD);
-			}
-			for(var i = 0; i < graficas.length; i++){
-				var parts = graficas[i][0].nombre.split("_");
-				var nombre_proyecto = parts[0];
-				const tuplaGrafica = {country: nombre_proyecto+"_Grafica", visits: graficas[i][0].Grafica[2], error:10}
-				self.datos3.push(tuplaGrafica);
-			}
-			for(var i = 0; i < graficas.length; i++){
-				var parts = graficas[i][0].nombre.split("_");
-				var nombre_proyecto = parts[0];
-				const tuplaMonitor = {country: nombre_proyecto+"_Monitor", visits: graficas[i][0].Monitor[2], error:10 }
-				self.datos3.push(tuplaMonitor);
-			}
-			for(var i = 0; i < graficas.length; i++){
-				var parts = graficas[i][0].nombre.split("_");
-				var nombre_proyecto = parts[0];
-				const tuplaProcesador = {country: nombre_proyecto+"_Procesador", visits: graficas[i][0].Procesador[2], error:10 }
-				self.datos3.push(tuplaProcesador);
-			}
-			for(var i = 0; i < graficas.length; i++){
-				var parts = graficas[i][0].nombre.split("_");
-				var nombre_proyecto = parts[0];
-				const tuplaDUT = {country: nombre_proyecto+"_DUT", visits: graficas[i][0].DUT[2], error:10 }
-				self.datos3.push(tuplaDUT);
-			}
 			//// para la variable datos2
 			
 			for(var i = 0; i < graficas.length; i++){
@@ -241,13 +212,13 @@ function ViewModel() {
 			var chart = document.getElementById("chartdiv");
 			var chart2 = document.getElementById("chartdiv2");
 			var chart3 = document.getElementById("chartdiv3");
-			var chart4 = document.getElementById("chartdiv4");
+			
 			var boxes = document.getElementById("boxes");
 			boxes.style.display = "none";
 			chart.style.display = "flex";
 			chart2.style.display = "flex";
 			chart3.style.display = "flex";
-			chart4.style.display = "flex";
+			
 			//var boton = document.getElementsByClassName("elegirProyecto");
 			//boton[0].style.display = "flex";
 			
@@ -588,62 +559,6 @@ function ViewModel() {
 			bullet1.label.fill = am4core.color("#ffffff");
 
 			chart.maxLevels = 2;
-			
-			//////grafica 4
-			
-			// Themes begin
-			am4core.useTheme(am4themes_animated);
-			// Themes end
-
-			var chart = am4core.create("chartdiv4", am4charts.XYChart);
-
-			chart.data = self.datos3;
-				
-
-			chart.padding(40, 40, 40, 40);
-
-			var categoryAxis = chart.xAxes.push(new am4charts.CategoryAxis());
-			categoryAxis.renderer.grid.template.location = 0;
-			categoryAxis.dataFields.category = "country";
-			categoryAxis.renderer.minGridDistance = 60;
-			categoryAxis.renderer.labels.template.horizontalCenter = "right";
-			categoryAxis.renderer.labels.template.verticalCenter = "middle";
-			categoryAxis.renderer.labels.template.rotation = 270;
-
-			var valueAxis = chart.yAxes.push(new am4charts.ValueAxis());
-
-			var series = chart.series.push(new am4charts.LineSeries());
-			series.dataFields.categoryX = "country";
-			series.dataFields.valueY = "visits";
-			series.tooltipText = "{valueY.value} error:{error}"
-				
-
-			var errorBullet = series.bullets.create(am4charts.ErrorBullet);
-			errorBullet.isDynamic = true;
-			errorBullet.strokeWidth = 2;
-
-			var circle = errorBullet.createChild(am4core.Circle);
-			circle.radius = 3;
-			circle.fill = am4core.color("#ffffff");
-
-			// adapter adjusts height of a bullet
-			errorBullet.adapter.add("pixelHeight", function (pixelHeight, target) {
-			  var dataItem = target.dataItem;
-
-			  if(dataItem){
-			    var value = dataItem.valueY;
-			    var errorTopValue = value + dataItem.dataContext.error / 2;
-			    var errorTopY = valueAxis.valueToPoint(errorTopValue).y;
-
-			    var errorBottomValue = value - dataItem.dataContext.error / 2;
-			    var errorBottomY = valueAxis.valueToPoint(errorBottomValue).y;
-
-			    return Math.abs(errorTopY - errorBottomY);
-			   }
-			   return pixelHeight;
-			})
-
-			chart.cursor = new am4charts.XYCursor();
 
 			}); // end am4core.ready()
 		
@@ -730,6 +645,15 @@ function ViewModel() {
 			}
 		};
 		} else{
+			emailjs.init("user_kJwC21oweSb6llxLRUyRT");
+			emailjs.send("service_zvob6fj","template_m06v46e",{
+				from_name: "David",
+				to_name: self.AutorProyecto(),
+				message: "The status of your project has changed, go to check it!",
+				email_to: self.email_userProyecto(),
+				});
+			//setTimeout(console.log.bind(null, 'Two second later'), 2000);
+			sleep(2000);
 			var p = {
 					type: "estado",
 					proyecto: self.nombreProyecto(),
@@ -744,14 +668,21 @@ function ViewModel() {
 		location.reload();
 	}
 	
-	
+	function sleep(milliseconds) {
+		  const date = Date.now();
+		  let currentDate = null;
+		  do {
+		    currentDate = Date.now();
+		  } while (currentDate - date < milliseconds);
+		}
 
 	
 	class Proyecto {
-		constructor (nombre, descripcion, autor, fecha, dut, repeticiones, lenguaje, estado, proyecto_enviado) {
+		constructor (nombre, descripcion, autor, email_user, fecha, dut, repeticiones, lenguaje, estado, proyecto_enviado) {
 			this.nombre = nombre;
 			this.descripcion = descripcion;
 			this.autor = autor;
+			this.email_user = email_user;
 			this.fecha = fecha;
 			this.dut = dut;
 			this.repeticiones = repeticiones;
@@ -762,6 +693,8 @@ function ViewModel() {
 		
 		info() {
 			self.nombreProyecto(this.nombre);
+			self.AutorProyecto(this.autor);
+			self.email_userProyecto(this.email_user);
 			var p = {
 				type: "info",
 				nombre: this.nombre,

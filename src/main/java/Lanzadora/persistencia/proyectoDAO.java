@@ -58,11 +58,11 @@ public final class proyectoDAO {
 		while ((iter.hasNext())) {
 			document = iter.next();
 			if(nombre.equals("admin")) {
-				p = new proyecto(document.getDate("fecha"), document.getString(NAME), document.getString("descripcion"), document.getInteger("dut"), document.getInteger("repeticiones"),document.getString("lenguaje"),document.getString("Autor"), document.getString("estado"),document.getBoolean("proyecto_enviado"));
+				p = new proyecto(document.getDate("fecha"), document.getString(NAME), document.getString("descripcion"), document.getInteger("dut"), document.getInteger("repeticiones"),document.getString("lenguaje"),document.getString("Autor"),document.getString("email_user"), document.getString("estado"),document.getBoolean("proyecto_enviado"));
 				proyectos.add(p);
 			} else {
 				if ((nombre).equals(document.getString("Autor"))) {
-					p = new proyecto(document.getDate("fecha"), document.getString(NAME), document.getString("descripcion"), document.getInteger("dut"), document.getInteger("repeticiones"),document.getString("lenguaje"),document.getString("Autor"), document.getString("estado"),document.getBoolean("proyecto_enviado"));
+					p = new proyecto(document.getDate("fecha"), document.getString(NAME), document.getString("descripcion"), document.getInteger("dut"), document.getInteger("repeticiones"),document.getString("lenguaje"),document.getString("Autor"),document.getString("email_user"), document.getString("estado"),document.getBoolean("proyecto_enviado"));
 					proyectos.add(p);
 				
 				}

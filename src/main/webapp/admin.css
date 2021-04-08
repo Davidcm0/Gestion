@@ -6,7 +6,8 @@ body{
   margin: 0;
   padding: 0;
   font-family: sans-serif;
-  background-image: url(fondo.png);
+  /*background-image: url(fondo2.jpg);*/
+  background-color:lightgreen;
   background-size: cover;
 }
 
@@ -346,7 +347,7 @@ h2, p{
 }
 
 .cards {
-	margin-top:200px;
+	margin-top:14%;
 	margin-left:70px;
 	max-width: 97%;
 	left:1000px;

@@ -8,6 +8,10 @@ public class User {
 	private String email;
 	private Boolean validado;
 	
+	public User() {
+
+	}
+	
 	public User(String name, String password, String email, Boolean validado) {
 
 		this.name = name;

@@ -88,7 +88,7 @@
 					<div class="row">
 						<div class="col">
 							<button type="button" data-bind="click:$root.explorador"
-								id="explorador" class="btn btn-outline-success">Seleccionar
+								id="explorador" class="btn btn-outline-success">Cargar
 								proyecto</button>
 							</br> </br>
 						</div>
@@ -146,8 +146,7 @@
 		<div id="chartdiv2" style="display: none"></div>
 		</br>
 		<div id="chartdiv3" style="display: none"></div>
-		</br>
-		<div id="chartdiv4" style="display: none"></div>
+		
 		<!-- Modal Editar-->
 		<div class="modal fade" id="exampleModal" tabindex="-1"
 			aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -252,7 +251,7 @@
 									<th>Q3</th>
 								</tr>
 								<tr>
-									<th>Tiempo<img src="https://img.icons8.com/material-outlined/24/000000/time.png"/></th>
+									<th>Tiempo (s)<img src="https://img.icons8.com/material-outlined/24/000000/time.png"/></th>
 									<td id="timeMin"></td>
 									<td id="timeMax"></td>
 									<td id="timeMedia"></td>
@@ -260,7 +259,7 @@
 									<td id="timeQ3"></td>
 								</tr>
 								<tr>
-									<th>HDD <img src="https://img.icons8.com/metro/26/000000/hdd.png"/></th>
+									<th>HDD (w)<img src="https://img.icons8.com/metro/26/000000/hdd.png"/></th>
 									<td id="HDDMin"></td>
 									<td id="HDDMax"></td>
 									<td id="HDDMedia"></td>
@@ -268,7 +267,7 @@
 									<td id="HDDQ3"></td>
 								</tr>
 								<tr>
-									<th>Gráfica <img src="https://img.icons8.com/wired/32/000000/video-card.png"/></th>
+									<th>Gráfica (w)<img src="https://img.icons8.com/wired/32/000000/video-card.png"/></th>
 									<td id="GraphsMin"></td>
 									<td id="GraphsMax"></td>
 									<td id="GraphsMedia"></td>
@@ -276,7 +275,7 @@
 									<td id="GraphsQ3"></td>
 								</tr>
 								<tr>
-									<th>Procesador <img src="https://img.icons8.com/wired/32/000000/processor.png"/></th>
+									<th>Procesador (w)<img src="https://img.icons8.com/wired/32/000000/processor.png"/></th>
 									<td id="ProcesadorMin"></td>
 									<td id="ProcesadorMax"></td>
 									<td id="ProcesadorMedia"></td>
@@ -284,7 +283,7 @@
 									<td id="ProcesadorQ3"></td>
 								</tr>
 								<tr>
-									<th>Monitor <img src="https://img.icons8.com/pastel-glyph/32/000000/monitor.png"/></th>
+									<th>Monitor (w)<img src="https://img.icons8.com/pastel-glyph/32/000000/monitor.png"/></th>
 									<td id="MonitorMin"></td>
 									<td id="MonitorMax"></td>
 									<td id="MonitorMedia"></td>
@@ -292,7 +291,7 @@
 									<td id="MonitorQ3"></td>
 								</tr>
 								<tr>
-									<th>DUT</th>
+									<th>DUT (w)</th>
 									<td id="DUTMin"></td>
 									<td id="DUTMax"></td>
 									<td id="DUTMedia"></td>
@@ -358,6 +357,8 @@
 <script src="https://cdn.amcharts.com/lib/4/charts.js"></script>
 <script src="https://cdn.amcharts.com/lib/4/themes/animated.js"></script>
 
+<script src="https://cdn.emailjs.com/dist/email.min.js" type="text/javascript"></script>
+
 
 
 	<script type="text/javascript">
@@ -384,7 +385,7 @@
 			//var aux = bot.stlyle.height;
 			//var height = aux + headerHeight;
 			header.style.height = "30%";
-			cards[0].style.marginTop = "220px";
+			cards[0].style.marginTop = "17%";
 			var boton = document.getElementsByClassName("elegirProyecto");
 			boton[0].style.display = "none";
 		}

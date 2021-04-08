@@ -13,6 +13,7 @@ public class proyecto {
 	private int repeticiones;
 	private String lenguaje;
 	private String user;
+	private String email_user;
 	private String nombre;
 	private String estado;
 	private Boolean proyecto_enviado;
@@ -20,7 +21,7 @@ public class proyecto {
 	
 
 	public proyecto(Date fecha, String nombre, String descripcion, int DUT, int repeticiones, String lenguaje,
-			String user, String estado, boolean proyecto_enviado) {
+			String user, String email_user,String estado, boolean proyecto_enviado) {
 		this.fecha = fecha;
 		this.nombre = nombre;
 		this.descripcion = descripcion;
@@ -28,6 +29,7 @@ public class proyecto {
 		this.repeticiones = repeticiones;
 		this.lenguaje = lenguaje;
 		this.user = user;
+		this.email_user = email_user;
 		this.estado = estado;
 		this.proyecto_enviado = proyecto_enviado;
 	}
@@ -79,6 +81,14 @@ public class proyecto {
 	public void setUser(String user) {
 		this.user = user;
 	}
+	
+	public String getEmail_user() {
+		return email_user;
+	}
+
+	public void setEmail_user(String email_user) {
+		this.email_user = email_user;
+	}
 
 	public String getDescripcion() {
 		return descripcion;
@@ -113,6 +123,7 @@ public class proyecto {
 		jso.put("Repeticiones", this.getRepeticiones());
 		jso.put("Lenguaje", this.getLenguaje());
 		jso.put("Autor", this.getUser());
+		jso.put("email_user", this.getEmail_user());
 		jso.put("estado", this.getEstado());
 		jso.put("proyecto_enviado", this.getProyecto_enviado());
 		return jso;
