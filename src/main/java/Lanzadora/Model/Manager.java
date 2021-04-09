@@ -361,7 +361,9 @@ public class Manager {
 	}
 
 	public void actualizar_estado(String proyecto, String estado) {
-
+        if(estado.equals("En preparacion")){
+        	estado = "En preparación";
+        }
 		proyectoDAO.actualizar(proyecto, estado);
 
 	}

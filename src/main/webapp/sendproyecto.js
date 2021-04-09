@@ -6,6 +6,7 @@ function ViewModel() {
 	self.nombreProyecto = ko.observable('');
 	self.AutorProyecto = ko.observable('');
 	self.email_userProyecto = ko.observable('');
+	self.estadoProyecto = ko.observable('');
 	self.user = ko.observable('');
 	self.time = ko.observable('');
 	self.datos = [];
@@ -645,11 +646,20 @@ function ViewModel() {
 			}
 		};
 		} else{
+			var estado = document.getElementById("Estado").options[document.getElementById("Estado").selectedIndex].text;
+			var mensaje = "The status of your project " + self.nombreProyecto() + " has changed from " + self.estadoProyecto() + " to " + estado + ".";
+			if(estado === "En preparacion"){
+				mensaje = mensaje + " This is because the code was not right, so try again or contact to dcarretero.1999@gmail.com, go to check it!";
+			} else if(estado === "Medido"){
+				mensaje = mensaje + " You can go to check the results!";
+			} else {
+				mensaje = mensaje + " You have to wait for the measurement of your code.";
+			}
 			emailjs.init("user_kJwC21oweSb6llxLRUyRT");
 			emailjs.send("service_zvob6fj","template_m06v46e",{
 				from_name: "David",
 				to_name: self.AutorProyecto(),
-				message: "The status of your project has changed, go to check it!",
+				message: mensaje,
 				email_to: self.email_userProyecto(),
 				});
 			//setTimeout(console.log.bind(null, 'Two second later'), 2000);
@@ -657,7 +667,7 @@ function ViewModel() {
 			var p = {
 					type: "estado",
 					proyecto: self.nombreProyecto(),
-					estado: document.getElementById("Estado").options[document.getElementById("Estado").selectedIndex].text,
+					estado: estado,
 					success: function() {
 						location.reload();
 					}
@@ -695,6 +705,7 @@ function ViewModel() {
 			self.nombreProyecto(this.nombre);
 			self.AutorProyecto(this.autor);
 			self.email_userProyecto(this.email_user);
+			self.estadoProyecto(this.estado);
 			var p = {
 				type: "info",
 				nombre: this.nombre,
