@@ -74,13 +74,13 @@ function ViewModel() {
 			document.getElementById('DUTQ3').innerText = resultados[0].DUT[4];
 			
 			document.getElementById('Pro').innerText = self.nombreProyecto();
-			//self.time(resultados[0].DUT[0]) ;
+			// self.time(resultados[0].DUT[0]) ;
 		}
 		
 		if(proyectos != null){
 			for (var i = 0; i < proyectos.length; i++) {
 				var proyecto = proyectos[i];
-					self.listaproyectos.push(new Proyecto(proyecto.Nombre, proyecto.Descripcion, proyecto.Autor, proyecto.email_user, proyecto.Fecha, proyecto.DUT, proyecto.Repeticiones, proyecto.Lenguaje, proyecto.estado, proyecto.proyecto_enviado));
+					self.listaproyectos.push(new Proyecto(proyecto.Nombre, proyecto.Descripcion, proyecto.Autor, proyecto.email_user, proyecto.Fecha, proyecto.DUT, proyecto.Repeticiones, proyecto.Lenguaje, proyecto.estado, proyecto.proyecto_enviado, proyecto.url));
 					
 				
 
@@ -108,7 +108,7 @@ function ViewModel() {
 		if(graficas != null){
 
 
-			//Para la variable datos
+			// Para la variable datos
 
 			for(var i = 0; i < graficas.length; i++){
 				var parts = graficas[i][0].nombre.split("_");
@@ -141,13 +141,13 @@ function ViewModel() {
 				self.datos.push(tuplaDUT);
 			}
 			
-			//// para la variable datos2
+			// // para la variable datos2
 			
 			for(var i = 0; i < graficas.length; i++){
 				var parts = graficas[i][0].nombre.split("_");
 				var nombre_proyecto = parts[0];
 				var lista = [];
-				//self.datos2.push(nombre_proyecto);
+				// self.datos2.push(nombre_proyecto);
 				var tuplaHDD = {name:"HDD", value: graficas[i][0].HDD[2]}
 				lista.push(tuplaHDD);
 				var final = {name: nombre_proyecto, children: lista}
@@ -158,7 +158,7 @@ function ViewModel() {
 				var parts = graficas[i][0].nombre.split("_");
 				var nombre_proyecto = parts[0];
 				var lista = [];
-				//self.datos2.push(nombre_proyecto);
+				// self.datos2.push(nombre_proyecto);
 				var tuplaHDD = {name: "Grafica", value: graficas[i][0].Grafica[2]}
 				lista.push(tuplaHDD);
 				var final = {name: nombre_proyecto, children: lista}
@@ -169,7 +169,7 @@ function ViewModel() {
 				var parts = graficas[i][0].nombre.split("_");
 				var nombre_proyecto = parts[0];
 				var lista = [];
-				//self.datos2.push(nombre_proyecto);
+				// self.datos2.push(nombre_proyecto);
 				var tuplaHDD = {name:"Procesador", value: graficas[i][0].Procesador[2]}
 				lista.push(tuplaHDD);
 				var final = {name: nombre_proyecto, children: lista}
@@ -180,7 +180,7 @@ function ViewModel() {
 				var parts = graficas[i][0].nombre.split("_");
 				var nombre_proyecto = parts[0];
 				var lista = [];
-				//self.datos2.push(nombre_proyecto);
+				// self.datos2.push(nombre_proyecto);
 				var tuplaHDD = {name: "Monitor", value: graficas[i][0].Monitor[2]}
 				lista.push(tuplaHDD);
 				var final = {name: nombre_proyecto, children: lista}
@@ -191,7 +191,7 @@ function ViewModel() {
 				var parts = graficas[i][0].nombre.split("_");
 				var nombre_proyecto = parts[0];
 				var lista = [];
-				//self.datos2.push(nombre_proyecto);
+				// self.datos2.push(nombre_proyecto);
 				var tuplaHDD = {name: "DUT", value: graficas[i][0].DUT[2]}
 				lista.push(tuplaHDD);
 				var final = {name: nombre_proyecto, children: lista}
@@ -200,7 +200,7 @@ function ViewModel() {
 			
 			
 			
-		//// para la variable datos4
+		// // para la variable datos4
 			var e = {
 				    "name": "Dummy",
 				    "disabled": true,
@@ -226,8 +226,8 @@ function ViewModel() {
 			chart2.style.display = "flex";
 			chart3.style.display = "flex";
 			
-			//var boton = document.getElementsByClassName("elegirProyecto");
-			//boton[0].style.display = "flex";
+			// var boton = document.getElementsByClassName("elegirProyecto");
+			// boton[0].style.display = "flex";
 			
 			am4core.ready;
 		}
@@ -236,7 +236,7 @@ function ViewModel() {
 		document.getElementsByTagName('h1')[0].innerText = sessionStorage.userName;
 
 		am4core.ready(function() {
-			////grafica 1
+			// //grafica 1
 			
 			// Themes begin
 			am4core.useTheme(am4themes_animated);
@@ -291,7 +291,7 @@ function ViewModel() {
 			chart.cursor = new am4charts.XYCursor();
 			chart.exporting.menu = new am4core.ExportMenu();
 			
-			//////////////////////////////grafica 2
+			// ////////////////////////////grafica 2
 			
 			
 			// Themes begin
@@ -316,7 +316,8 @@ function ViewModel() {
 
 			var chart1 = container.createChild(am4charts.PieChart);
 			chart1 .fontSize = 11;
-			chart1.hiddenState.properties.opacity = 0; // this makes initial fade in effect
+			chart1.hiddenState.properties.opacity = 0; // this makes initial
+														// fade in effect
 			chart1.data = data;
 			chart1.radius = am4core.percent(70);
 			chart1.innerRadius = am4core.percent(40);
@@ -378,7 +379,8 @@ function ViewModel() {
 
 			// second chart
 			var chart2 = container.createChild(am4charts.PieChart);
-			chart2.hiddenState.properties.opacity = 0; // this makes initial fade in effect
+			chart2.hiddenState.properties.opacity = 0; // this makes initial
+														// fade in effect
 			chart2 .fontSize = 11;
 			chart2.radius = am4core.percent(70);
 			chart2.data = data;
@@ -427,7 +429,8 @@ function ViewModel() {
 			    var series1CenterConverted = am4core.utils.svgPointToSprite(series1Center, series2.slicesContainer);
 			    var series2CenterConverted = am4core.utils.svgPointToSprite(series2Center, series1.slicesContainer);
 
-			    // tooltipY and tooltipY are in the middle of the slice, so we use them to avoid extra calculations
+			    // tooltipY and tooltipY are in the middle of the slice, so we
+				// use them to avoid extra calculations
 			    var targetSlicePoint = am4core.utils.spritePointToSvg({ x: targetSlice.tooltipX, y: targetSlice.tooltipY }, targetSlice);
 
 			    if (targetSlice == slice1) {
@@ -499,7 +502,7 @@ function ViewModel() {
 			series2.events.on("datavalidated", function () {
 
 			    var dummyDataItem = series2.dataItems.getIndex(0);
-			    //dummyDataItem.show(0);
+			    // dummyDataItem.show(0);
 			    dummyDataItem.slice.draggable = false;
 			    dummyDataItem.slice.tooltipText = undefined;
 
@@ -510,23 +513,24 @@ function ViewModel() {
 
 			series1.events.on("datavalidated", function () {
 			    var dummyDataItem = series1.dataItems.getIndex(0);
-			    //dummyDataItem.hide(0);
+			    // dummyDataItem.hide(0);
 			    dummyDataItem.slice.draggable = false;
 			    dummyDataItem.slice.tooltipText = undefined;
 			})
 			
 			container.exporting.menu = new am4core.ExportMenu();
 			
-			/////////grafica 3
+			// ///////grafica 3
 			
 			// Themes begin
-			//am4core.useTheme(am4themes_dataviz);
+			// am4core.useTheme(am4themes_dataviz);
 			am4core.useTheme(am4themes_animated);
 			// Themes end
 
 			// create chart
 			var chart = am4core.create("chartdiv3", am4charts.TreeMap);
-			chart.hiddenState.properties.opacity = 0; // this makes initial fade in effect
+			chart.hiddenState.properties.opacity = 0; // this makes initial
+														// fade in effect
 
 			chart.data = self.datos2;
 				
@@ -657,26 +661,31 @@ function ViewModel() {
 		} else{
 			var estado = document.getElementById("Estado").options[document.getElementById("Estado").selectedIndex].text;
 			var mensaje = "The status of your project " + self.nombreProyecto() + " has changed from " + self.estadoProyecto() + " to " + estado + ".";
-			if(estado === "En preparacion"){
-				mensaje = mensaje + " This is because the code was not right, so try again or contact to dcarretero.1999@gmail.com, go to check it!";
-			} else if(estado === "Medido"){
-				mensaje = mensaje + " You can go to check the results!";
-			} else {
-				mensaje = mensaje + " You have to wait for the measurement of your code.";
+			var url = document.getElementById("url").value;
+			if(estado != "Elige..."){
+				if(estado === "En preparacion"){
+					mensaje = mensaje + " This is because the code was not right, so try again or contact to dcarretero.1999@gmail.com, go to check it!";
+				} else if(estado === "Medido"){
+					mensaje = mensaje + " You can go to check the results!";
+				} else {
+					mensaje = mensaje + " You have to wait for the measurement of your code.";
+				}
+				emailjs.init("user_kJwC21oweSb6llxLRUyRT");
+				emailjs.send("service_zvob6fj","template_m06v46e",{
+					from_name: "David",
+					to_name: self.AutorProyecto(),
+					message: mensaje,
+					email_to: self.email_userProyecto(),
+					});
 			}
-			emailjs.init("user_kJwC21oweSb6llxLRUyRT");
-			emailjs.send("service_zvob6fj","template_m06v46e",{
-				from_name: "David",
-				to_name: self.AutorProyecto(),
-				message: mensaje,
-				email_to: self.email_userProyecto(),
-				});
-			//setTimeout(console.log.bind(null, 'Two second later'), 2000);
+
 			sleep(2000);
+
 			var p = {
 					type: "estado",
 					proyecto: self.nombreProyecto(),
 					estado: estado,
+					url: url,
 					success: function() {
 						location.reload();
 					}
@@ -697,7 +706,7 @@ function ViewModel() {
 
 	
 	class Proyecto {
-		constructor (nombre, descripcion, autor, email_user, fecha, dut, repeticiones, lenguaje, estado, proyecto_enviado) {
+		constructor (nombre, descripcion, autor, email_user, fecha, dut, repeticiones, lenguaje, estado, proyecto_enviado, url) {
 			this.nombre = nombre;
 			this.descripcion = descripcion;
 			this.autor = autor;
@@ -708,6 +717,7 @@ function ViewModel() {
 			this.lenguaje = lenguaje;
 			this.estado = estado;
 			this.proyecto_enviado = proyecto_enviado;
+			this.url = url;
 		}
 		
 		info() {
@@ -746,8 +756,13 @@ function ViewModel() {
 				usuario:sessionStorage.userName
 
 			};
-			//self.nombreUsuario(this.name);
+			// self.nombreUsuario(this.name);
 			self.sws.send(JSON.stringify(p));
+		}
+		
+		url_excel(){
+			//location.href= this.url;
+			window.open(this.url, '_blank');
 		}
 		
 		estado_proyecto() {

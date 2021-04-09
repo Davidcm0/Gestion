@@ -27,7 +27,7 @@
 				<button type="button" id="volverGestion"
 					onclick="window.history.back()">Volver</button>
 				<button type="button" id="crearProyecto"
-					onclick="mostrarProyectos()" class="btn btn-success">Ocultar
+					onclick="mostrarProyectos()" class="btn btn-primary">Ocultar
 					proyectos</button>
 
 				<!-- ko {if: $root.usuario != "admin"} -->
@@ -79,6 +79,7 @@
 						class="card-text" data-bind="html : lenguaje"></label></br> Fecha: <label
 						class="card-text" data-bind="html : fecha"></label></br> Estado: <label
 						class="card-text" data-bind="html : estado"></label></br>
+						
 
 
 					<!-- ko if: proyecto.proyecto_enviado == true -->
@@ -91,13 +92,13 @@
 					<div class="row">
 						<div class="col">
 							<button type="button" data-bind="click:$root.explorador"
-								id="explorador" class="btn btn-outline-success">Cargar
+								id="explorador" class="btn btn-primary">Cargar
 								proyecto</button>
 							</br> </br>
 						</div>
 						<div class="col">
 							<button type="button" data-bind="click: enviar" id="enviar"
-								class="btn btn-outline-success">Enviar Proyecto</button>
+								class="btn btn-primary">Enviar Proyecto</button>
 							</br>
 						</div>
 					</div>
@@ -114,7 +115,7 @@
 						-->
 					<!-- Button trigger modal -->
 					<button type="button" data-bind="click: info"
-						class="btn btn-outline-success" data-toggle="modal"
+						class="btn btn-primary" data-toggle="modal"
 						data-target="#exampleModal">Editar proyecto</button>
 
 
@@ -126,15 +127,19 @@
 					</br>
 					<!-- ko if: proyecto.estado == "En preparación" && proyecto.proyecto_enviado == true && $root.usuario !="admin" -->
 					<button type="button" data-bind="click: terminar" id="explorador"
-						class="btn btn-outline-success">Terminar proyecto</button>
+						class="btn btn-primary">Terminar proyecto</button>
 					</br>
 					<!-- /ko -->
 
 					<!-- ko if: proyecto.estado === "Medido" && $root.usuario !="admin" -->
 
 					<button type="button" data-bind="click: resultados" id="explorador"
-						class="btn btn-outline-success" data-toggle="modal"
+						class="btn btn-primary" data-toggle="modal"
 						data-target="#exampleModal2">Ver resultados</button>
+						</br>
+						</br>
+						<button type="button" data-bind="click: url_excel"
+						class="btn btn-primary" target="_blank">Ver excel detallado</button>
 
 					<!-- /ko -->
 
@@ -208,6 +213,11 @@
 										<option>En preparacion</option>
 									</select>
 								</div>
+								</br>
+								<div>
+									<input id="url" required="required" type="text"
+										placeholder="URL excel" />
+								</div>
 
 								<!-- /ko -->
 
@@ -215,10 +225,10 @@
 							<p>
 					</div>
 					<div class="modal-footer">
-						<button type="button" class="btn btn-outline-secondary"
+						<button type="button" class="btn btn-primary"
 							data-dismiss="modal"
 							onclick="window.location.href='proyectos.html'">Cerrar</button>
-						<button type="button" class="btn btn-outline-success"
+						<button type="button" class="btn btn-primary"
 							data-dismiss="modal" data-bind="click: $root.modificar">Guardar
 							cambios</button>
 					</div>
@@ -310,10 +320,10 @@
 						<p>
 					</div>
 					<div class="modal-footer">
-						<button type="button" class="btn btn-outline-secondary"
+						<button type="button" class="btn btn-primary"
 							data-dismiss="modal"
 							onclick="window.location.href='proyectos.html'">Cerrar</button>
-						<button type="button" class="btn btn-outline-success"
+						<button type="button" class="btn btn-primary"
 							data-dismiss="modal" data-bind="click: $root.excel">Guardar
 							como excel</button>
 					</div>

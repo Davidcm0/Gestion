@@ -17,11 +17,10 @@ public class proyecto {
 	private String nombre;
 	private String estado;
 	private Boolean proyecto_enviado;
-
-	
+	private String url;
 
 	public proyecto(Date fecha, String nombre, String descripcion, int DUT, int repeticiones, String lenguaje,
-			String user, String email_user,String estado, boolean proyecto_enviado) {
+			String user, String email_user, String estado, boolean proyecto_enviado, String url) {
 		this.fecha = fecha;
 		this.nombre = nombre;
 		this.descripcion = descripcion;
@@ -32,6 +31,7 @@ public class proyecto {
 		this.email_user = email_user;
 		this.estado = estado;
 		this.proyecto_enviado = proyecto_enviado;
+		this.url = url;
 	}
 
 	public String getNombre() {
@@ -81,7 +81,7 @@ public class proyecto {
 	public void setUser(String user) {
 		this.user = user;
 	}
-	
+
 	public String getEmail_user() {
 		return email_user;
 	}
@@ -105,13 +105,21 @@ public class proyecto {
 	public void setEstado(String estado) {
 		this.estado = estado;
 	}
-	
+
 	public Boolean getProyecto_enviado() {
 		return proyecto_enviado;
 	}
 
 	public void setProyecto_enviado(Boolean proyecto_enviado) {
 		this.proyecto_enviado = proyecto_enviado;
+	}
+	
+	public String getUrl() {
+		return url;
+	}
+
+	public void setUrl(String url) {
+		this.url = url;
 	}
 
 	public JSONObject toJSON() {
@@ -126,6 +134,7 @@ public class proyecto {
 		jso.put("email_user", this.getEmail_user());
 		jso.put("estado", this.getEstado());
 		jso.put("proyecto_enviado", this.getProyecto_enviado());
+		jso.put("url", this.getUrl());
 		return jso;
 	}
 

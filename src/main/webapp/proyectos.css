@@ -253,7 +253,7 @@ background-color: grey;
   text-align: center;
   padding: 10px;
   outline: none;
-  background: #303d30;
+  background: #D3EBF9;
   color: black;
   border-radius: 18px;
   transition: 0.25s;
@@ -275,13 +275,12 @@ background-color: grey;
   opacity:0.9;
   width:24%;  
   border:5px;
-  background: none;
   font-size: 15px;
   margin: 5px;
   text-align: center;
   padding: 10px;
   outline: none;
-  background: #1fce36;
+  background: #028EDE;
   color: black;
   border-radius: 14px;
   transition: 0.25s;
@@ -291,7 +290,7 @@ background-color: grey;
 }
 
 #crearProyecto:hover{
-  background: #18a52b;
+  background: #005E93;
   color: whitesmoke;
   transform: scale(0.9);
 }

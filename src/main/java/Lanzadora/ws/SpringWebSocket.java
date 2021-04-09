@@ -56,7 +56,7 @@ public class SpringWebSocket extends TextWebSocketHandler {
 
 		case "terminar":
 			String terminar = "terminar";
-			Manager.get().actualizar_estado(jso.getString("proyecto"), terminar);
+			Manager.get().actualizar_estado(jso.getString("proyecto"), terminar,"");
 			break;
 
 		case "resultados":
@@ -81,7 +81,7 @@ public class SpringWebSocket extends TextWebSocketHandler {
 			break;
 
 		case "estado":
-			Manager.get().actualizar_estado(jso.getString("proyecto"), jso.getString("estado"));
+			Manager.get().actualizar_estado(jso.getString("proyecto"), jso.getString("estado"), jso.getString("url"));
 			break;
 
 		case "validacion":
