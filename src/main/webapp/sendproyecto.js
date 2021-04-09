@@ -81,9 +81,15 @@ function ViewModel() {
 			for (var i = 0; i < proyectos.length; i++) {
 				var proyecto = proyectos[i];
 					self.listaproyectos.push(new Proyecto(proyecto.Nombre, proyecto.Descripcion, proyecto.Autor, proyecto.email_user, proyecto.Fecha, proyecto.DUT, proyecto.Repeticiones, proyecto.Lenguaje, proyecto.estado, proyecto.proyecto_enviado));
-				
+					
 				
 
+			}
+			for(var i = 0; i < proyectos.length; i++){
+				var proyecto = proyectos[i];
+				if(proyecto.estado == "Medido"){
+					document.getElementsByClassName("cards")[0].children[i].style.backgroundColor = "springgreen";
+				}
 			}
 			
 			for (var j = 0; j < proyectos.length; j++) {
@@ -283,7 +289,7 @@ function ViewModel() {
 
 			// Cursor
 			chart.cursor = new am4charts.XYCursor();
-			
+			chart.exporting.menu = new am4core.ExportMenu();
 			
 			//////////////////////////////grafica 2
 			
@@ -509,6 +515,8 @@ function ViewModel() {
 			    dummyDataItem.slice.tooltipText = undefined;
 			})
 			
+			container.exporting.menu = new am4core.ExportMenu();
+			
 			/////////grafica 3
 			
 			// Themes begin
@@ -560,6 +568,7 @@ function ViewModel() {
 			bullet1.label.fill = am4core.color("#ffffff");
 
 			chart.maxLevels = 2;
+			chart.exporting.menu = new am4core.ExportMenu();
 
 			}); // end am4core.ready()
 		

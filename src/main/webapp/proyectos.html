@@ -62,7 +62,10 @@
 	<div id="koGestion">
 		<div class="cards">
 			<!-- ko foreach : { data: listaproyectos, as :"proyecto" } -->
-			<div class="card" style="width: 18rem; max-width: 18rem;">
+			<!-- en prepatacion = gris claro, terminado = azulito, validado = rosita, medido = verdecito -->
+			
+			<div class="card" style="width: 18rem; max-width: 18rem; background-color: gainsboro;">
+			
 				<div class="card-body">
 					<h4 class="card-title" data-bind="html : nombre"></h4>
 					<h6 class="card-subtitle mb-2 text-muted" data-bind="html : autor"></h6>
@@ -363,6 +366,14 @@
 
 
 	<script type="text/javascript">
+	var projects = document.getElementsByClassName("cards");
+	for(var i = 0; this.vm.listaproyectos.length; i ++){
+		if(this.vm.listaproyectos[i].estado == "En preparación"){
+			document.getElementsByClassName("cards")[0].children[i].style.backgroundColor = "green";
+		}
+	}
+	
+	
 		function mostrarProyectos() {
 			var proyectos = document.getElementsByClassName("cards");
 			var grafica = document.getElementById("chartdiv");
@@ -393,6 +404,7 @@
 	</script>
 </body>
 <style>
+
 #chartdiv {
   width: 100%;
   height: 500px;
