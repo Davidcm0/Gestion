@@ -219,12 +219,13 @@ function ViewModel() {
 			var chart = document.getElementById("chartdiv");
 			var chart2 = document.getElementById("chartdiv2");
 			var chart3 = document.getElementById("chartdiv3");
-			
+			var cha = document.getElementById("cha");
 			var boxes = document.getElementById("boxes");
 			boxes.style.display = "none";
 			chart.style.display = "flex";
 			chart2.style.display = "flex";
 			chart3.style.display = "flex";
+			cha.style.display = "flex";
 			
 			// var boton = document.getElementsByClassName("elegirProyecto");
 			// boton[0].style.display = "flex";

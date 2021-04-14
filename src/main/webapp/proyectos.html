@@ -25,14 +25,14 @@
 			<div id ="bot" class="col-md-6">
 			
 				<button type="button" id="volverGestion"
-					onclick="window.history.back()">Volver</button>
+					onclick="window.history.back()">Back</button>
 				<button type="button" id="crearProyecto"
-					onclick="mostrarProyectos()" class="btn btn-primary">Ocultar
-					proyectos</button>
+					onclick="mostrarProyectos()" class="btn btn-primary">Hide
+					projects</button>
 
 				<!-- ko {if: $root.usuario != "admin"} -->
 				<button type="button" id="crearProyecto"
-					onclick="window.location.href='form.html'">Crear proyecto</button>
+					onclick="window.location.href='form.html'">Create project</button>
 				<div id="boxes"  style="display: none">
 				<!-- ko foreach : { data: listaproyectos, as :"proyecto" } -->
 				<div  class="form-check" >
@@ -41,14 +41,14 @@
 						for="flexCheckDefault" data-bind="html : nombre"> </label>
 				</div>
 				<!-- /ko -->
-				<button type="button" id="crearProyecto" data-bind="click: $root.compararPro" style="margin-right: 75%;">Comparar proyectos</button>
+				<button type="button" id="crearProyecto" data-bind="click: $root.compararPro" style="margin-right: 75%;">Compare projects</button>
 				</div>
-				<button class="elegirProyecto" type="button" id="crearProyecto" onclick="Comparar()">Elige proyectos a comparar</button>
+				<button class="elegirProyecto" type="button" id="crearProyecto" onclick="Comparar()">Choose projects to compare</button>
 				<!-- /ko -->
 				<!-- ko {if: $root.usuario === "admin"} -->
 				<button type="button" id="crearProyecto"
-					onclick="window.location.href='validar.html'">Validar
-					usuarios</button>
+					onclick="window.location.href='validar.html'">Validate
+					users</button>
 				<!-- /ko -->
 
 
@@ -69,36 +69,36 @@
 				<div class="card-body">
 					<h4 class="card-title" data-bind="html : nombre"></h4>
 					<h6 class="card-subtitle mb-2 text-muted" data-bind="html : autor"></h6>
-					Descripción: <label class="card-text"
+					Description: <label class="card-text"
 						data-bind="html : descripcion"></label></br>
 					<!--   Autor: <label
 						class="card-text" data-bind="html : autor"></label></br>-->
 					DUT: <label class="card-text" data-bind="html : dut"></label></br>
-					Repeticiones: <label class="card-text"
-						data-bind="html : repeticiones"></label></br> Lenguaje: <label
-						class="card-text" data-bind="html : lenguaje"></label></br> Fecha: <label
-						class="card-text" data-bind="html : fecha"></label></br> Estado: <label
+					Repetitions: <label class="card-text"
+						data-bind="html : repeticiones"></label></br> Language: <label
+						class="card-text" data-bind="html : lenguaje"></label></br> Date: <label
+						class="card-text" data-bind="html : fecha"></label></br> State: <label
 						class="card-text" data-bind="html : estado"></label></br>
 						
 
 
 					<!-- ko if: proyecto.proyecto_enviado == true -->
-					<b>Proyecto enviado</b>
+					<b>Project sent</b>
 					<!-- /ko -->
 					<!-- ko if: proyecto.proyecto_enviado == false -->
-					<b>Proyecto no enviado</b>
+					<b>project not sent</b>
 					<!-- /ko -->
 					<!-- ko if: proyecto.estado == "En preparación" && proyecto.proyecto_enviado == false && $root.usuario !="admin"-->
 					<div class="row">
 						<div class="col">
 							<button type="button" data-bind="click:$root.explorador"
-								id="explorador" class="btn btn-primary">Cargar
-								proyecto</button>
+								id="explorador" class="btn btn-primary">Load
+								project</button>
 							</br> </br>
 						</div>
 						<div class="col">
 							<button type="button" data-bind="click: enviar" id="enviar"
-								class="btn btn-primary">Enviar Proyecto</button>
+								class="btn btn-primary">Send project</button>
 							</br>
 						</div>
 					</div>
@@ -116,7 +116,7 @@
 					<!-- Button trigger modal -->
 					<button type="button" data-bind="click: info"
 						class="btn btn-primary" data-toggle="modal"
-						data-target="#exampleModal">Editar proyecto</button>
+						data-target="#exampleModal">Edit project</button>
 
 
 
@@ -127,7 +127,7 @@
 					</br>
 					<!-- ko if: proyecto.estado == "En preparación" && proyecto.proyecto_enviado == true && $root.usuario !="admin" -->
 					<button type="button" data-bind="click: terminar" id="explorador"
-						class="btn btn-primary">Terminar proyecto</button>
+						class="btn btn-primary">Finish project</button>
 					</br>
 					<!-- /ko -->
 
@@ -135,11 +135,11 @@
 
 					<button type="button" data-bind="click: resultados" id="explorador"
 						class="btn btn-primary" data-toggle="modal"
-						data-target="#exampleModal2">Ver resultados</button>
+						data-target="#exampleModal2">See results</button>
 						</br>
 						</br>
 						<button type="button" data-bind="click: url_excel"
-						class="btn btn-primary" target="_blank">Ver excel detallado</button>
+						class="btn btn-primary" target="_blank">see detailed excel</button>
 
 					<!-- /ko -->
 
@@ -151,6 +151,14 @@
 		</div>
 		<div id="chartdiv" style="display: none"></div>
 		</br>
+		 <div id="cha" class="row" style="width: inherit; display: none;">
+		 	<div class="col-md-6">
+		 	<label  style="padding-left: 40%; color:bisque">All characteristics</label>
+		 	</div>
+		 	<div class="col-md-6">
+		 	<label style="padding-left: 35%; color:black">Characteristics to compare</label>
+		 	</div>
+		</div>
 		<div id="chartdiv2" style="display: none"></div>
 		</br>
 		<div id="chartdiv3" style="display: none"></div>
@@ -161,8 +169,7 @@
 			<div class="modal-dialog">
 				<div class="modal-content">
 					<div class="modal-header">
-						<h5 class="modal-title" id="exampleModalLabel">Modificacion
-							proyecto</h5>
+						<h5 class="modal-title" id="exampleModalLabel">Project modification</h5>
 						<button type="button" class="close" data-dismiss="modal"
 							aria-label="Close"
 							onclick="window.location.href='proyectos.html'">
@@ -171,7 +178,7 @@
 					</div>
 					<div class="modal-body">
 						<!-- AQUI METO EL CODIGO -->
-						<h1 id="nombrepro">Modificar proyecto</h1>
+						<h1 id="nombrepro">Modify project</h1>
 						<p>
 						<form>
 							<div id="container" class="form">
@@ -179,12 +186,12 @@
 								<!-- ko {if: $root.usuario != "admin"} -->
 								<div>
 									<input id="nombreProyecto" name="nombre" required="required"
-										type="text" placeholder="Nombre proyecto" />
+										type="text" placeholder="Project name" />
 								</div>
 
 								<div>
 									<textarea id="descripcion" required="required"
-										placeholder="descripción"></textarea>
+										placeholder="description"></textarea>
 								</div>
 								<div>
 									<input id="dut" required="required" type="number"
@@ -192,10 +199,10 @@
 								</div>
 								<div>
 									<input id="repeticiones" required="required" type="number"
-										placeholder="repeticiones" />
+										placeholder="repetitions" />
 								</div>
 								<div>
-									<label for="inputState">Lenguaje</label> <select id="lenguaje"
+									<label for="inputState">Language</label> <select id="lenguaje"
 										class="form-control">
 										<option selected>Elige...</option>
 										<option>Java</option>
@@ -205,7 +212,7 @@
 								<!-- /ko -->
 								<!-- ko {if: $root.usuario === "admin"} -->
 								<div>
-									<label for="inputState">Cambiar estado:</label> <select
+									<label for="inputState">Change state:</label> <select
 										id="Estado" class="form-control">
 										<option selected>Elige...</option>
 										<option>Validado</option>
@@ -227,10 +234,10 @@
 					<div class="modal-footer">
 						<button type="button" class="btn btn-primary"
 							data-dismiss="modal"
-							onclick="window.location.href='proyectos.html'">Cerrar</button>
+							onclick="window.location.href='proyectos.html'">Close</button>
 						<button type="button" class="btn btn-primary"
-							data-dismiss="modal" data-bind="click: $root.modificar">Guardar
-							cambios</button>
+							data-dismiss="modal" data-bind="click: $root.modificar">Save
+							changes</button>
 					</div>
 				</div>
 			</div>
@@ -242,7 +249,7 @@
 			<div class="modal-dialog" style="max-width: 50%;">
 				<div class="modal-content">
 					<div class="modal-header">
-						<h5 class="modal-title" id="exampleModalLabel">Resultados</h5>
+						<h5 class="modal-title" id="exampleModalLabel">Results</h5>
 						<button type="button" class="close" data-dismiss="modal"
 							aria-label="Close"
 							onclick="window.location.href='proyectos.html'">
@@ -265,7 +272,7 @@
 									<th>Q3</th>
 								</tr>
 								<tr>
-									<th>Tiempo (s)<img src="https://img.icons8.com/material-outlined/24/000000/time.png"/></th>
+									<th>Time (s)<img src="https://img.icons8.com/material-outlined/24/000000/time.png"/></th>
 									<td id="timeMin"></td>
 									<td id="timeMax"></td>
 									<td id="timeMedia"></td>
@@ -281,7 +288,7 @@
 									<td id="HDDQ3"></td>
 								</tr>
 								<tr>
-									<th>Gráfica (w)<img src="https://img.icons8.com/wired/32/000000/video-card.png"/></th>
+									<th>Graph (w)<img src="https://img.icons8.com/wired/32/000000/video-card.png"/></th>
 									<td id="GraphsMin"></td>
 									<td id="GraphsMax"></td>
 									<td id="GraphsMedia"></td>
@@ -289,7 +296,7 @@
 									<td id="GraphsQ3"></td>
 								</tr>
 								<tr>
-									<th>Procesador (w)<img src="https://img.icons8.com/wired/32/000000/processor.png"/></th>
+									<th>Processor (w)<img src="https://img.icons8.com/wired/32/000000/processor.png"/></th>
 									<td id="ProcesadorMin"></td>
 									<td id="ProcesadorMax"></td>
 									<td id="ProcesadorMedia"></td>
@@ -322,10 +329,9 @@
 					<div class="modal-footer">
 						<button type="button" class="btn btn-primary"
 							data-dismiss="modal"
-							onclick="window.location.href='proyectos.html'">Cerrar</button>
+							onclick="window.location.href='proyectos.html'">Close</button>
 						<button type="button" class="btn btn-primary"
-							data-dismiss="modal" data-bind="click: $root.excel">Guardar
-							como excel</button>
+							data-dismiss="modal" data-bind="click: $root.excel">Save as excel</button>
 					</div>
 				</div>
 			</div>
