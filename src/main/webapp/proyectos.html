@@ -19,31 +19,41 @@
 		class="col-md-6 col-sm-8 col-xl-6 col-lg-4 boxHeaderGestion"
 		style="height: 25%;">
 		<div class="row">
-			<div class="col-md-6">
+			<div class="col-md-4">
 				<h1></h1>
 			</div>
-			<div id ="bot" class="col-md-6">
-			
+			<div id="bot" class="col-md-8">
+
 				<button type="button" id="volverGestion"
 					onclick="window.history.back()">Back</button>
 				<button type="button" id="crearProyecto"
 					onclick="mostrarProyectos()" class="btn btn-primary">Hide
 					projects</button>
+				<button type="button" id="crearProyecto" onclick="buscar()"
+					class="btn btn-primary">Search</button>
+				<input id="search" type="text" placeholder="Search" />
 
 				<!-- ko {if: $root.usuario != "admin"} -->
-				<button type="button" id="crearProyecto"
+				<button type="button" id="crearProyect" class="btn btn-primary"
 					onclick="window.location.href='form.html'">Create project</button>
-				<div id="boxes"  style="display: none">
-				<!-- ko foreach : { data: listaproyectos, as :"proyecto" } -->
-				<div  class="form-check" >
-					<input class="form-check-input" type="checkbox" value=""
-						id="flexCheckDefault"> <label class="form-check-label"
-						for="flexCheckDefault" data-bind="html : nombre"> </label>
+				<div id="boxes" style="display: none">
+					
+					<button type="button" id="crearProyecto"
+						data-bind="click: $root.compararPro" style="margin-right: 75%;">Compare
+						projects</button>
+						<div id="elecciones">
+						<!-- ko foreach : { data: listaproyectos, as :"proyecto" } -->
+					<div class="form-check">
+						<input class="form-check-input" type="checkbox" value=""
+							id="flexCheckDefault"> <label class="form-check-label"
+							for="flexCheckDefault" data-bind="html : nombre"> </label>
+					</div>
+					<!-- /ko -->
+					</div>
 				</div>
-				<!-- /ko -->
-				<button type="button" id="crearProyecto" data-bind="click: $root.compararPro" style="margin-right: 75%;">Compare projects</button>
-				</div>
-				<button class="elegirProyecto" type="button" id="crearProyecto" onclick="Comparar()">Choose projects to compare</button>
+				<button class="elegirProyecto" type="button" id="crearProyecto"
+					onclick="Comparar()" style="margin-right: 47%;">Choose
+					projects to compare</button>
 				<!-- /ko -->
 				<!-- ko {if: $root.usuario === "admin"} -->
 				<button type="button" id="crearProyecto"
@@ -63,11 +73,16 @@
 		<div class="cards">
 			<!-- ko foreach : { data: listaproyectos, as :"proyecto" } -->
 			<!-- en prepatacion = gris claro, terminado = azulito, validado = rosita, medido = verdecito -->
-			
-			<div class="card" style="width: 18rem; max-width: 18rem; background-color: gainsboro;">
-			
+
+			<div class="card"
+				style="width: 18rem; max-width: 18rem; background-color: gainsboro;">
+
 				<div class="card-body">
-					<h4 class="card-title" data-bind="html : nombre"></h4>
+				<div id="titulo" >
+				<div id="titNombre" >
+					<h4 class="card-title" data-bind="html : nombre"></h4></div> <div id="circulo" ></div>
+					
+					</div>
 					<h6 class="card-subtitle mb-2 text-muted" data-bind="html : autor"></h6>
 					Description: <label class="card-text"
 						data-bind="html : descripcion"></label></br>
@@ -79,7 +94,7 @@
 						class="card-text" data-bind="html : lenguaje"></label></br> Date: <label
 						class="card-text" data-bind="html : fecha"></label></br> State: <label
 						class="card-text" data-bind="html : estado"></label></br>
-						
+
 
 
 					<!-- ko if: proyecto.proyecto_enviado == true -->
@@ -92,8 +107,7 @@
 					<div class="row">
 						<div class="col">
 							<button type="button" data-bind="click:$root.explorador"
-								id="explorador" class="btn btn-primary">Load
-								project</button>
+								id="explorador" class="btn btn-primary">Load project</button>
 							</br> </br>
 						</div>
 						<div class="col">
@@ -136,10 +150,10 @@
 					<button type="button" data-bind="click: resultados" id="explorador"
 						class="btn btn-primary" data-toggle="modal"
 						data-target="#exampleModal2">See results</button>
-						</br>
-						</br>
-						<button type="button" data-bind="click: url_excel"
-						class="btn btn-primary" target="_blank">see detailed excel</button>
+					</br> </br>
+					<button type="button" data-bind="click: url_excel"
+						class="btn btn-primary" target="_blank">see detailed
+						excel</button>
 
 					<!-- /ko -->
 
@@ -151,25 +165,28 @@
 		</div>
 		<div id="chartdiv" style="display: none"></div>
 		</br>
-		 <div id="cha" class="row" style="width: inherit; display: none;">
-		 	<div class="col-md-6">
-		 	<label  style="padding-left: 40%; color:bisque">All characteristics</label>
-		 	</div>
-		 	<div class="col-md-6">
-		 	<label style="padding-left: 35%; color:black">Characteristics to compare</label>
-		 	</div>
+		<div id="cha" class="row" style="width: inherit; display: none;">
+			<div class="col-md-6">
+				<label style="padding-left: 40%; color: bisque">All
+					characteristics</label>
+			</div>
+			<div class="col-md-6">
+				<label style="padding-left: 35%; color: black">Characteristics
+					to compare</label>
+			</div>
 		</div>
 		<div id="chartdiv2" style="display: none"></div>
 		</br>
 		<div id="chartdiv3" style="display: none"></div>
-		
+
 		<!-- Modal Editar-->
 		<div class="modal fade" id="exampleModal" tabindex="-1"
 			aria-labelledby="exampleModalLabel" aria-hidden="true">
 			<div class="modal-dialog">
 				<div class="modal-content">
 					<div class="modal-header">
-						<h5 class="modal-title" id="exampleModalLabel">Project modification</h5>
+						<h5 class="modal-title" id="exampleModalLabel">Project
+							modification</h5>
 						<button type="button" class="close" data-dismiss="modal"
 							aria-label="Close"
 							onclick="window.location.href='proyectos.html'">
@@ -232,12 +249,10 @@
 							<p>
 					</div>
 					<div class="modal-footer">
-						<button type="button" class="btn btn-primary"
-							data-dismiss="modal"
+						<button type="button" class="btn btn-primary" data-dismiss="modal"
 							onclick="window.location.href='proyectos.html'">Close</button>
-						<button type="button" class="btn btn-primary"
-							data-dismiss="modal" data-bind="click: $root.modificar">Save
-							changes</button>
+						<button type="button" class="btn btn-primary" data-dismiss="modal"
+							data-bind="click: $root.modificar">Save changes</button>
 					</div>
 				</div>
 			</div>
@@ -272,7 +287,8 @@
 									<th>Q3</th>
 								</tr>
 								<tr>
-									<th>Time (s)<img src="https://img.icons8.com/material-outlined/24/000000/time.png"/></th>
+									<th>Time (s)<img
+										src="https://img.icons8.com/material-outlined/24/000000/time.png" /></th>
 									<td id="timeMin"></td>
 									<td id="timeMax"></td>
 									<td id="timeMedia"></td>
@@ -280,7 +296,8 @@
 									<td id="timeQ3"></td>
 								</tr>
 								<tr>
-									<th>HDD (w)<img src="https://img.icons8.com/metro/26/000000/hdd.png"/></th>
+									<th>HDD (w)<img
+										src="https://img.icons8.com/metro/26/000000/hdd.png" /></th>
 									<td id="HDDMin"></td>
 									<td id="HDDMax"></td>
 									<td id="HDDMedia"></td>
@@ -288,7 +305,8 @@
 									<td id="HDDQ3"></td>
 								</tr>
 								<tr>
-									<th>Graph (w)<img src="https://img.icons8.com/wired/32/000000/video-card.png"/></th>
+									<th>Graph (w)<img
+										src="https://img.icons8.com/wired/32/000000/video-card.png" /></th>
 									<td id="GraphsMin"></td>
 									<td id="GraphsMax"></td>
 									<td id="GraphsMedia"></td>
@@ -296,7 +314,8 @@
 									<td id="GraphsQ3"></td>
 								</tr>
 								<tr>
-									<th>Processor (w)<img src="https://img.icons8.com/wired/32/000000/processor.png"/></th>
+									<th>Processor (w)<img
+										src="https://img.icons8.com/wired/32/000000/processor.png" /></th>
 									<td id="ProcesadorMin"></td>
 									<td id="ProcesadorMax"></td>
 									<td id="ProcesadorMedia"></td>
@@ -304,7 +323,8 @@
 									<td id="ProcesadorQ3"></td>
 								</tr>
 								<tr>
-									<th>Monitor (w)<img src="https://img.icons8.com/pastel-glyph/32/000000/monitor.png"/></th>
+									<th>Monitor (w)<img
+										src="https://img.icons8.com/pastel-glyph/32/000000/monitor.png" /></th>
 									<td id="MonitorMin"></td>
 									<td id="MonitorMax"></td>
 									<td id="MonitorMedia"></td>
@@ -327,11 +347,10 @@
 						<p>
 					</div>
 					<div class="modal-footer">
-						<button type="button" class="btn btn-primary"
-							data-dismiss="modal"
+						<button type="button" class="btn btn-primary" data-dismiss="modal"
 							onclick="window.location.href='proyectos.html'">Close</button>
-						<button type="button" class="btn btn-primary"
-							data-dismiss="modal" data-bind="click: $root.excel">Save as excel</button>
+						<button type="button" class="btn btn-primary" data-dismiss="modal"
+							data-bind="click: $root.excel">Save as excel</button>
 					</div>
 				</div>
 			</div>
@@ -371,25 +390,37 @@
 
 	<script src="sendproyecto.js"></script>
 	<script src="explorador.js"></script>
-	
-	<!-- Resources -->
-<script src="https://cdn.amcharts.com/lib/4/core.js"></script>
-<script src="https://cdn.amcharts.com/lib/4/charts.js"></script>
-<script src="https://cdn.amcharts.com/lib/4/themes/animated.js"></script>
 
-<script src="https://cdn.emailjs.com/dist/email.min.js" type="text/javascript"></script>
+	<!-- Resources -->
+	<script src="https://cdn.amcharts.com/lib/4/core.js"></script>
+	<script src="https://cdn.amcharts.com/lib/4/charts.js"></script>
+	<script src="https://cdn.amcharts.com/lib/4/themes/animated.js"></script>
+
+	<script src="https://cdn.emailjs.com/dist/email.min.js"
+		type="text/javascript"></script>
 
 
 
 	<script type="text/javascript">
-	var projects = document.getElementsByClassName("cards");
-	for(var i = 0; this.vm.listaproyectos.length; i ++){
-		if(this.vm.listaproyectos[i].estado == "En preparación"){
-			document.getElementsByClassName("cards")[0].children[i].style.backgroundColor = "green";
+		
+
+		function buscar() {
+			var filtro = document.getElementById("search").value;
+			var projects = document.getElementsByClassName("cards");
+
+			for (var i = 0; i < projects[0].children.length; i++) {
+				var esta = projects[0].children[i].innerText.indexOf(filtro);
+				if (esta < 0) {
+					projects[0].children[i].style.display = "none";
+				}
+			}
+
+			if (filtro == "") {
+				location.reload();
+			}
+
 		}
-	}
-	
-	
+
 		function mostrarProyectos() {
 			var proyectos = document.getElementsByClassName("cards");
 			var grafica = document.getElementById("chartdiv");
@@ -404,11 +435,13 @@
 
 		function Comparar() {
 			var boxes = document.getElementById("boxes");
+			var crearPro = document.getElementById("crearProyect");
 			var cards = document.getElementsByClassName("cards");
 			var header = document.getElementById("headerr");
 			var headerHeight = header.style.height;
 			//header.style.height = "25%";
 			boxes.style.display = "initial";
+			crearPro.style.display = "none";
 			var bot = document.getElementById("bot");
 			//var aux = bot.stlyle.height;
 			//var height = aux + headerHeight;
@@ -420,31 +453,33 @@
 	</script>
 </body>
 <style>
-
 #chartdiv {
-  width: 100%;
-  height: 500px;
-}
-th{
-background: darkseagreen;
-border: outset;
+	width: 100%;
+	height: 500px;
 }
 
-td{
-border: outset;
+th {
+	background: darkseagreen;
+	border: outset;
+}
+
+td {
+	border: outset;
 }
 
 #chartdiv2 {
-  width: 100%;
-  height: 500px;
-  }
+	width: 100%;
+	height: 500px;
+}
+
 #chartdiv3 {
-  width: 100%;
-  height: 500px;
-  }
-  #chartdiv4 {
-  width: 100%;
-  height: 500px;
-  }
+	width: 100%;
+	height: 500px;
+}
+
+#chartdiv4 {
+	width: 100%;
+	height: 500px;
+}
 </style>
 </html>

@@ -6,7 +6,7 @@ body{
   margin: 0;
   padding: 0;
   font-family: sans-serif;
-  background-image: url(fondo2.png);
+  background-color: dimgrey;
   
   background-size: cover;
 }
@@ -321,6 +321,7 @@ background-color: grey;
 	opacity:0.9;
 	margin-bottom: 30px;
 	border-radius:30px;
+	min-width: fit-content;
 }
 
 h2, p{
@@ -380,3 +381,23 @@ table {
 .btn {
 	border-radius: 12px;
 }
+
+#circulo{
+   height:25px;
+   width:25px;
+   background:white;
+   -moz-border-radius:50px;
+   -webkit-border-radius:50px;
+   border-radius:50px;
+   float:left;
+}
+
+#titulo{
+   overflow:hidden;
+}
+ 
+#titNombre{
+   float: left;
+   margin-right: 3%;
+}
+ 

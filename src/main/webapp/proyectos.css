@@ -286,7 +286,7 @@ background-color: grey;
   transition: 0.25s;
   cursor: pointer;
   display: inline;
-  float: right;
+  
 }
 
 #crearProyecto:hover{

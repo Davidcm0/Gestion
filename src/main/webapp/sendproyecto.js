@@ -88,7 +88,17 @@ function ViewModel() {
 			for(var i = 0; i < proyectos.length; i++){
 				var proyecto = proyectos[i];
 				if(proyecto.estado == "Medido"){
-					document.getElementsByClassName("cards")[0].children[i].style.backgroundColor = "springgreen";
+					document.getElementsByClassName("cards")[0].children[i].children[0].children[0].children[1].style.backgroundColor = "springgreen";
+					//document.getElementsByClassName("cards")[0].children[i].children[0].children[0].children[1].style.backgroundColor = "springgreen";​
+				}
+				if(proyecto.estado == "Terminado"){
+					document.getElementsByClassName("cards")[0].children[i].children[0].children[0].children[1].style.backgroundColor = "darkkhaki";
+					
+				}
+				if(proyecto.estado == "Validado"){
+					document.getElementsByClassName("cards")[0].children[i].children[0].children[0].children[1].style.backgroundColor = "aqua";
+					
+					
 				}
 			}
 			
