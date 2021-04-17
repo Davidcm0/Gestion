@@ -80,7 +80,7 @@ function ViewModel() {
 		if(proyectos != null){
 			for (var i = 0; i < proyectos.length; i++) {
 				var proyecto = proyectos[i];
-					self.listaproyectos.push(new Proyecto(proyecto.Nombre, proyecto.Descripcion, proyecto.Autor, proyecto.email_user, proyecto.Fecha, proyecto.DUT, proyecto.Repeticiones, proyecto.Lenguaje, proyecto.estado, proyecto.proyecto_enviado, proyecto.url));
+					self.listaproyectos.push(new Proyecto(proyecto.Nombre, proyecto.Descripcion, proyecto.Autor, proyecto.email_user, proyecto.Fecha, proyecto.DUT, proyecto.Repeticiones, proyecto.Lenguaje, proyecto.estado, proyecto.proyecto_enviado, proyecto.url, proyecto.password));
 					
 				
 
@@ -697,6 +697,7 @@ function ViewModel() {
 					proyecto: self.nombreProyecto(),
 					estado: estado,
 					url: url,
+					password: document.getElementById("password").value,
 					success: function() {
 						location.reload();
 					}
@@ -717,7 +718,7 @@ function ViewModel() {
 
 	
 	class Proyecto {
-		constructor (nombre, descripcion, autor, email_user, fecha, dut, repeticiones, lenguaje, estado, proyecto_enviado, url) {
+		constructor (nombre, descripcion, autor, email_user, fecha, dut, repeticiones, lenguaje, estado, proyecto_enviado, url, password) {
 			this.nombre = nombre;
 			this.descripcion = descripcion;
 			this.autor = autor;
@@ -729,6 +730,7 @@ function ViewModel() {
 			this.estado = estado;
 			this.proyecto_enviado = proyecto_enviado;
 			this.url = url;
+			this.password = password;
 		}
 		
 		info() {

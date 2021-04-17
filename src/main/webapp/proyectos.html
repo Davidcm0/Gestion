@@ -26,22 +26,23 @@
 
 				<button type="button" id="volverGestion"
 					onclick="window.history.back()">Back</button>
-				<button type="button" id="crearProyecto"
+				
+					<input id="search" type="text" placeholder="Search" />
+				<button type="button" id="buscarProyectos" onclick="buscar()"
+					class="btn btn-primary">Search</button>
+				<button type="button" id="HideProyecto" class="btn btn-primary"
 					onclick="mostrarProyectos()" class="btn btn-primary">Hide
 					projects</button>
-				<button type="button" id="crearProyecto" onclick="buscar()"
-					class="btn btn-primary">Search</button>
-				<input id="search" type="text" placeholder="Search" />
 
 				<!-- ko {if: $root.usuario != "admin"} -->
 				<button type="button" id="crearProyect" class="btn btn-primary"
 					onclick="window.location.href='form.html'">Create project</button>
 				<div id="boxes" style="display: none">
 					
-					<button type="button" id="crearProyecto"
-						data-bind="click: $root.compararPro" style="margin-right: 75%;">Compare
+					<button type="button" id="compararProyecto"  class="btn btn-primary"
+						data-bind="click: $root.compararPro" style="margin-right: 35%;margin-top: 1%;">Compare
 						projects</button>
-						<div id="elecciones">
+						<div id="elecciones" style="margin-right: 55%;">
 						<!-- ko foreach : { data: listaproyectos, as :"proyecto" } -->
 					<div class="form-check">
 						<input class="form-check-input" type="checkbox" value=""
@@ -51,8 +52,8 @@
 					<!-- /ko -->
 					</div>
 				</div>
-				<button class="elegirProyecto" type="button" id="crearProyecto"
-					onclick="Comparar()" style="margin-right: 47%;">Choose
+				<button class="btn btn-primary" type="button" id="elegirProyecto" 
+					onclick="Comparar()" style="margin-right: 40%;margin-top: 1%;">Choose
 					projects to compare</button>
 				<!-- /ko -->
 				<!-- ko {if: $root.usuario === "admin"} -->
@@ -88,13 +89,17 @@
 						data-bind="html : descripcion"></label></br>
 					<!--   Autor: <label
 						class="card-text" data-bind="html : autor"></label></br>-->
+						
 					DUT: <label class="card-text" data-bind="html : dut"></label></br>
-					Repetitions: <label class="card-text"
+					Reps: <label class="card-text"
 						data-bind="html : repeticiones"></label></br> Language: <label
 						class="card-text" data-bind="html : lenguaje"></label></br> Date: <label
 						class="card-text" data-bind="html : fecha"></label></br> State: <label
 						class="card-text" data-bind="html : estado"></label></br>
-
+						<!-- ko if: proyecto.password != "" && $root.usuario !="admin" -->
+						Password: <label
+						class="card-text" data-bind="html : password"></label></br>
+						<!-- /ko -->
 
 
 					<!-- ko if: proyecto.proyecto_enviado == true -->
@@ -150,10 +155,10 @@
 					<button type="button" data-bind="click: resultados" id="explorador"
 						class="btn btn-primary" data-toggle="modal"
 						data-target="#exampleModal2">See results</button>
-					</br> </br>
+					
 					<button type="button" data-bind="click: url_excel"
 						class="btn btn-primary" target="_blank">see detailed
-						excel</button>
+						excel</button> 
 
 					<!-- /ko -->
 
@@ -171,7 +176,7 @@
 					characteristics</label>
 			</div>
 			<div class="col-md-6">
-				<label style="padding-left: 35%; color: black">Characteristics
+				<label style="padding-left: 35%; color: bisque">Characteristics
 					to compare</label>
 			</div>
 		</div>
@@ -239,8 +244,12 @@
 								</div>
 								</br>
 								<div>
-									<input id="url" required="required" type="text"
+									<input id="url"  type="text"
 										placeholder="URL excel" />
+								</div>
+								<div>
+									<input id="password"type="text"
+										placeholder="password" />
 								</div>
 
 								<!-- /ko -->
@@ -407,6 +416,11 @@
 		function buscar() {
 			var filtro = document.getElementById("search").value;
 			var projects = document.getElementsByClassName("cards");
+			for (var i = 0; i < projects[0].children.length; i++) {
+					projects[0].children[i].style.display = "flex";
+				
+			}
+			
 
 			for (var i = 0; i < projects[0].children.length; i++) {
 				var esta = projects[0].children[i].innerText.indexOf(filtro);
@@ -418,6 +432,8 @@
 			if (filtro == "") {
 				location.reload();
 			}
+			var cartas = document.getElementsByClassName("cards");
+			cartas[0].style.display = "flex";
 
 		}
 
@@ -425,7 +441,7 @@
 			var proyectos = document.getElementsByClassName("cards");
 			var grafica = document.getElementById("chartdiv");
 			if (proyectos[0].style.display == "none") {
-				proyectos[0].style.display = "flex";
+				proyectos[0].style.display = "block";
 				grafica.style.marginTop = "1%";
 			} else {
 				proyectos[0].style.display = "none";
@@ -434,6 +450,17 @@
 		}
 
 		function Comparar() {
+			var extension = document.getElementsByClassName("form-check").length;
+			var extension2 = 30;
+			if(extension > 3){
+				var aux = extension -3;
+				aux = aux*3;
+				extension2 = aux+extension2;
+			}
+			
+			var extend = extension2 + "%";
+			var extendcartas = extension2-13;
+			extendcartas = extendcartas + "%";
 			var boxes = document.getElementById("boxes");
 			var crearPro = document.getElementById("crearProyect");
 			var cards = document.getElementsByClassName("cards");
@@ -441,14 +468,14 @@
 			var headerHeight = header.style.height;
 			//header.style.height = "25%";
 			boxes.style.display = "initial";
-			crearPro.style.display = "none";
+			//crearPro.style.display = "none";
 			var bot = document.getElementById("bot");
 			//var aux = bot.stlyle.height;
 			//var height = aux + headerHeight;
-			header.style.height = "30%";
-			cards[0].style.marginTop = "17%";
-			var boton = document.getElementsByClassName("elegirProyecto");
-			boton[0].style.display = "none";
+			header.style.height = extend;
+			cards[0].style.marginTop = extendcartas;
+			var boton = document.getElementById("elegirProyecto");
+			boton.style.display = "none";
 		}
 	</script>
 </body>

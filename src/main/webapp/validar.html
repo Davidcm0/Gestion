@@ -14,7 +14,14 @@
 <link rel="stylesheet" href="admin.css">
 
 </head>
+
+					
 <body>
+<!-- ko if: $root.usuario !="admin" -->
+
+You are not an admin!
+<!-- /ko -->
+<!-- ko if: $root.usuario =="admin" -->
 	<div class="col-md-6 col-sm-8 col-xl-6 col-lg-4 boxHeaderGestion">
 		<button type="button" id="volverGestion"
 			onclick="window.history.back()">Back</button>
@@ -132,7 +139,7 @@
 	</div>
 -->
 
-
+<!-- /ko -->
 	<!-- Optional JavaScript -->
 	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
 	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
@@ -154,4 +161,5 @@
 	<script src="validar.js"></script>
 	
 </body>
+
 </html>

@@ -248,7 +248,7 @@ background-color: grey;
   width:22%;  
   border:5px;
   font-size: 15px;
-  margin: 5px;
+  margin: 0.1px;
   text-align: center;
   padding: 10px;
   outline: none;
@@ -352,6 +352,7 @@ h2, p{
 	margin-left:70px;
 	max-width: 97%;
 	left:1000px;
+	
 }
 p {
   padding: 0;

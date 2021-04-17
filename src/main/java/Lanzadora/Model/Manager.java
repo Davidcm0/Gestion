@@ -335,7 +335,7 @@ public class Manager {
 		String estado = "En preparación";
 		Boolean enviado = false;
 		proyectoDAO.insertar(
-				new proyecto(fecha, nombre, descripcion, dut, repeticiones, lenguaje, usuario, usuarioDef.getEmail(), estado, enviado, ""));
+				new proyecto(fecha, nombre, descripcion, dut, repeticiones, lenguaje, usuario, usuarioDef.getEmail(), estado, enviado, "",""));
 
 	}
 
@@ -360,7 +360,7 @@ public class Manager {
 
 	}
 
-	public void actualizar_estado(String proyecto, String estado, String url) {
+	public void actualizar_estado(String proyecto, String estado, String url, String password) {
        
 		
 		if(estado.equals("En preparacion")){
@@ -372,6 +372,9 @@ public class Manager {
 		
 		if(!url.equals("")) {
 			proyectoDAO.actualizar_url(proyecto, url);
+		}
+		if(!password.equals("")) {
+			proyectoDAO.actualizar_password(proyecto, password);
 		}
 		
 

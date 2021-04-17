@@ -58,11 +58,11 @@ public final class proyectoDAO {
 		while ((iter.hasNext())) {
 			document = iter.next();
 			if(nombre.equals("admin")) {
-				p = new proyecto(document.getDate("fecha"), document.getString(NAME), document.getString("descripcion"), document.getInteger("dut"), document.getInteger("repeticiones"),document.getString("lenguaje"),document.getString("Autor"),document.getString("email_user"), document.getString("estado"),document.getBoolean("proyecto_enviado"), document.getString("url"));
+				p = new proyecto(document.getDate("fecha"), document.getString(NAME), document.getString("descripcion"), document.getInteger("dut"), document.getInteger("repeticiones"),document.getString("lenguaje"),document.getString("Autor"),document.getString("email_user"), document.getString("estado"),document.getBoolean("proyecto_enviado"), document.getString("url"), document.getString("password"));
 				proyectos.add(p);
 			} else {
 				if ((nombre).equals(document.getString("Autor"))) {
-					p = new proyecto(document.getDate("fecha"), document.getString(NAME), document.getString("descripcion"), document.getInteger("dut"), document.getInteger("repeticiones"),document.getString("lenguaje"),document.getString("Autor"),document.getString("email_user"), document.getString("estado"),document.getBoolean("proyecto_enviado"), document.getString("url"));
+					p = new proyecto(document.getDate("fecha"), document.getString(NAME), document.getString("descripcion"), document.getInteger("dut"), document.getInteger("repeticiones"),document.getString("lenguaje"),document.getString("Autor"),document.getString("email_user"), document.getString("estado"),document.getBoolean("proyecto_enviado"), document.getString("url"), document.getString("password"));
 					proyectos.add(p);
 				
 				}
@@ -93,6 +93,16 @@ public final class proyectoDAO {
 		// Create the document to specify the update
 		    Document updateDocument = new Document("$set",
 		        new Document("url", url));
+		    coleccion.findOneAndUpdate(findDocument, updateDocument);
+		
+	}
+	public static void actualizar_password(String proyecto, String password) {
+		MongoCollection<Document> coleccion = AgenteDB.get().getBd(PROYECTO);
+		 Document findDocument = new Document("nombre", proyecto);
+		 
+		// Create the document to specify the update
+		    Document updateDocument = new Document("$set",
+		        new Document("password", password));
 		    coleccion.findOneAndUpdate(findDocument, updateDocument);
 		
 	}
