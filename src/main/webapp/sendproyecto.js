@@ -641,10 +641,10 @@ function ViewModel() {
 	self.modificar = function() {
 		var dut;
 		var repeticiones;
-		
-		
-		
-		
+		var descripcion = escapeHtml(document.getElementById("descripcion").value);
+		descripcion = stringEscape(descripcion);
+		var new_nombre = escapeHtml( document.getElementById("nombreProyecto").value);
+		new_nombre = stringEscape(new_nombre);
 		if(sessionStorage.userName != "admin"){
 			if(document.getElementById("dut").value === ""){
 				dut = 000;
@@ -660,8 +660,8 @@ function ViewModel() {
 		var p = {
 			type: "modificar",
 			nombre: self.nombreProyecto(),
-			new_nombre: document.getElementById("nombreProyecto").value,
-			descripcion: document.getElementById("descripcion").value,
+			new_nombre: new_nombre,
+			descripcion: descripcion,
 			dut: dut,
 			repeticiones: repeticiones,
 			lenguaje: document.getElementById("lenguaje").options[document.getElementById("lenguaje").selectedIndex].text,
@@ -706,6 +706,23 @@ function ViewModel() {
 		
 		self.sws.send(JSON.stringify(p));
 		location.reload();
+	}
+	
+	function escapeHtml(text) {
+		  var map = {
+		    '&': '&amp;',
+		    '<': '&lt;',
+		    '>': '&gt;',
+		    '"': '&quot;',
+		    "'": '&#039;',
+		    '"\"': '&#92;'
+		  };
+		  
+		  return text.replace(/[&<>"']/g, function(m) { return map[m]; });
+		}
+	function stringEscape(s) {
+	    return s ? s.replace(/\\/g,'\\\\').replace(/\n/g,'\\n').replace(/\t/g,'\\t').replace(/\v/g,'\\v').replace(/'/g,"\\'").replace(/"/g,'\\"').replace(/[\x00-\x1F\x80-\x9F]/g,hex) : s;
+	    function hex(c) { var v = '0'+c.charCodeAt(0).toString(16); return '\\x'+v.substr(v.length-2); }
 	}
 	
 	function sleep(milliseconds) {
