@@ -131,52 +131,11 @@ public class Manager {
 	 * 
 	 * }
 	 * 
-	 * public JSONArray leerAsistentes() { JSONArray jsa = new JSONArray();
-	 * List<User> usuarios = UserDAO.leerUsers("ASISTENTE");
-	 * 
-	 * for (User user : usuarios) { jsa.put(user.toJSON()); }
-	 * 
-	 * return jsa;
-	 * 
-	 * }
-	 * 
-	 * public JSONArray leerReuniones() { JSONArray jsa = new JSONArray();
-	 * List<Actividad> actividades = ActividadDAO.leerReuniones(); if
-	 * (!actividades.isEmpty()) { for (Actividad act : actividades) {
-	 * jsa.put(act.toJSON()); } }
-	 * 
-	 * return jsa;
-	 * 
-	 * }
-	 * 
-	 * public void insertarActividad(String nombre, String dia, String horaI, String
-	 * minutosI, String horaF, String minutosF, String usuario, String reunion) {
-	 * 
-	 * List<User> users = UserDAO.leerUsers();
-	 * 
-	 * LocalTime horaIni = LocalTime.of(Integer.parseInt(horaI),
-	 * Integer.parseInt(minutosI)); LocalTime horaFin =
-	 * LocalTime.of(Integer.parseInt(horaF), Integer.parseInt(minutosF)); boolean
-	 * reunionB = Boolean.parseBoolean(reunion);
-	 * 
-	 * for (User user : users) { if (usuario.equals(user.getName()) &&
-	 * "ASISTENTE".equals(user.getRol())) {
-	 * ActividadDAO.insertarActividad((Asistente) user, new Actividad(nombre,
-	 * DiaSemana.valueOf(dia), horaIni, horaFin, reunionB)); } } }
 	 * 
 	 * public void actualizar(String string, boolean boolean1) { // sustituir este
 	 * metodo por su equivalente de los de arriba }
 	 * 
-	 * public void eliminarUsuario(String usuario) { for (User u :
-	 * UserDAO.leerUsers()) { if (usuario.equals(u.getName()) &&
-	 * "ASISTENTE".equals(u.getRol())) { UserDAO.eliminar(u); } } }
 	 * 
-	 * public void error() { // sustituir este metodo por su equivalente de los de
-	 * arriba }
-	 * 
-	 * public JSONObject leer() { JSONObject jso = new JSONObject();
-	 * jso.put(USUARIOS, Manager.get().leerAsistentes()); jso.put("actividades",
-	 * Manager.get().leerReuniones()); return jso; }
 	 * 
 	 * public void eliminarTests() { for (User u : UserDAO.leerUsers()) { if
 	 * ("nombre".equals(u.getName())) { UserDAO.eliminar(u); } if
@@ -197,14 +156,6 @@ public class Manager {
 	 * 
 	 * 
 	 * 
-	 * private static boolean contiene(List<Actividad> actividades, Actividad a) {
-	 * for (Actividad b : actividades) { if (b.getId() == a.getId()) { return true;
-	 * } }
-	 * 
-	 * return false; }
-	 * 
-	 * 
-	 * 
 	 * public JSONArray leerInfoUsuario(String nombre) { JSONArray jsa = new
 	 * JSONArray(); JSONObject jso = new JSONObject(); for (User u :
 	 * UserDAO.leerUsers()) { if (u.getName().equals(nombre)) { jsa.put(u.toJSON());
@@ -212,9 +163,7 @@ public class Manager {
 	 * 
 	 * return jsa; }
 	 * 
-	 * 
-	 * 
-	 * 
+
 	 * public void cerrarSesion(String name) { TokenDAO.eliminar(new Token(name)); }
 	 * 
 	 * public void checkAccess(String name, String token, String page) throws

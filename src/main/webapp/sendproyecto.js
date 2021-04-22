@@ -641,11 +641,12 @@ function ViewModel() {
 	self.modificar = function() {
 		var dut;
 		var repeticiones;
-		var descripcion = escapeHtml(document.getElementById("descripcion").value);
-		descripcion = stringEscape(descripcion);
-		var new_nombre = escapeHtml( document.getElementById("nombreProyecto").value);
-		new_nombre = stringEscape(new_nombre);
+		
 		if(sessionStorage.userName != "admin"){
+			var descripcion = escapeHtml(document.getElementById("descripcion").value);
+			descripcion = stringEscape(descripcion);
+			var new_nombre = escapeHtml( document.getElementById("nombreProyecto").value);
+			new_nombre = stringEscape(new_nombre);
 			if(document.getElementById("dut").value === ""){
 				dut = 000;
 			} else{
@@ -677,7 +678,7 @@ function ViewModel() {
 				if(estado === "En preparacion"){
 					mensaje = mensaje + " This is because the code was not right, so try again or contact to dcarretero.1999@gmail.com, go to check it!";
 				} else if(estado === "Medido"){
-					mensaje = mensaje + " You can go to check the results!";
+					mensaje = mensaje + " You can go to check the results!\n Here we give you the url of results: " + url + " and the password: " + document.getElementById("password").value;
 				} else {
 					mensaje = mensaje + " You have to wait for the measurement of your code.";
 				}
