@@ -224,9 +224,9 @@ public class Manager {
 			while ((in = bis.read(byteArray)) != -1) {
 
 				bos.write(byteArray, 0, in);
-				enviado = true;
+				
 			}
-
+			enviado = true;
 			bis.close();
 			bos.close();
 
@@ -266,7 +266,7 @@ public class Manager {
 	public void crearProyecto(String nombre, int repeticiones, String lenguaje, String descripcion, int dut,
 			String usuario) {
 		User usuarioDef = new User();
-		List<User> usuarios = proyectoDAO.leer_usuarios();
+		List<User> usuarios = UserDAO.leerUsers();
 		for(User user : usuarios) {
 			if(user.getName().equals(usuario)) {
 				

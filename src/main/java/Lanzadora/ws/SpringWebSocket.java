@@ -55,7 +55,7 @@ public class SpringWebSocket extends TextWebSocketHandler {
 			break;
 
 		case "terminar":
-			String terminar = "terminar";
+			String terminar = "Terminado";
 			Manager.get().actualizar_estado(jso.getString("proyecto"), terminar,"","");
 			break;
 

@@ -35,6 +35,7 @@ public final class proyectoDAO {
 			document.append(NAME, proyecto.getNombre());
 			document.append("descripcion", proyecto.getDescripcion());
 			document.append("Autor", proyecto.getUser());
+			document.append("email_user", proyecto.getEmail_user());
 			document.append("dut", proyecto.getDUT());
 			document.append("repeticiones", proyecto.getRepeticiones());
 			document.append("lenguaje", proyecto.getLenguaje());

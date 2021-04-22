@@ -774,7 +774,7 @@ function ViewModel() {
 			};
 			
 			self.sws.send(JSON.stringify(p));
-
+			location.reload();
 		}
 		
 
