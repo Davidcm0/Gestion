@@ -96,7 +96,7 @@ function ViewModel() {
 					
 				}
 				if(proyecto.estado == "Validado"){
-					document.getElementsByClassName("cards")[0].children[i].children[0].children[0].children[1].style.backgroundColor = "aqua";
+					document.getElementsByClassName("cards")[0].children[i].children[0].children[0].children[1].style.backgroundColor = "skyblue";
 					
 					
 				}

@@ -33,7 +33,7 @@ body {
 	font-weight: 500;
 }
 
-.box input[type="text"],.box input[type="password"], .box select{
+.box input[type="text"],.box input[type="password"],.box input[type="email"], .box select{
 	border:0;
 	background:#161616c5;
 	display: block;
@@ -48,7 +48,7 @@ body {
 	transition: 0.5s;
 }
 
-.box input[type="text"]:hover,.box input[type="password"]:hover {
+.box input[type="text"]:hover,.box input[type="password"]:hover,.box input[type="email"]:hover {
 	width: 280px;
 	background: #d8d8d8;
 	color: black;

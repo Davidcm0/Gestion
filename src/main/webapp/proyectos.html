@@ -12,6 +12,8 @@
 <!-- CUSTOM CSS -->
 <link rel="stylesheet" href="proyectos.css">
 <link rel="stylesheet" href="admin.css">
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=PT+Serif:ital,wght@0,400;1,700&display=swap" rel="stylesheet">
 
 </head>
 <body>
@@ -28,9 +30,9 @@
 					onclick="window.history.back()">Back</button>
 				
 					<input id="search" type="text" placeholder="Search" />
-				<button type="button" id="buscarProyectos" onclick="buscar()"
-					class="btn btn-primary">Search</button>
-				<button type="button" id="HideProyecto" class="btn btn-primary"
+				<button type="button" id="buscarProyectos" onclick="buscar()" class="btn btn-primary"
+					>Search</button>
+				<button type="button" id="HideProyecto"
 					onclick="mostrarProyectos()" class="btn btn-primary">Hide
 					projects</button>
 
@@ -57,7 +59,7 @@
 					projects to compare</button>
 				<!-- /ko -->
 				<!-- ko {if: $root.usuario === "admin"} -->
-				<button type="button" id="crearProyecto"
+				<button type="button" id="validar" class="btn btn-primary"
 					onclick="window.location.href='validar.html'">Validate
 					users</button>
 				<!-- /ko -->

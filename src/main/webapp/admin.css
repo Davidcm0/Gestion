@@ -1,12 +1,12 @@
 *{
-  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  font-family: 'PT Serif', serif;
 }
 
 body{
   margin: 0;
   padding: 0;
   font-family: sans-serif;
-  background-color: dimgrey;
+  background-color: #238447;
   
   background-size: cover;
 }
@@ -400,5 +400,16 @@ table {
 #titNombre{
    float: left;
    margin-right: 3%;
+}
+
+.btn-primary{
+	background-color: 	#0F6B31 !important;
+	border-color: #69B886 !important;
+}
+
+.btn-primary:hover{
+	background-color: #69B886 !important;
+	border-color:#0F6B31  !important;
+	color: black;
 }
  
