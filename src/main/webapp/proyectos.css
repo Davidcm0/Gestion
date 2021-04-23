@@ -1,12 +1,12 @@
 *{
-  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  font-family: 'Bitter', serif;
 }
 
 body{
   margin: 0;
   padding: 0;
   font-family: sans-serif;
-  background-color:lightgreen;
+  background-color:#9DAEB8;
   background-size: cover;
 }
 
@@ -30,7 +30,7 @@ body{
 }
 
 .boxHeader h1{
-  color: rgb(248, 248, 248);
+ color:#111112;
   text-transform: uppercase;
   font-weight: 100;
   text-align: center;
@@ -234,7 +234,7 @@ background-color: grey;
 }
 
 .boxHeaderGestion h1{
-  color: rgb(248, 248, 248);
+  color:#111112;
   text-transform: uppercase;
   font-weight: 100;
   text-align: center;
@@ -429,3 +429,15 @@ p {
   float: left;
   text-align: center;
 }
+
+.btn-primary{
+	background-color: 	#0F6B31 !important;
+	border-color: #69B886 !important;
+}
+
+.btn-primary:hover{
+	background-color: #69B886 !important;
+	border-color:#0F6B31  !important;
+	color: black;
+}
+ 
