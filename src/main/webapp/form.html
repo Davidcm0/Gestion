@@ -11,9 +11,12 @@
 
 <!-- CUSTOM CSS -->
 <link rel="stylesheet" href="proyectos.css">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css">
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css">
 <link rel="preconnect" href="https://fonts.gstatic.com">
-<link href="https://fonts.googleapis.com/css2?family=Bitter:wght@500&display=swap" rel="stylesheet">
+<link
+	href="https://fonts.googleapis.com/css2?family=Bitter:wght@500&display=swap"
+	rel="stylesheet">
 </head>
 <body>
 	<div class="col-md-6 col-sm-8 col-xl-6 col-lg-4 boxHeaderGestion">
@@ -29,41 +32,43 @@
 						class="form-control" id="nombre" placeholder="Name">
 				</div>
 				<div class="form-group col-md-6">
-					<label for="inputPassword4">Repetititions</label> <input type="number"
-						class="form-control" id="repeticiones" placeholder="Repetitions">
+					<label for="inputPassword4">Repetititions</label> <input
+						type="number" class="form-control" id="repeticiones"
+						placeholder="Repetitions">
 				</div>
 			</div>
 			<div class="form-group">
 				<label for="inputAddress">Description</label> <input type="text"
-					class="form-control" id="descripcion" placeholder="Small description">
+					class="form-control" id="descripcion"
+					placeholder="Small description">
 			</div>
-			
+
 			<div class="form-row">
-				<div class="form-group col-md-2">
-					
-				</div>
+				<div class="form-group col-md-2"></div>
 				<div class="row">
-				<div class="form-group col-md-4">
-					<label for="inputState">Language</label> <select id="lenguaje"
-						class="form-control">
-						<option selected>Elige...</option>
-						<option>Java</option>
-						<option>Python</option>
-					</select>
-				</div>
-				
-				<div class="form-group col-md-3"  style="padding-right: 0px;">
-					<label for="inputZip">DUT</label> <input type="number"
-						class="form-control" id="dut" max="2">
-						</div>
-						<div class="form-group col-md-2" style="padding-top: 8%;padding-left: 0px;">
-						
-						<label  data-toggle="tooltip" data-placement="right" title="DUT 1:&#10-Monitor: Phillips 170S6FS&#10-Motherboard: ASUS M2N-SLI Deluxe&#10-Processor: AMD athlon tm 64 X2 Dual core 5600+2,81 GHz&#10-RAM: 4 modules os 1GB DD42 MHz&#10-Graphic card: Nvidia Xfx 8600 GTS&#10-Hard disk: Seagate Barracuda 7200 500Gb&#10-Power suply: 350 W Aopenz350-08Fc&#10 DUT 2:&#10-Monitor: Phillips 170S6FS&#10-Motherboard: ASUS M2N-SLI Deluxe&#10-Processor: AMD athlon tm 64 X2 Dual core 5600+2,81 GHz&#10-RAM: 4 modules os 1GB DD42 MHz&#10-Graphic card: Nvidia Xfx 8600 GTS&#10-Hard disk: Seagate Barracuda 7200 500Gb&#10-Power suply: 350 W Aopenz350-08Fc"><i class="bi bi-question-square"></i></label>
-				</div>
+					<div class="form-group col-md-4">
+						<label for="inputState">Language</label> <select id="lenguaje"
+							class="form-control">
+							<option selected>Elige...</option>
+							<option>Java</option>
+							<option>Python</option>
+						</select>
+					</div>
+
+					<div class="form-group col-md-3" style="padding-right: 0px;">
+						<label for="inputZip">DUT</label> <label data-toggle="tooltip"
+							data-placement="right"
+							title="DUT 1:&#10-Monitor: Phillips 170S6FS&#10-Motherboard: ASUS M2N-SLI Deluxe&#10-Processor: AMD athlon tm 64 X2 Dual core 5600+2,81 GHz&#10-RAM: 4 modules os 1GB DD42 MHz&#10-Graphic card: Nvidia Xfx 8600 GTS&#10-Hard disk: Seagate Barracuda 7200 500Gb&#10-Power suply: 350 W Aopenz350-08Fc&#10 DUT 2:&#10-Monitor: Phillips 170S6FS&#10-Motherboard: ASUS M2N-SLI Deluxe&#10-Processor: AMD athlon tm 64 X2 Dual core 5600+2,81 GHz&#10-RAM: 4 modules os 1GB DD42 MHz&#10-Graphic card: Nvidia Xfx 8600 GTS&#10-Hard disk: Seagate Barracuda 7200 500Gb&#10-Power suply: 350 W Aopenz350-08Fc"><i
+							class="bi bi-question-square"></i></label> <input type="number"
+							class="form-control" id="dut" max="2">
+					</div>
+					<div class="form-group col-md-2"
+						style="padding-top: 8%; padding-left: 0px;"></div>
 				</div>
 			</div>
-			
-			<button type="submit" class="btn btn-primary" data-bind="click:$root.crear">Create project</button>
+
+			<button type="submit" class="btn btn-primary"
+				data-bind="click:$root.crear">Create project</button>
 		</form>
 
 	</div>
@@ -89,6 +94,6 @@
 	<script src="https://knockoutjs.com/downloads/knockout-3.5.0.js"></script>
 
 	<script src="form.js"></script>
-	
+
 </body>
 </html>

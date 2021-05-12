@@ -23,27 +23,29 @@
 			<div class="col-md-4">
 				<h1></h1>
 			</div>
-			<div id="bot" class="col-md-8">
-
-				<button type="button" id="volverGestion"
-					onclick="window.history.back()">Back</button>
-				
+			<div id="bot" class="col-md-8" style="text-align: end;">
+				<div class="row">
+				<div class="col-md-12">
 					<input id="search" type="text" placeholder="Search" />
-				<button type="button" id="buscarProyectos" onclick="buscar()" class="btn btn-primary"
+				<button type="button" id="buscarProyectos" onclick="buscar()" class="btn btn-primary" style="margin-right:5%"
 					>Search</button>
 				<button type="button" id="HideProyecto"
 					onclick="mostrarProyectos()" class="btn btn-primary">Hide
-					projects</button>
+					projects</button> 
+				
+					
 
 				<!-- ko {if: $root.usuario != "admin"} -->
-				<button type="button" id="crearProyect" class="btn btn-primary"
+				<button type="button" id="crearProyect" class="btn btn-primary" style="margin-right:5%"
 					onclick="window.location.href='form.html'">Create project</button>
+					<button type="button" id="volve" class="btn btn-primary"
+					onclick="window.history.back()">Back</button>
 				<div id="boxes" style="display: none">
 					
 					<button type="button" id="compararProyecto"  class="btn btn-primary"
-						data-bind="click: $root.compararPro" style="margin-right: 35%;margin-top: 1%;">Compare
+						data-bind="click: $root.compararPro" style="margin-right: 62%;margin-top: 1%;">Compare
 						projects</button>
-						<div id="elecciones" style="margin-right: 55%;">
+						<div id="elecciones" style="margin-left: 23%;text-align:justify">
 						<!-- ko foreach : { data: listaproyectos, as :"proyecto" } -->
 					<div class="form-check">
 						<input class="form-check-input" type="checkbox" value=""
@@ -53,17 +55,23 @@
 					<!-- /ko -->
 					</div>
 				</div>
+				
 				<button class="btn btn-primary" type="button" id="elegirProyecto" 
-					onclick="Comparar()" style="margin-right: 40%;margin-top: 1%;">Choose
+					onclick="Comparar()" style="margin-right: 57%;margin-top: 1%;">Choose
 					projects to compare</button>
 				<!-- /ko -->
+				
 				<!-- ko {if: $root.usuario === "admin"} -->
-				<button type="button" id="validar" class="btn btn-primary"
+				<button type="button" id="validar" class="btn btn-primary" style="margin-right:5%"
 					onclick="window.location.href='validar.html'">Validate
 					users</button>
+					<button type="button" id="volve" class="btn btn-primary"
+					onclick="window.history.back()">Back</button>
 				<!-- /ko -->
 
 
+			</div>
+			</div>
 			</div>
 		</div>
 

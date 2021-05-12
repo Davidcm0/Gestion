@@ -56,12 +56,12 @@ body {
 
 .box button[type="button"] {
 	border:0;
-	background: none;
+	background: #6a7384;
 	font-size: 18px;
 	display: block;
 	margin: 20px auto;
 	text-align: center;
-	border: 2px solid #2ecc71;
+	border: 2px solid #000000;
 	padding: 14px 40px;
 	outline: none;
 	color: white;
@@ -84,7 +84,7 @@ body {
 
 .box button[value="REGISTRO"] {
 	color: white;
-	border-color:#11a4b8 ;
+	border-color:#000000 ;
 }
 
 .box button[type=button]:active, #goToLogin:active {
