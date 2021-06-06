@@ -674,7 +674,7 @@ function ViewModel() {
 			var estado = document.getElementById("Estado").options[document.getElementById("Estado").selectedIndex].text;
 			var mensaje = "The status of your project " + self.nombreProyecto() + " has changed from " + self.estadoProyecto() + " to " + estado + ".";
 			var url = document.getElementById("url").value;
-			if(estado != "Elige..."){
+			if(estado != "Choose..."){
 				if(estado === "En preparacion"){
 					mensaje = mensaje + " This is because the code was not right, so try again or contact to dcarretero.1999@gmail.com, go to check it!";
 				} else if(estado === "Medido"){

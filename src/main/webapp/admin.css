@@ -217,7 +217,7 @@ background-color: grey;
 .boxHeaderGestion{
   max-width: 97%;
   width: 97%;
-  height: 80px;
+  height: 140px;
   padding: 20px;
   position: absolute;
   top: 0%;
@@ -358,8 +358,8 @@ h2, p{
 p {
   padding: 0;
   margin: 0 0 15px 0;
-  font-size: 12px;
-  width: 1000px;
+  font-size: 15px;
+  
 }
 #hide-me {
   width: 100%;

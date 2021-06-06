@@ -42,6 +42,8 @@ public final class proyectoDAO {
 			document.append("fecha", proyecto.getFecha());
 			document.append("estado", proyecto.getEstado());
 			document.append("proyecto_enviado", proyecto.getProyecto_enviado());
+			document.append("url", proyecto.getUrl());
+			document.append("password", proyecto.getPassword());
 
 			coleccion.insertOne(document);
 			System.out.println("xx");
@@ -128,7 +130,7 @@ public final class proyectoDAO {
 		    Document updaterep = new Document("$set",new Document("repeticiones", repeticiones));
 		    coleccion.findOneAndUpdate(findDocument, updaterep);
 		 }
-		 if (!lenguaje.equals("Elige...")) {
+		 if (!lenguaje.equals("Choose...")) {
 		  //lenguaje
 		    Document updateLen = new Document("$set",new Document("lenguaje", lenguaje));
 		    coleccion.findOneAndUpdate(findDocument, updateLen);

@@ -19,7 +19,7 @@ import junit.framework.TestCase;
  */
 @RunWith(SpringRunner.class)
 @SpringBootTest
-class CrearUsuario extends TestCase {
+class GestionApplicationTests extends TestCase {
 
 	@Before
 	public void setUp() {
@@ -122,6 +122,26 @@ class CrearUsuario extends TestCase {
 			User usuario_prueba = new User(name, email, pass, validate);
 			
 			assertTrue(Manager.get().checkCredenciales(usuario_prueba, name, pass));
+		}catch(Exception e) {
+			fail(e.getMessage());
+		}
+		
+	}
+	
+	@Test
+	public void encriptar(){
+		
+		try {
+			String name = "Nombre_prueba";
+			String email = "correo@correo.com";
+			String pass = "pass1234567890";
+			Manager.get().register(name, email, pass);
+			
+			Boolean validate = false;
+
+			User usuario_prueba = new User();
+			
+			assertFalse(pass.equals(usuario_prueba.getPassword()));
 		}catch(Exception e) {
 			fail(e.getMessage());
 		}

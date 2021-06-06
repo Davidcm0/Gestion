@@ -112,10 +112,16 @@
 
 
 					<!-- ko if: proyecto.proyecto_enviado == true -->
-					<b>Project sent</b>
+					<p><b>Project sent</b></p>
+						<!-- ko if: proyecto.estado == "Terminado" -->
+						<p>We are validating your project.</p>
+					    <!-- /ko -->
+					    <!-- ko if: proyecto.estado == "Validado" -->
+						<p>We are measuring your project.</p>
+					    <!-- /ko -->
 					<!-- /ko -->
 					<!-- ko if: proyecto.proyecto_enviado == false -->
-					<b>project not sent</b>
+					<p><b>project not sent</b></p>
 					<!-- /ko -->
 					<!-- ko if: proyecto.estado == "En preparación" && proyecto.proyecto_enviado == false && $root.usuario !="admin"-->
 					<div class="row">
@@ -142,6 +148,7 @@
 						proyecto</button>
 						-->
 					<!-- Button trigger modal -->
+					
 					<button type="button" data-bind="click: info"
 						class="btn btn-primary" data-toggle="modal"
 						data-target="#exampleModal">Edit project</button>
@@ -155,7 +162,7 @@
 					</br>
 					<!-- ko if: proyecto.estado == "En preparación" && proyecto.proyecto_enviado == true && $root.usuario !="admin" -->
 					<button type="button" data-bind="click: terminar" id="explorador"
-						class="btn btn-primary">Finish project</button>
+						class="btn btn-primary" style="margin-top: 2%;">Finish project</button>
 					</br>
 					<!-- /ko -->
 
@@ -235,7 +242,7 @@
 								<div>
 									<label for="inputState">Language</label> <select id="lenguaje"
 										class="form-control">
-										<option selected>Elige...</option>
+										<option selected>Choose...</option>
 										<option>Java</option>
 										<option>Python</option>
 									</select>
@@ -245,7 +252,7 @@
 								<div>
 									<label for="inputState">Change state:</label> <select
 										id="Estado" class="form-control">
-										<option selected>Elige...</option>
+										<option selected>Choose...</option>
 										<option>Validado</option>
 										<option>Medido</option>
 										<option>En preparacion</option>
@@ -254,7 +261,7 @@
 								</br>
 								<div>
 									<input id="url"  type="text"
-										placeholder="URL excel" />
+										placeholder="URL" />
 								</div>
 								<div>
 									<input id="password"type="text"
